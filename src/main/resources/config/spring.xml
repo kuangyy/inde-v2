@@ -14,9 +14,6 @@
 				<value>
 					classpath*:config/jdbc.properties
 				</value>
-				<value>
-					classpath*:config/cach.properties
-				</value>
 			</list>
 		</property>
 	</bean>
