@@ -35,16 +35,9 @@
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
-			<!--<bean class="com.cf.mamahome.company.filter.FilterAll"/>&lt;!&ndash; 自定义拦截器 &ndash;&gt;-->
+			<bean class="cn.kykys.index.filter.FilterAll"/><!-- 自定义拦截器 -->
 		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/><!-- 映射路径后缀名 -->
-			<mvc:exclude-mapping path="/resources/**"/>
-			<mvc:exclude-mapping path="/404"/>
-			<mvc:exclude-mapping path="/500"/>
-			<mvc:exclude-mapping path="/error"/>
-			<!--<bean class="com.cf.mamahome.company.filter.WebSiteFilter"/>&lt;!&ndash; 自定义拦截器 &ndash;&gt;-->
-		</mvc:interceptor>
+
 	</mvc:interceptors>
 
 	<mvc:resources mapping="/resources/js/**" location="/resources/js/" />
