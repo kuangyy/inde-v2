@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.3.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+
+	<!-- 扫描controller（controller层注入） -->
+	<context:component-scan base-package="cn.kykys.index.controller.*">
+		<context:exclude-filter type="annotation"
+								expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<mvc:default-servlet-handler />
+
+	<!-- 自定义拦截器 -->
+	<mvc:interceptors>
+		<!-- 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+				<property name="paramName" value="language" />
+			</bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<!--<bean class="com.cf.mamahome.company.filter.FilterAll"/>&lt;!&ndash; 自定义拦截器 &ndash;&gt;-->
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/><!-- 映射路径后缀名 -->
+			<mvc:exclude-mapping path="/resources/**"/>
+			<mvc:exclude-mapping path="/404"/>
+			<mvc:exclude-mapping path="/500"/>
+			<mvc:exclude-mapping path="/error"/>
+			<!--<bean class="com.cf.mamahome.company.filter.WebSiteFilter"/>&lt;!&ndash; 自定义拦截器 &ndash;&gt;-->
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<mvc:resources mapping="/resources/js/**" location="/resources/js/" />
+	<mvc:resources mapping="/resources/css/**" location="/resources/css/" />
+	<mvc:resources mapping="/resources/images/**" location="/resources/images/" />
+	<mvc:resources mapping="/resources/fonts/**" location="/resources/fonts/" />
+	<mvc:resources mapping="/errors/**" location="/errors/" />
+
+	<bean id="validator"
+		  class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+		<!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->
+	</bean>
+
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+	<mvc:annotation-driven validator="validator" conversion-service="conversionService">
+		<mvc:message-converters>
+			<bean
+					class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8" index="0"></constructor-arg><!--
+					避免出现乱码 -->
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/plain;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			<bean class="org.springframework.http.converter.ResourceHttpMessageConverter" />
+			<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+			<bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" />
+			<bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" />
+			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+				<property name="fastJsonConfig">
+					<bean class="com.alibaba.fastjson.support.config.FastJsonConfig">
+						<property name="features">
+							<list>
+								<value>AllowArbitraryCommas</value>
+								<value>AllowSingleQuotes</value>
+								<value>AllowUnQuotedFieldNames</value>
+								<value>InternFieldNames</value>
+								<value>UseBigDecimal</value>
+								<value>UseObjectArray</value>
+								<value>AllowISO8601DateFormat</value>
+							</list>
+						</property>
+						<property name="dateFormat">
+							<value>yyyy-MM-dd HH:mm:ss</value>
+						</property>
+					</bean>
+				</property>
+			</bean><!-- 处理json -->
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!--<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">-->
+		<!--<property name="templateLoaderPath" value="/WEB-INF/view"/>-->
+		<!--<property name="freemarkerSettings">&lt;!&ndash; 设置FreeMarker环境属性 &ndash;&gt;-->
+			<!--<props>-->
+				<!--<prop key="template_update_delay">5</prop>&lt;!&ndash;刷新模板的周期，单位为秒 &ndash;&gt;-->
+				<!--<prop key="default_encoding">UTF-8</prop>&lt;!&ndash;模板的编码格式 &ndash;&gt;-->
+				<!--<prop key="locale">UTF-8</prop>&lt;!&ndash; 本地化设置 &ndash;&gt;-->
+				<!--<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>-->
+				<!--<prop key="time_format">HH:mm:ss</prop>-->
+				<!--<prop key="number_format">0.####</prop>-->
+				<!--<prop key="boolean_format">true,false</prop>-->
+				<!--<prop key="whitespace_stripping">true</prop>-->
+				<!--<prop key="tag_syntax">auto_detect</prop>-->
+				<!--<prop key="url_escaping_charset">UTF-8</prop>-->
+			<!--</props>-->
+		<!--</property>-->
+	<!--</bean>-->
+	<!--<bean id="freeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">-->
+		<!--<property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />-->
+		<!--<property name="cache" value="true" />-->
+		<!--<property name="suffix" value=".ftl" />-->
+		<!--<property name="exposeSpringMacroHelpers" value="true" />-->
+		<!--<property name="exposeRequestAttributes" value="true" />-->
+		<!--<property name="exposeSessionAttributes" value="true" />-->
+		<!--<property name="contentType" value="text/html;charset=UTF-8" />-->
+		<!--<property name="order" value="1" />-->
+	<!--</bean>-->
+
+	<!-- 配置视图解析 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+    <!-- 上传文件 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 被允许的最大的内存的大小，Default is 10240 bytes -->
+        <property name="maxInMemorySize" value="20480" />
+        <!-- 设置最大允许的大小(字节)。-1表示没有限制(默认) 1024*1024*1024*20=20G -->
+        <property name="maxUploadSize" value="21474836480" />
+        <!-- 一个类似懒加载的属性.可以定义该属性.让解析文件的时候再抛异常,然后Controller中定义异常处理的方法 -->
+        <property name="resolveLazily" value="true" />
+        <!-- 解析request的编码 ，Default is ISO-8859-1 -->
+        <property name="defaultEncoding" value="utf-8" />
+    </bean>
+
+	<bean id="localeResolver"
+		  class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="zh_CN" />
+	</bean>
+</beans>
