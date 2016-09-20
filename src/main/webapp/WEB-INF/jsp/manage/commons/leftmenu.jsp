@@ -27,10 +27,10 @@
             <ul class="nav of nav-stacked">
                 <li class="tq">Dashboards</li>
                 <li>
-                    <a href="../index.html">Overview</a>
+                    <a href="${ctx}/manage/index">Overview</a>
                 </li>
                 <li>
-                    <a href="../order-history/index.html">Order history</a>
+                    <a href="${ctx}/manage/posts">Posts</a>
                 </li>
                 <li>
                     <a href="../fluid/index.html">Fluid layout</a>

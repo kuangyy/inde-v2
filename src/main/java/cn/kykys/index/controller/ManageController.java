@@ -61,14 +61,5 @@ public class ManageController extends BaseController {
     }
 
 
-    @RequestMapping("/detail")
-    public ModelAndView detail() {
-
-        ModelAndView mav = new ModelAndView("detail");
-
-
-        return mav;
-    }
-
 
 }
