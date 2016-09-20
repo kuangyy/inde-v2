@@ -11,6 +11,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler;
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,16 +23,16 @@ public class FilterAll implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
 
-        if(handler instanceof DefaultServletHttpRequestHandler){
-           return true;
-        }else{
+        if (handler instanceof DefaultServletHttpRequestHandler || handler instanceof ResourceHttpRequestHandler) {
+            return true;
+        } else {
             MustLogin mustLogin = ((HandlerMethod) handler).getMethod().getAnnotation(MustLogin.class);
             if (mustLogin != null) {//需要验证
-
-
-
-            }else{
-               return true;
+                if (this.getToken() != null) {
+                    return true;
+                }
+            } else {
+                return true;
             }
         }
         return true;
@@ -49,7 +50,7 @@ public class FilterAll implements HandlerInterceptor {
 
     }
 
-    String a() {
+    private String getToken() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         String ei;

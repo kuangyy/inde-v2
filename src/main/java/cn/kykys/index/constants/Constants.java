@@ -5,9 +5,9 @@ package cn.kykys.index.constants;
  */
 public interface Constants {
 
-    String COOKIE_LOGIN_USER_KEY ="";
+    String COOKIE_LOGIN_USER_KEY ="kykys_login_user";
 
-    String SESSION_LOGIN_USER_KEY ="";
+    String SESSION_LOGIN_USER_KEY ="kykys_login_user";
 
-    String DES_ENCODE_KEY ="";
+    String DES_ENCODE_KEY ="@$^|123_";
 }

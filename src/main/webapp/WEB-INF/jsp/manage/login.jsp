@@ -27,10 +27,14 @@
 
         <div class="container">
 
-           <form action="${ctx}/manage/access">
+           <form action="${ctx}/manage/access" method="post">
                <div class="form-group">
-                   <div class="input-group">
+                   <div class="input-group login-group">
                        <input class="form-control" name="password" placeholder="enter you token">
+                       <span class="input-group-addon">remeber me</span>
+                       <span class="input-group-addon">
+                          <input type="checkbox" name="remember">
+                       </span>
                        <span class="input-group-btn">
                            <button class="btn btn-info" >access</button>
                        </span>

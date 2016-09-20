@@ -265,14 +265,235 @@
     -moz-border-radius: 2px;
     border-radius: 2px
 }
-
 #topcontrol:before {
     width: 40px;
     height: 40px;
     line-height: 40px;
     color: #FFF
 }
-
 #topcontrol:hover {
     opacity: 1
+}
+
+/* login-group */
+.login-group input {
+    border: 2px solid;
+    border-color: #5bc0de;
+    border-radius: .25rem;
+}
+.login-group span {
+    border: 1px solid;
+    border-color: #5bc0de;
+    border-radius: .25rem;
+}
+
+
+/* manage bar */
+.ge {
+    margin: 10em 0px 0px 10em;
+
+}
+.fm {
+    color: #1ca8dd;
+    font-weight: normal;
+    border-radius: 0;
+}
+.fm,
+.fm:active,
+.fm.active,
+.fm[disabled],
+fieldset[disabled] .fm {
+    background-color: transparent;
+    box-shadow: none;
+}
+.fm,
+.fm:hover,
+.fm:focus,
+.fm:active {
+    border-color: transparent;
+}
+.fm:hover,
+.fm:focus {
+    color: #137499;
+    text-decoration: underline;
+    background-color: transparent;
+}
+.fm[disabled]:hover,
+fieldset[disabled] .fm:hover,
+.fm[disabled]:focus,
+fieldset[disabled] .fm:focus {
+    color: #aaaaaa;
+    text-decoration: none;
+}
+.fv, .fw, .fx, .fy, .fz, .ga, .gb, .gc, .gd, .ge, .gf, .gg, .gh, .gi, .gj, .gk, .gl, .gm, .gn, .go, .gp, .gq, .gr, .gs, .gt, .gu, .gv, .gw, .gx, .gy, .gz, .ha, .hb, .hc, .hd, .he, .hf, .hg, .hh, .hi, .hj, .hk, .hl, .hm, .hn, .ho, .hp, .hq {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.aom .and.in,
+.aom .ane.in {
+    padding-bottom: 20px;
+}
+@media (min-width: 768px) {
+    .aot {
+        margin-right: 40px;
+    }
+}
+.aon {
+    position: relative;
+    padding-bottom: 20px;
+}
+.ann,
+.ano,
+.anp,
+.anq,
+.anr {
+    color: #fff;
+    border-radius: 3px;
+}
+.ann .anm,
+.ano .anm,
+.anp .anm,
+.anq .anm,
+.anr .anm,
+.ann .anl,
+.ano .anl,
+.anp .anl,
+.anq .anl,
+.anr .anl,
+.ann .ani,
+.ano .ani,
+.anp .ani,
+.anq .ani,
+.anr .ani {
+    font-weight: normal;
+    color: inherit;
+}
+.ann .anj,
+.ano .anj,
+.anp .anj,
+.anq .anj,
+.anr .anj {
+    font-weight: normal;
+    color: rgba(255, 255, 255, 0.65);
+}
+.ann .ans,
+.ano .ans,
+.anp .ans,
+.anq .ans,
+.anr .ans {
+    margin-left: -20px;
+    margin-right: -20px;
+    border-top-color: rgba(255, 255, 255, 0.2);
+}
+.ann {
+    background-color: #1ca8dd;
+}
+.ano {
+    background-color: #1bc98e;
+}
+.amy {
+    display: block;
+    width: 40px;
+    padding: 10px;
+    font-size: 16px;
+    color: #555555;
+    background: transparent;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+.amy:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-bottom: .125em;
+    border-top: .375em double;
+    border-bottom: .125em solid;
+}
+.amy:hover,
+.amy:focus {
+    color: #fff;
+    background-color: #555555;
+}
+@media (min-width: 768px) {
+    .amz {
+        display: none;
+    }
+}
+.aoo {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    color: #cccccc;
+    border-color: #cccccc;
+}
+.aoo:hover,
+.aoo:focus {
+    color: #ffffff;
+    background-color: #cccccc;
+}
+.ct {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+.nav > .tq {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 5px;
+    font-size: 85%;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    color: #2d2d2d;
+    text-transform: uppercase;
+}
+.nav > li + .tq {
+    margin-top: 20px;
+}
+.nav > li {
+    position: relative;
+    display: block;
+}
+.nav > li > a {
+    color: #4c2416;
+    position: relative;
+    display: block;
+    padding: 7px 15px;
+}
+.nav > li > a:hover,
+.nav > li > a:focus {
+    text-decoration: none;
+    background-color: #e3f5fb;
+    border-radius: 0.25em;
+}
+.nav > li.disabled > a {
+    color: #aaaaaa;
+}
+.nav > li.disabled > a:hover,
+.nav > li.disabled > a:focus {
+    color: #aaaaaa;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: not-allowed;
+}
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+    background-color: #e3f5fb;
+    border-color: #1ca8dd;
+}
+.nav .nav-divider {
+    height: 1px;
+    margin: 9.5px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+.nav > li > a > img {
+    max-width: none;
 }
