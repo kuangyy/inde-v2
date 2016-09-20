@@ -41,4 +41,10 @@ public class IndexController extends BaseController {
         return mav;
     }
 
+
+
+    @RequestMapping("/404")
+    public ModelAndView err404() {
+        return new ModelAndView("404");
+    }
 }

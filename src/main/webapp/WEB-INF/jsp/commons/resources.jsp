@@ -3,10 +3,12 @@
 <%
 	int _port = request.getServerPort();
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+//	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+//			+ path;
+	String basePath = "http://" + request.getServerName() + ":" + request.getServerPort()
 			+ path;
 	if (_port == 80) {
-		basePath = request.getScheme() + "://" + request.getServerName();
+		basePath = "http://" + request.getServerName();
 	}
 	request.setAttribute("ctx", basePath);
 %>
