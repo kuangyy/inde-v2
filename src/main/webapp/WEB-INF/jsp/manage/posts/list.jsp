@@ -74,7 +74,7 @@
                                 <tr>
                                     <td>${posts.id}</td>
                                     <td><span title="${posts.title}" style="max-width: 5em">${posts.title}</span></td>
-                                    <td>${posts.likeCount}/${posts.clickCount}</td>
+                                    <td>${posts.likeCount}/${posts.viewCount}</td>
                                     <td> <a class="btn btn-success" href="${ctx}/manage/posts/edit?id=${posts.id}">Edit</a></td>
                                 </tr>
                             </c:forEach>

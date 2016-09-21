@@ -39,7 +39,7 @@ public class PostsBusiness implements IPosts {
         if (postsModel != null) {
             PostsModel model = new PostsModel();
             model.setId(postsModel.getId());
-            model.setViewCount(model.getViewCount() + 1);
+            model.setViewCount(postsModel.getViewCount() + 1);
             postsModelMapper.updateByPrimaryKeySelective(model);
         }
 
