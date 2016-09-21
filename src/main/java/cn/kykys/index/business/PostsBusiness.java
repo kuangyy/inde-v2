@@ -33,11 +33,24 @@ public class PostsBusiness implements IPosts {
         return null;
     }
 
+    public PostsModel getByIdAddViewCount(Long id) {
+
+        PostsModel postsModel = this.getById(id);
+        if (postsModel != null) {
+            PostsModel model = new PostsModel();
+            model.setId(postsModel.getId());
+            model.setViewCount(model.getViewCount() + 1);
+            postsModelMapper.updateByPrimaryKeySelective(model);
+        }
+
+        return postsModel;
+    }
+
     public boolean add(PostsModel postsModel) {
         if (postsModel != null) {
 
             //default publish now
-            if(postsModel.getPublishTime()==null){
+            if (postsModel.getPublishTime() == null) {
                 postsModel.setPublishTime(new Date());
             }
 

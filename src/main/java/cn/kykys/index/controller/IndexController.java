@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Map;
+
 /**
  * Created by kuangye on 2016/9/18.
  */
@@ -24,15 +26,12 @@ public class IndexController extends BaseController {
 
 
     @RequestMapping("/list")
-    public ModelAndView list() {
+    public ModelAndView list(PageWeb pageWeb) {
 
         ModelAndView mav = new ModelAndView("list");
 
-        //分页
-        PageWeb pageWeb = new PageWeb();
-        pageWeb.setPageIndex(1);
-        pageWeb.setCount(10);
-        mav.addObject("pageWeb", pageWeb);
+        Map<String, ?> result = iPosts.selectByPage(null, pageWeb);
+        mav.addAllObjects(result);
         return mav;
     }
 
@@ -42,7 +41,7 @@ public class IndexController extends BaseController {
 
         ModelAndView mav = new ModelAndView("detail");
 
-        mav.addObject("posts", iPosts.getById(id));
+        mav.addObject("posts", iPosts.getByIdAddViewCount(id));
         return mav;
     }
 

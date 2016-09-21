@@ -525,7 +525,7 @@ footer {
     padding: 5em 1em;
     border-radius: .25rem;
     margin-top: -5em;
-    margin-bottom: -5em;
+    /*margin-bottom: -5em;*/
 
     -webkit-box-shadow: 5px 5px 0 #fff9e9;
     -moz-box-shadow: 5px 5px 0 #fff9e9;
@@ -545,4 +545,9 @@ footer {
 }
 .markdown blockquote p:last-child {
     margin-bottom: 0;
+}
+.markdown img {
+    width: 30em;
+    margin: 5px 25%;
+
 }

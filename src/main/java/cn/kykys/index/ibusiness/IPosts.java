@@ -13,6 +13,8 @@ public interface IPosts {
 
     PostsModel getById(Long id);
 
+    PostsModel getByIdAddViewCount(Long id);
+
     boolean add(PostsModel postsModel);
 
     boolean update(PostsModel postsModel);
