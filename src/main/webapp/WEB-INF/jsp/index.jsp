@@ -3,7 +3,7 @@
 <html>
 <head>
 
-   <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"></jsp:include>
 
     <title>狂or野-你喜欢哪一个我</title>
     <meta name="description" content="ky's home page">

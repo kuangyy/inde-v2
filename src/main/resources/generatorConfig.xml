@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-	<classPathEntry location="D:\apache-maven-3.3.9\mavenJar\com\oracle\ojdbc14\10.2.0.4.0\ojdbc14-10.2.0.4.0.jar"/>
+    <classPathEntry location="d:\lastest_workbench\mavenlib\repository\mysql\mysql-connector-java\5.1.29\mysql-connector-java-5.1.29.jar"/>
 	<context id="context1" targetRuntime="MyBatis3">
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" /><!-- 是否去除自动生成的注释 true：是 ： false:否 -->
 		</commentGenerator>
-		<jdbcConnection driverClass="oracle.jdbc.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.1.1:1521:a" userId="a" password="a" />
+		<!--<jdbcConnection driverClass="oracle.jdbc.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.1.1:1521:a" userId="a" password="a" />-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/kykys?characterEncoding=utf8" userId="root" password="123456" />
+
 
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
 		<!-- javabeen生成的地方 -->
-		<javaModelGenerator targetPackage="cn.kykys.index.model" targetProject="inde-v2">
+		<javaModelGenerator targetPackage="cn.kykys.index.model" targetProject="D:\lastest_workbench\code\inde-v2">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<!-- mapper.xml生成的地方 -->
-		<sqlMapGenerator targetPackage="order" targetProject="inde-v2">
+		<sqlMapGenerator targetPackage="cn.kykys.index.data" targetProject="D:\lastest_workbench\code\inde-v2">
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 	
-		<javaClientGenerator type="XMLMAPPER" targetPackage="cn.kykys.index.data" targetProject="inde-v2">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="cn.kykys.index.data" targetProject="D:\lastest_workbench\code\inde-v2">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 
 		<!-- 表名和生成的实体名 -->
 		<!--<table tableName="a" domainObjectName="a" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
-		
-	</context>
+
+        <table tableName="posts" domainObjectName="PostsModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
+
+
+    </context>
 </generatorConfiguration>
