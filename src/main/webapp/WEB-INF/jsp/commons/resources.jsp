@@ -43,6 +43,8 @@
 <script src="https://cdn.bootcss.com/trianglify/1.0.1/trianglify.min.js"></script>
 <!-- jquery.cookie -->
 <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<!-- custom -->
+<script src="${ctx}/resources/js/common.js"></script>
 
 <!--[if lt IE 9]>
 
@@ -52,7 +54,7 @@
 	$.baseData = {
 		"basePath":"${ctx}",
 		"system":{
-			"dateTime":new Date(parseInt('${system_dateTime}')),
+			"dateTime":new Date(parseInt('${sys_time}')),
 		}
 	}
 })(jQuery);

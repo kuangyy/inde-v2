@@ -2,7 +2,9 @@ package cn.kykys.index.controller;
 
 import cn.kykys.index.model.exception.BusinessException;
 import cn.kykys.index.utils.DateUtils;
+import cn.kykys.index.utils.web.WebHelper;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -40,9 +43,13 @@ public abstract class BaseController {
 
     @ModelAttribute
     private void initAttribute(ModelMap model) {
-        model.put("system_dateTime", DateUtils.getCalendar().getTimeInMillis());
+        model.put("sys_time", DateUtils.getCalendar().getTimeInMillis());
     }
 
+    protected void output(HttpServletRequest httpRequest, HttpServletResponse httpResponse, Object object) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        this.output(httpRequest, httpResponse, object, dateFormat);
+    }
 
     /**
      * API输出
@@ -56,29 +63,32 @@ public abstract class BaseController {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setDateFormat(dateFormat);
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        try {
-            ps = httpResponse.getOutputStream();
-            String type = httpRequest.getParameter("type");
-            ps.write(objectMapper.writeValueAsString(object).getBytes("UTF-8"));
 
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-            throw new BusinessException(e.getMessage(), -1);
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+        if (WebHelper.isAjax(httpRequest)) {
+            try {
+                ps = httpResponse.getOutputStream();
+                ps.write(objectMapper.writeValueAsString(object).getBytes("UTF-8"));
+            } catch (IOException e) {
+                logger.error(e.getMessage(), e);
+                throw new BusinessException(e.getMessage(), -1);
+            } finally {
+                if (ps != null) {
+                    try {
+                        ps.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
+            }
+        } else {
+            try {
+                httpResponse.sendRedirect("/404");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
 
-    protected void output(HttpServletRequest httpRequest, HttpServletResponse httpResponse, Object object) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        this.output(httpRequest, httpResponse, object, dateFormat);
-    }
 
     /**
      * 异常处理,当捕获异常时统一使用此方法处理
@@ -119,4 +129,13 @@ public abstract class BaseController {
     }
 
 
+    public ModelAndView goError() {
+        return new ModelAndView("redirect:/404");
+    }
+
+    public JSONObject getJSON(){
+        JSONObject json = new JSONObject();
+        json.put("status",-1);
+        return json;
+    }
 }

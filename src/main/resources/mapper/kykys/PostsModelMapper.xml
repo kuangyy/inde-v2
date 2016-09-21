@@ -7,7 +7,7 @@
     <result column="summary" property="summary" jdbcType="VARCHAR" />
     <result column="pic" property="pic" jdbcType="VARCHAR" />
     <result column="like_count" property="likeCount" jdbcType="BIGINT" />
-    <result column="click_count" property="clickCount" jdbcType="BIGINT" />
+    <result column="view_count" property="viewCount" jdbcType="BIGINT" />
     <result column="weight" property="weight" jdbcType="DOUBLE" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
@@ -17,7 +17,7 @@
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, title, summary, pic, like_count, click_count, weight, create_time, update_time, 
+    id, title, summary, pic, like_count, view_count, weight, create_time, update_time,
     publish_time
   </sql>
   <sql id="Blob_Column_List" >
@@ -37,11 +37,11 @@
   </delete>
   <insert id="insert" parameterType="cn.kykys.index.model.PostsModel" >
     insert into posts (id, title, summary, 
-      pic, like_count, click_count, 
+      pic, like_count, view_count,
       weight, create_time, update_time, 
       publish_time, content)
     values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
-      #{pic,jdbcType=VARCHAR}, #{likeCount,jdbcType=BIGINT}, #{clickCount,jdbcType=BIGINT}, 
+      #{pic,jdbcType=VARCHAR}, #{likeCount,jdbcType=BIGINT}, #{viewCount,jdbcType=BIGINT},
       #{weight,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{publishTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
   </insert>
@@ -63,8 +63,8 @@
       <if test="likeCount != null" >
         like_count,
       </if>
-      <if test="clickCount != null" >
-        click_count,
+      <if test="viewCount != null" >
+        view_count,
       </if>
       <if test="weight != null" >
         weight,
@@ -98,8 +98,8 @@
       <if test="likeCount != null" >
         #{likeCount,jdbcType=BIGINT},
       </if>
-      <if test="clickCount != null" >
-        #{clickCount,jdbcType=BIGINT},
+      <if test="viewCount != null" >
+        #{viewCount,jdbcType=BIGINT},
       </if>
       <if test="weight != null" >
         #{weight,jdbcType=DOUBLE},
@@ -133,8 +133,8 @@
       <if test="likeCount != null" >
         like_count = #{likeCount,jdbcType=BIGINT},
       </if>
-      <if test="clickCount != null" >
-        click_count = #{clickCount,jdbcType=BIGINT},
+      <if test="viewCount != null" >
+        view_count = #{viewCount,jdbcType=BIGINT},
       </if>
       <if test="weight != null" >
         weight = #{weight,jdbcType=DOUBLE},
@@ -160,7 +160,7 @@
       summary = #{summary,jdbcType=VARCHAR},
       pic = #{pic,jdbcType=VARCHAR},
       like_count = #{likeCount,jdbcType=BIGINT},
-      click_count = #{clickCount,jdbcType=BIGINT},
+      view_count = #{viewCount,jdbcType=BIGINT},
       weight = #{weight,jdbcType=DOUBLE},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -174,11 +174,34 @@
       summary = #{summary,jdbcType=VARCHAR},
       pic = #{pic,jdbcType=VARCHAR},
       like_count = #{likeCount,jdbcType=BIGINT},
-      click_count = #{clickCount,jdbcType=BIGINT},
+      view_count = #{viewCount,jdbcType=BIGINT},
       weight = #{weight,jdbcType=DOUBLE},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       publish_time = #{publishTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  
+  <select id="selectByPage" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from posts
+   <where>
+
+   </where>
+
+    <if test="offset != null and size != null">
+      limit #{offset},#{limit}
+    </if>
+  </select>
+  <select id="count" parameterType="Map" resultType="int">
+    select
+      count(1)
+    from posts
+    <where>
+
+    </where>
+  </select>
+  
 </mapper>

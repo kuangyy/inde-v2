@@ -1,5 +1,7 @@
 package cn.kykys.index.model;
 
+import cn.kykys.index.model.dto.ContentModel;
+
 import java.util.Date;
 
 public class PostsModel {
@@ -13,7 +15,7 @@ public class PostsModel {
 
     private Long likeCount;
 
-    private Long clickCount;
+    private Long viewCount;
 
     private Double weight;
 
@@ -24,6 +26,8 @@ public class PostsModel {
     private Date publishTime;
 
     private String content;
+
+    ContentModel contentModel;
 
     public Long getId() {
         return id;
@@ -65,12 +69,12 @@ public class PostsModel {
         this.likeCount = likeCount;
     }
 
-    public Long getClickCount() {
-        return clickCount;
+    public Long getViewCount() {
+        return viewCount;
     }
 
-    public void setClickCount(Long clickCount) {
-        this.clickCount = clickCount;
+    public void setViewCount(Long viewCount) {
+        this.viewCount = viewCount;
     }
 
     public Double getWeight() {
@@ -111,5 +115,13 @@ public class PostsModel {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public ContentModel getContentModel() {
+        return contentModel;
+    }
+
+    public void setContentModel(ContentModel contentModel) {
+        this.contentModel = contentModel;
     }
 }

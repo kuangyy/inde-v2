@@ -1,7 +1,10 @@
 package cn.kykys.index.controller;
 
+import cn.kykys.index.ibusiness.IPosts;
 import cn.kykys.index.model.page.PageWeb;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -11,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController extends BaseController {
 
+    @Autowired
+    IPosts iPosts;
 
     @RequestMapping("/")
     public ModelAndView index() {
@@ -32,12 +37,12 @@ public class IndexController extends BaseController {
     }
 
 
-    @RequestMapping("/detail")
-    public ModelAndView detail() {
+    @RequestMapping("/p/{id}")
+    public ModelAndView detail(@PathVariable("id")Long id) {
 
         ModelAndView mav = new ModelAndView("detail");
 
-
+        mav.addObject("posts", iPosts.getById(id));
         return mav;
     }
 

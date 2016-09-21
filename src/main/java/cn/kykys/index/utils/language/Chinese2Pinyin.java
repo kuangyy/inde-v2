@@ -80,22 +80,31 @@ public class Chinese2Pinyin {
         HanyuPinyinOutputFormat defaultFormat = new HanyuPinyinOutputFormat();
         defaultFormat.setCaseType(HanyuPinyinCaseType.LOWERCASE);
         defaultFormat.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
+        boolean tag = true;
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] > 128) {
+                if (!tag) {
+                    pybf.append("_");
+                }
+                tag = true;
                 try {
-                    pybf.append(PinyinHelper.toHanyuPinyinStringArray(arr[i], defaultFormat)[0]).append("_");
+                    pybf.append(PinyinHelper.toHanyuPinyinStringArray(arr[i], defaultFormat)[0]);
                 } catch (BadHanyuPinyinOutputFormatCombination e) {
                     e.printStackTrace();
                 }
             } else {
-                pybf.append(arr[i]).append("_");
+                tag = false;
+                pybf.append(arr[i]);
+            }
+            if (tag && i < arr.length - 1) {
+                pybf.append("_");
             }
         }
-        return pybf.substring(0, pybf.length() - 1).toString();
+        return pybf.substring(0, pybf.length()).toString();
     }
 
     public static void main(String[] args) throws UnsupportedEncodingException {
-        String x = "爱睡觉会打瞌睡的金卡间谍";
+        String x = "爱睡觉会打瞌睡的my金卡间谍";
         System.out.println(cn2FirstSpell(x));
         System.out.println(cn2Spell(x));
         System.out.println(cn2SpellWithUnderline(x));

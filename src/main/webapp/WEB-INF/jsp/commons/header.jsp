@@ -40,10 +40,10 @@
 
 	$(function(){
 
-		generateBG();
+//		generateBG();
 
 		$(window).resize(function(){
-			generateBG();
+//			generateBG();
 		});
 
 		// $(".jumbotron .row .div").animate({

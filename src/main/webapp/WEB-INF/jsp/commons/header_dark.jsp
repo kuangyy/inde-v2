@@ -3,7 +3,7 @@
 
 <div class="bg"></div>
 
-<nav class="navbar navbar-dark navbar-fixed-top">
+<nav class="navbar navbar-dark bg-inverse">
 	<!-- <div class="clearfix"> -->
 	<button class="navbar-toggler pull-xs-right hidden-sm-up" type="button" data-toggle="collapse" data-target="#bd-main-nav" aria-controls="bd-main-nav" aria-expanded="false" aria-label="Toggle navigation">
 		&#9776;

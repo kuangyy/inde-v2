@@ -498,3 +498,51 @@ fieldset[disabled] .fm:focus {
     position: fixed;
     width: 25%;
 }
+
+
+/* tips */
+.submit-tips{
+    text-align: center;
+    height: 44px;
+    line-height: 44px;
+    /*width: 126px;*/
+    padding: 0px 10px;
+    border-radius: 3px;
+    position: fixed;
+    left: 40%;
+    top: 56%;
+    display: none;
+}
+
+footer {
+    z-index: 0;
+}
+
+/* container .d-content*/
+.container .d-content {
+    min-height: 25em;
+    background-color: #ffe3f0;
+    padding: 5em 1em;
+    border-radius: .25rem;
+    margin-top: -5em;
+    margin-bottom: -5em;
+
+    -webkit-box-shadow: 5px 5px 0 #fff9e9;
+    -moz-box-shadow: 5px 5px 0 #fff9e9;
+    box-shadow: 5px 5px 0 #fff9e9;
+
+    z-index: 99;
+}
+/* markdown */
+.markdown blockquote{
+    border: 2px solid #eee;
+    border-left-width: .25rem;
+    border-left-color: #f0ad4e;
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-radius: .25rem;
+}
+.markdown blockquote p:last-child {
+    margin-bottom: 0;
+}
