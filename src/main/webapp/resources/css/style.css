@@ -289,10 +289,6 @@
 
 
 /* manage bar */
-.ge {
-    margin: 10em 0px 0px 10em;
-
-}
 .fm {
     color: #1ca8dd;
     font-weight: normal;
@@ -496,4 +492,9 @@ fieldset[disabled] .fm:focus {
 }
 .nav > li > a > img {
     max-width: none;
+}
+.ge {
+    margin: 2em auto;
+    position: fixed;
+    width: 25%;
 }

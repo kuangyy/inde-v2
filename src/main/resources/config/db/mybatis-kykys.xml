@@ -9,7 +9,7 @@
 
 	<bean id="kykysDbDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 		<property name="driverClassName">
-			<value>com.mysql.jdbc.Driver</value>
+			<value>${driver}</value>
 		</property>
 		<property name="url">
 			<value>${url}</value>

@@ -8,7 +8,7 @@
 		<ul class="bd-footer-links">
 			<li><a href="495621336">QQ</a></li>
 			<li><a href="mailto:ky.kys.cn@hotmail.com">Email</a></li>
-			<li><a href="/examples/">Examples</a></li>
+			<li><a href="${ctx}/manage/login">Manage</a></li>
 			<li><a href="/about/history/">About</a></li>
 		</ul>
 		<p>Designed and built with all the love in the world by <a href="https://www.kykys.cn/about" target="_blank">@Kuangye</a>. Nice to see you here.</p>

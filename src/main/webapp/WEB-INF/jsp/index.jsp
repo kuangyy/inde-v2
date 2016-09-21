@@ -35,7 +35,6 @@
                     </form>
                 </div>
             </div>
-            </p>
         </div>
 
         <div class="card-deck-wrapper">
