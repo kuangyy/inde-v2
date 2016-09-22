@@ -178,7 +178,7 @@
                     url : $.baseData.basePath+"/manage/posts/updateDo",
                     type: "POST",
                     cache : false,
-                    data :$("#submitForm").serialize()+"&markdownContent="+$("#preview").html()+"",
+                    data :$("#submitForm").serialize()+"&markdownContent="+encodeURIComponent($("#preview").html())+"",
                     dataType : "json",
                     success : function(data) {
                         if(data.status){
