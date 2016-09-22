@@ -7,23 +7,21 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.Calendar;
 
-public class DocUpload extends FileAbstract {
+class DocUpload extends FileAbstract {
 
 
     static final String HOST = BASE_PATH + "/file/doc/";
 
-    protected  Integer maxSize = 5000 * 1024 * 1024;
+    Integer maxSize = 5000 * 1024 * 1024;
 
     public DocUpload(CommonsMultipartFile file) {
-      super(file);
+        super(file);
     }
 
     public DocUpload(InputStream inputStream, String fileName) {
-        super(inputStream,fileName);
+        super(inputStream, fileName);
     }
 
 
@@ -42,7 +40,7 @@ public class DocUpload extends FileAbstract {
                 try {
                     path = new StringBuffer(FileHelper.getPicturePath());
 
-                    path.append( File.separator).append("doc").append(File.separator);
+                    path.append(File.separator).append("doc").append(File.separator);
 
                     path.append(filePath);
 

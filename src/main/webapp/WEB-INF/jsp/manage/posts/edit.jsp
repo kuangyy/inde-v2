@@ -3,7 +3,7 @@
 <html>
 <head>
 
-   <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"></jsp:include>
+   <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"/>
 
     <title>狂or野-你喜欢哪一个我</title>
     <meta name="description" content="ky's home page">
@@ -11,11 +11,11 @@
 </head>
 <body>
     
-    <jsp:include page="/WEB-INF/jsp/commons/header.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/jsp/commons/header.jsp"/>
 
 
     <div class="col-md-3">
-        <jsp:include page="/WEB-INF/jsp/manage/commons/leftmenu.jsp"></jsp:include>
+        <jsp:include page="/WEB-INF/jsp/manage/commons/leftmenu.jsp"/>
     </div>
     <div class="col-md-9">
 
@@ -64,7 +64,7 @@
                    <label class="col-xs-2 col-form-label">PublishTime</label>
                    <div class="col-xs-5">
                        <input class="form-control" type="datetime-local" name="publishTimeString" placeholder="default publish now"
-                              value="<fmt:formatDate value="${posts.publishTime}" pattern="yyyy/MM/dd hh:mm:ss"></fmt:formatDate>">
+                              value="<fmt:formatDate value="${posts.publishTime}" pattern="yyyy/MM/dd hh:mm:ss"/>">
                    </div>
                </div>
                <div class="form-group row">
@@ -107,7 +107,7 @@
 
 
 
-    <jsp:include page="/WEB-INF/jsp/commons/footer.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/jsp/commons/footer.jsp"/>
 
     <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
     <script src="${ctx}/resources/component/js/vendor/jquery.ui.widget.js"></script>

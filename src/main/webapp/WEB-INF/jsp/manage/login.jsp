@@ -3,7 +3,7 @@
 <html>
 <head>
 
-   <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"></jsp:include>
+   <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"/>
 
     <title>狂or野-你喜欢哪一个我</title>
     <meta name="description" content="ky's home page">
@@ -11,7 +11,7 @@
 </head>
 <body>
     
-    <jsp:include page="/WEB-INF/jsp/commons/header_dark.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/jsp/commons/header_dark.jsp"/>
 
     <div class="content">
 
@@ -53,7 +53,7 @@
     </div>
 
 
-    <jsp:include page="/WEB-INF/jsp/commons/footer.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/jsp/commons/footer.jsp"/>
 
 </body>
 </html>

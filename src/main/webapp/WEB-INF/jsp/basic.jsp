@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 
-    <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"/>
 
 <!-- Generic page styles -->
 <link rel="stylesheet" href="${ctx}/resources/component/css/style.css">

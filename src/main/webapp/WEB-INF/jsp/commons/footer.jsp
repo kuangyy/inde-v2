@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/commons/taglibs.jsp"%>
 
-<jsp:include page="/WEB-INF/jsp/commons/fixedbar.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/jsp/commons/fixedbar.jsp"/>
 
 <footer class="bd-footer text-muted">
 	<div class="container">

@@ -7,16 +7,14 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.Calendar;
 
 /**
  * Created by john on 15/10/27.
  */
-public class AudioUpload extends FileAbstract {
+class AudioUpload extends FileAbstract {
 
-    protected Integer maxSize = 30 * 1024 * 1024;
+    Integer maxSize = 30 * 1024 * 1024;
 
     static final String HOST = BASE_PATH + "/file/audio/";
 
@@ -25,7 +23,7 @@ public class AudioUpload extends FileAbstract {
     }
 
     public AudioUpload(InputStream inputStream, String fileName) {
-        super(inputStream,fileName);
+        super(inputStream, fileName);
     }
 
 

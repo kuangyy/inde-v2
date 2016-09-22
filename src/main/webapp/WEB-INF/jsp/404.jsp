@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"/>
 
     <title>404 - Page Not Found</title>
     <link rel="stylesheet" type="text/css" href="${ctx}/resources/css/404.css">

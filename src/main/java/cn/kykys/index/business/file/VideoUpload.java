@@ -7,11 +7,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.Calendar;
 
-public class VideoUpload extends FileAbstract {
+class VideoUpload extends FileAbstract {
 
 
     static final String HOST = BASE_PATH + "/file/video/";

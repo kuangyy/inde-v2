@@ -56,9 +56,9 @@
 
 	<bean id="kykysDbSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="kykysDbDataSource" />
-		<property name="configLocation">
-			<value>classpath:config/db/mybatis-config.xml</value>
-		</property>
+		<!--<property name="configLocation">-->
+			<!--<value>classpath:config/db/mybatis-config.xml</value>-->
+		<!--</property>-->
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:mapper/kykys/**.xml</value>
