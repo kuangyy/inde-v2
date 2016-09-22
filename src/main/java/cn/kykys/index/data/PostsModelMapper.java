@@ -24,4 +24,9 @@ public interface PostsModelMapper {
     List<PostsModel> selectByPage(Map<String,?> map);
 
     int count(Map<String,?> map);
+
+
+    List<PostsModel> searchByPage(Map<String,?> map);
+
+    int searchCount(Map<String,?> map);
 }

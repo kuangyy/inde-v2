@@ -81,7 +81,8 @@ public class PostsBusiness implements IPosts {
 
         Map<String, Object> param = new HashMap<>();
         param.put("model", postsModel);
-        param.put("page", pageWeb);
+        param.put("offset", pageWeb.getOffset());
+        param.put("limit", pageWeb.getLimit());
 
         List<PostsModel> postsModelList = postsModelMapper.selectByPage(param);
         result.put("postsModelList", postsModelList);
@@ -94,5 +95,27 @@ public class PostsBusiness implements IPosts {
 
         return result;
     }
+
+
+
+  public   Map<String, ?> searchByPage(String word, PageWeb pageWeb){
+      Map<String, Object> result = new HashMap<>();
+
+      Map<String, Object> param = new HashMap<>();
+      param.put("word", word);
+      param.put("offset", pageWeb.getOffset());
+      param.put("limit", pageWeb.getLimit());
+
+      List<PostsModel> postsModelList = postsModelMapper.searchByPage(param);
+      result.put("postsModelList", postsModelList);
+
+      int count = postsModelMapper.searchCount(param);
+      pageWeb.setPageIndex(pageWeb.getPageIndex());
+      pageWeb.setCount(count);
+
+      result.put("pageWeb", pageWeb);
+
+      return result;
+  }
 
 }

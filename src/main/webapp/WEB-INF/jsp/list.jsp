@@ -37,30 +37,117 @@
         <div class="container">
 
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Library</a></li>
-                <li class="breadcrumb-item active">Data</li>
+                <li class="breadcrumb-item">Search results :</li>
             </ol>
 
 
-            <div class="card-deck-wrapper">
-                <div class="card-deck">
+            <div class="list">
+                <div class="card-columns">
 
-                    <div class="card card-inverse">
-                        <img class="card-img" src="a.png" alt="Card image">
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">Card title</h4>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
+                    <c:forEach items="${postsModelList}" var="posts" varStatus="varStatus">
+                        <%--<div class="card card-inverse">--%>
+                            <%--<img class="card-img" width="100%" height="200px" src="<c:choose><c:when test="${posts.pic != null}">${posts.pic}</c:when><c:otherwise>${ctx}/resources/img/default.png</c:otherwise></c:choose>" alt="Card image">--%>
+                            <%--<div class="card-img-overlay">--%>
+                                <%--<h4 class="card-title">--%>
+                                    <%--<c:choose>--%>
+                                        <%--<c:when test="${fn:length(posts.title) > 12}">--%>
+                                            <%--${fn:substring(posts.title,0,12)}...--%>
+                                        <%--</c:when>--%>
+                                        <%--<c:otherwise>--%>
+                                            <%--${posts.title}--%>
+                                        <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                <%--</h4>--%>
 
+                                <%--<p class="card-text" title="${posts.summary}">--%>
+                                <%--<c:choose>--%>
+                                    <%--<c:when test="${fn:length(posts.summary) > 50}">--%>
+                                        <%--${fn:substring(posts.summary,0,50)}...--%>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
+                                        <%--${posts.summary}--%>
+                                    <%--</c:otherwise>--%>
+                                <%--</c:choose>--%>
+                                <%--</p>--%>
+                                <%--<p class="card-text">--%>
+                                    <%--<small class="text-inverse pull-right"><fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"></fmt:formatDate> </small>--%>
+                                <%--</p>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+
+                        <c:choose>
+                            <c:when test="${posts.pic != null}">
+                                <a href="${ctx}/p/${posts.id}" target="_blank">
+                                <div class="card card-inverse">
+                                    <img class="card-img" width="100%" height="200px" src="${posts.pic}" alt="Card image">
+                                    <div class="card-img-overlay">
+                                        <h3 class="card-title">
+                                            <c:choose>
+                                                <c:when test="${fn:length(posts.title) > 12}">
+                                                    ${fn:substring(posts.title,0,12)}...
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${posts.title}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </h3>
+                                        <p class="card-text" title="${posts.summary}">
+                                            <c:choose>
+                                                <c:when test="${fn:length(posts.summary) > 50}">
+                                                    ${fn:substring(posts.summary,0,50)}...
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${posts.summary}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </p>
+                                        <p class="card-text">
+                                            <small class="text-inverse pull-right"><fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"></fmt:formatDate> </small>
+                                        </p>
+                                    </div>
+                                </div>
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+                                    <div class="card-block">
+                                        <h3 class="card-title">
+                                            <c:choose>
+                                                <c:when test="${fn:length(posts.title) > 12}">
+                                                    ${fn:substring(posts.title,0,12)}...
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${posts.title}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </h3>
+                                        <p class="card-text" title="${posts.summary}">
+                                            <c:choose>
+                                                <c:when test="${fn:length(posts.summary) > 50}">
+                                                    ${fn:substring(posts.summary,0,50)}...
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${posts.summary}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </p>
+                                        <p class="card-text">
+                                            <small class="text-inverse pull-right"><fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"></fmt:formatDate> </small>
+                                        </p>
+                                        <a href="${ctx}/p/${posts.id}" target="_blank" class="btn btn-primary">View</a>
+                                    </div>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+
+                    </c:forEach>
 
                 </div>
+
+                <jsp:include page="/WEB-INF/jsp/commons/page.jsp"></jsp:include>
+
             </div>
 
-
-            <jsp:include page="/WEB-INF/jsp/commons/page.jsp"></jsp:include>
 
         </div>
 

@@ -22,4 +22,6 @@ public interface IPosts {
     boolean delete(Long id);
 
     Map<String, ?> selectByPage(PostsModel postsModel, PageWeb pageWeb);
+
+    Map<String, ?> searchByPage(String word, PageWeb pageWeb);
 }

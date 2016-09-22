@@ -565,8 +565,13 @@ footer {
     cursor: pointer;
 }
 
+/* edit bar [not good :( ] */
 .edit-toolbar {
     position: fixed;
     top:100px;
     left: 23%;
 }
+
+
+/*  list  */
+

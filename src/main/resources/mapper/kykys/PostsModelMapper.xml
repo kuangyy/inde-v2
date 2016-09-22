@@ -191,7 +191,7 @@
 
    </where>
 
-    <if test="offset != null and size != null">
+    <if test="offset != null and limit != null">
       limit #{offset},#{limit}
     </if>
   </select>
@@ -203,5 +203,34 @@
 
     </where>
   </select>
+
+
+  <select id="searchByPage" parameterType="Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from posts
+    <where>
+      <if test="word != null">
+        AND title like CONCAT('%',#{word},'%') OR content like CONCAT('%',#{word},'%')
+      </if>
+    </where>
+
+    ORDER BY weight desc,update_time desc,create_time desc
+
+    <if test="offset != null and limit != null">
+      limit #{offset},#{limit}
+    </if>
+  </select>
+  <select id="searchCount" parameterType="Map" resultType="int">
+    select
+    count(1)
+    from posts
+    <where>
+      <if test="word != null">
+        AND title like CONCAT('%',#{word},'%') OR content like CONCAT('%',#{word},'%')
+      </if>
+    </where>
+  </select>
+
   
 </mapper>
