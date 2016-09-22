@@ -176,10 +176,11 @@
 }
 
 @media (min-width: 992px) {
-  .bd-pageheader h1,
-  .bd-pageheader p {
-    margin-right: 380px;
-  }
+    /* not need */
+  /*.bd-pageheader h1,*/
+  /*.bd-pageheader p {*/
+    /*margin-right: 380px;*/
+  /*}*/
   .bd-pageheader .carbonad {
     position: absolute;
     top: 0;
