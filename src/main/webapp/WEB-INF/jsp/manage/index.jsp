@@ -15,7 +15,6 @@
 
 
 <%--<div class="container">--%>
-<div class="row">
     <div class="col-md-3">
         <jsp:include page="/WEB-INF/jsp/manage/commons/leftmenu.jsp"></jsp:include>
     </div>
@@ -92,7 +91,6 @@
 
     </div>
 
-</div>
 <%--</div>--%>
 
 

@@ -5,8 +5,8 @@
 
    <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"></jsp:include>
 
-    <title>狂or野-你喜欢哪一个我</title>
-    <meta name="description" content="ky's home page">
+    <title>${posts.title}-狂or野-你喜欢哪一个我</title>
+    <meta name="description" content="${posts.summary}">
     <meta name="author" content="kuangye">
 </head>
 <body>

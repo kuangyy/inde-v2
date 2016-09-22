@@ -220,5 +220,13 @@ var alertify = {
         tips.fadeIn(300);
         window.setTimeout(function(){tips.fadeOut(200);tips.remove();},3000);
         callback && callback();
+    },
+    tips_info:function(msg,callback){
+        msg=msg?msg:"tips";
+        $("body").append("<div class=\"submit-tips alert alert-info\" style='display: none'><i class=\"fa fa-info-circle\" aria-hidden=\"true\"></i> "+msg+"</div>");
+        var tips = $(".submit-tips");
+        tips.fadeIn(300);
+        window.setTimeout(function(){tips.fadeOut(200);tips.remove();},3000);
+        callback && callback();
     }
 }

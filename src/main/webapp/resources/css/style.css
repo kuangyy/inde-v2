@@ -521,7 +521,7 @@ footer {
 /* container .d-content*/
 .container .d-content {
     min-height: 25em;
-    background-color: #EEEEEE;
+    background-color: #ffffe6;
     padding: 5em 1em;
     border-radius: .25rem;
     margin-top: -5em;
@@ -550,4 +550,23 @@ footer {
     width: 30em;
     margin: 5px 25%;
 
+}
+
+/* upload btn */
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 200px !important;
+    direction: ltr;
+    cursor: pointer;
+}
+
+.edit-toolbar {
+    position: fixed;
+    top:100px;
+    left: 23%;
 }

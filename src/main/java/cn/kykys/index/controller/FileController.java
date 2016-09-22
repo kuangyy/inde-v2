@@ -11,7 +11,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,24 +23,6 @@ import java.util.Map;
 @RequestMapping("/file")
 public class FileController extends BaseController {
 
-
-    @RequestMapping(value = "/imgupload", method = RequestMethod.POST)
-    @Deprecated
-    public
-    @ResponseBody
-    Map<String, Object> imgUpload(HttpServletRequest httpRequest, HttpServletResponse httpResponse, @RequestParam CommonsMultipartFile file) throws BusinessException {
-        Map<String, Object> map = new HashMap<>();
-
-        String imageUrl = UtilsBusiness.fileUpload(file);
-        if (imageUrl != null && !imageUrl.equals("")) {
-            map.put("success", true);
-            map.put("imageUrl", imageUrl);
-        } else {
-            map.put("success", false);
-        }
-
-        return map;
-    }
 
     /**
      * 文件上传均使用该方法，不论是mp3或png
@@ -53,7 +37,34 @@ public class FileController extends BaseController {
 
         if (fileUrl != null && !fileUrl.equals("")) {
             map.put("success", true);
-            map.put("imageUrl", fileUrl);
+            map.put("url", fileUrl);
+        } else {
+            map.put("success", false);
+        }
+
+        return map;
+    }
+
+    /**
+     * 多文件上传
+     */
+    @RequestMapping(value = "/fileuploads", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    Map<String, Object> fileUpload(HttpServletRequest httpRequest, HttpServletResponse httpResponse, @RequestParam CommonsMultipartFile[] files) throws BusinessException {
+        Map<String, Object> map = new HashMap<>();
+
+        List<String> fileUrls = new ArrayList<>();
+
+        for(CommonsMultipartFile file :files){
+            String fileUrl = UtilsBusiness.fileUpload(file);
+            fileUrls.add(fileUrl);
+        }
+
+
+        if (fileUrls.size()>0) {
+            map.put("success", true);
+            map.put("urls", fileUrls);
         } else {
             map.put("success", false);
         }

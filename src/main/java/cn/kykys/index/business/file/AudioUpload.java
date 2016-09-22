@@ -2,6 +2,7 @@ package cn.kykys.index.business.file;
 
 import cn.kykys.index.model.dto.ExecuteResultModel;
 import cn.kykys.index.model.exception.BusinessException;
+import cn.kykys.index.utils.file.FileHelper;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
@@ -15,82 +16,65 @@ import java.util.Calendar;
  */
 public class AudioUpload extends FileAbstract {
 
-    static final String HOST = "http://video.yiminbang.com/";
+    protected Integer maxSize = 30 * 1024 * 1024;
+
+    static final String HOST = BASE_PATH + "/file/audio/";
 
     public AudioUpload(CommonsMultipartFile file) {
-        format = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
-        try {
-            inputStream = file.getInputStream();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        maxSize = 30 * 1024 * 1024;
+        super(file);
     }
 
     public AudioUpload(InputStream inputStream, String fileName) {
-        format = fileName.substring(fileName.lastIndexOf(".") + 1);
-        this.inputStream = inputStream;
-        maxSize = 30 * 1024 * 1024;
+        super(inputStream,fileName);
     }
 
-    /**
-     * 上传逻辑
-     *
-     * @return
-     * @throws IOException
-     */
-    @Override
-    protected ExecuteResultModel upload() throws IOException {
 
+    @Override
+    protected ExecuteResultModel upload(InputStream is, String filePath) {
         ExecuteResultModel resultModel = new ExecuteResultModel();
-        //文件上传地址
-        Calendar clDate = Calendar.getInstance();
-        String filePath = String.format("%s/%s/%s/%s.%s", clDate
-                        .get(Calendar.YEAR), clDate.get(Calendar.MONTH) + 1,
-                clDate.get(Calendar.DATE), java.util.UUID.randomUUID()
-                        .toString(), this.format);
+        resultModel.setIsSuccess(false);
         try {
 
-            if (this.inputStream.available() > this.maxSize) {
+            if (is.available() > this.maxSize) {
                 resultModel.setMessage("文件超过上传大小限制");
             } else {
 
-                StringBuffer path = new StringBuffer(System.getProperty("catalina.home") == null ? "" : System.getProperty("catalina.home"));
-                if (path.length() == 0) {
-                    path.append(System.getProperty("catalina.base") == null ? "" : System.getProperty("catalina.base"));
-                }
-                if (path.length() == 0) {
-                    throw new BusinessException("+++++++++++system error: server home is not found!+++++++++++");
-                } else {
-                    String sep = System.getProperty("file.separator");
-                    path.append(sep).append("pic").append(sep);
-
-                    path.append(filePath);
-                }
+                StringBuffer path;
 
                 try {
+                    path = new StringBuffer(FileHelper.getPicturePath());
+
+                    path.append(File.separator).append("audio").append(File.separator);
+
+                    path.append(filePath);
+
+                    //写入文件
                     File file = new File(path.toString());
+
+                    File parent = new File(file.getParent());
+                    parent.mkdirs();
+
+                    if (!file.exists())
+                        file.createNewFile();
 
                     FileOutputStream fileOutputStream = new FileOutputStream(file);
                     byte[] buffer = new byte[1024];
                     int i;
-                    while ((i = this.inputStream.read(buffer)) > 0) {
+                    while ((i = is.read(buffer)) > 0) {
                         fileOutputStream.write(buffer, 0, i);
                     }
 
                     fileOutputStream.flush();
                     fileOutputStream.close();
-
-                    this.inputStream.close();
+                    is.close();
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    throw new BusinessException("文件上传失败");
                 }
 
                 resultModel.setIsSuccess(true);
                 resultModel.setMessage(HOST + filePath);
 
-                this.inputStream.close();
             }
         } catch (Exception e) {
             resultModel.setMessage("上传失败");
@@ -98,4 +82,5 @@ public class AudioUpload extends FileAbstract {
         }
         return resultModel;
     }
+
 }

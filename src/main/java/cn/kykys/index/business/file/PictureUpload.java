@@ -14,52 +14,20 @@ import java.util.Calendar;
 public class PictureUpload extends FileAbstract {
 
 
-    static final String HOST = "http://localhost:8080/party-manage/file/pic/";
+    static final String HOST = BASE_PATH + "/file/pic/";
 
 
     public PictureUpload(CommonsMultipartFile file) {
-        format = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
-        try {
-            inputStream = file.getInputStream();
-        } catch (Exception e) {
-
-        }
-        maxSize = 10 * 1024 * 1024;
-
+        super(file);
     }
 
     public PictureUpload(InputStream inputStream, String fileName) {
-        format = fileName.substring(fileName.lastIndexOf(".") + 1);
-        try {
-            this.inputStream = inputStream;
-        } catch (Exception e) {
-
-        }
-        maxSize = 10 * 1024 * 1024;
+        super(inputStream,fileName);
     }
 
-    /**
-     * 上传逻辑
-     *
-     * @return
-     * @throws IOException
-     */
+
     @Override
-    protected ExecuteResultModel upload() throws IOException {
-        ExecuteResultModel resultModel;
-        //文件上传地址
-        Calendar clDate = Calendar.getInstance();
-        String filePath = String.format("%s/%s/%s/%s.%s", clDate
-                        .get(Calendar.YEAR), clDate.get(Calendar.MONTH) + 1,
-                clDate.get(Calendar.DATE), java.util.UUID.randomUUID()
-                        .toString(), this.format);
-
-        resultModel = upload(this.inputStream, filePath);
-        return resultModel;
-    }
-
-
-    private ExecuteResultModel upload(InputStream is, String filePath) {
+    protected ExecuteResultModel upload(InputStream is, String filePath) {
         ExecuteResultModel resultModel = new ExecuteResultModel();
         resultModel.setIsSuccess(false);
         try {
@@ -72,8 +40,8 @@ public class PictureUpload extends FileAbstract {
 
                 try {
                     path = new StringBuffer(FileHelper.getPicturePath());
-                    String sep = System.getProperty("file.separator");
-                    path.append(sep).append("pic").append(sep);
+
+                    path.append(File.separator).append("pic").append(File.separator);
 
                     path.append(filePath);
 
@@ -83,7 +51,7 @@ public class PictureUpload extends FileAbstract {
                     File parent = new File(file.getParent());
                     parent.mkdirs();
 
-                    if(!file.exists())
+                    if (!file.exists())
                         file.createNewFile();
 
                     FileOutputStream fileOutputStream = new FileOutputStream(file);
