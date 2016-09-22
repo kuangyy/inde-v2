@@ -25,9 +25,9 @@
 
         <div class="row">
             <div class="offset-xs-2 col-xs-8">
-                <form class="form-inline text-sx-center">
+                <form class="form-inline text-sx-center" action="${ctx}/s">
                     <div class="input-group">
-                        <input type="text" class="form-control" aria-label="Text input with segmented button dropdown"
+                        <input type="text" class="form-control" aria-label="Text input with segmented button dropdown" name="wd" value="${wd}"
                                placeholder="Search">
                         <div class="input-group-btn">
                             <button class="btn btn-outline-inverse btn-outline-gold" type="submit">Search</button>

@@ -17,18 +17,25 @@
 
         <div class="bd-pageheader text-xs-center text-sm-left">
             <div class="container">
-                <h1>Examples</h1>
+                <h1>Posts</h1>
                 <p class="lead">
-                    Quickly get a project started with any of our examples ranging from using parts of the framework to custom components and layouts.
+                    夜不炳烛则昧,冬不御裘则寒,渡河而乘陆车者危,易证而尝旧方者死
                 </p>
-
+                <hr>
                 <div id="carbonads">
-			    	<span>
-			    		<span class="carbon-wrap">
-			    			<a href="/" class="carbon-img" target="_blank"><img src="a.png" alt="" border="0" height="100" width="130" style="max-width:130px;"></a><a href="" class="carbon-text" target="_blank">Do You Want a Transparent Cloud Environment? Our Experts Can Help!</a>
-		    			</span>
-		    			<a href="http://carbonads.net/" class="carbon-poweredby" target="_blank">ads via Carbon</a>
-	    			</span>
+                    <div class="row">
+                        <div class="offset-xs-2 col-xs-8">
+                            <form class="form-inline text-sx-center" action="${ctx}/s">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" aria-label="Text input with segmented button dropdown" name="wd" value="${wd}"
+                                           placeholder="Search">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-outline-inverse btn-outline-gold" type="submit">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

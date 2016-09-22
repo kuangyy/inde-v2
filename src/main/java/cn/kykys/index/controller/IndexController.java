@@ -38,7 +38,12 @@ public class IndexController extends BaseController {
 
             Map map = iPosts.searchByPage(word, pageWeb);
             mav.addAllObjects(map);
+        } else {
+            mav = this.list(pageWeb);
+
         }
+
+        mav.addObject("wd", wd);
 
         return mav;
     }
