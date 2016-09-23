@@ -2,6 +2,9 @@ package cn.kykys.index.data;
 
 import cn.kykys.index.model.RPostTagModelKey;
 
+import java.util.List;
+import java.util.Map;
+
 @KykysDB
 public interface RPostTagModelMapper {
     int deleteByPrimaryKey(RPostTagModelKey key);
@@ -9,4 +12,5 @@ public interface RPostTagModelMapper {
     int insert(RPostTagModelKey record);
 
     int insertSelective(RPostTagModelKey record);
+
 }

@@ -1,6 +1,8 @@
 package cn.kykys.index.controller;
 
 import cn.kykys.index.ibusiness.IPosts;
+import cn.kykys.index.ibusiness.ITags;
+import cn.kykys.index.model.TagsModel;
 import cn.kykys.index.model.page.PageWeb;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,11 +23,27 @@ public class IndexController extends BaseController {
 
     @Autowired
     IPosts iPosts;
+    @Autowired
+    ITags iTags;
 
     //home page
     @RequestMapping("/")
     public ModelAndView index() {
-        return new ModelAndView("index");
+
+        ModelAndView mav = new ModelAndView("index");
+
+        PageWeb pageWeb = new PageWeb();
+        pageWeb.setPageSize(3);
+
+        //hot tags
+        List<TagsModel> hotTagList = iTags.selectHotTagByPage(pageWeb, 3, true);
+        mav.addObject("hotTagList", hotTagList);
+
+        //all tags
+        List<TagsModel> allTagList = iTags.selectHotTagByPage(null);
+        mav.addObject("allTagList", allTagList);
+
+        return mav;
     }
 
     //search

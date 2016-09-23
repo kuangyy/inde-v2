@@ -38,90 +38,63 @@
         </div>
     </div>
 
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">Books </li>
-    </ol>
-    <div class="card-deck-wrapper">
-        <div class="card-deck">
-            <div class="card">
-                <img class="card-img-top" src="${ctx}/resources/images/a.png" alt="Card image cap">
-                <div class="card-block">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                    <p class="card-text">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="${ctx}/resources/images/a.png" alt="Card image cap">
-                <div class="card-block">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                        content.</p>
-                    <p class="card-text">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="${ctx}/resources/images/a.png" alt="Card image cap">
-                <div class="card-block">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This card has even longer content than the first to show that equal height
-                        action.</p>
-                    <p class="card-text">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                </div>
+
+    <c:forEach var="tags" items="${hotTagList}" varStatus="varStatus">
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">${tags.name} </li><span class="pull-right"><a> more... </a></span>
+        </ol>
+        <div class="card-deck-wrapper">
+            <div class="card-deck">
+
+                <c:forEach var="posts" items="${tags.postsModelList}" varStatus="varStatus">
+
+                    <div class="card">
+                        <img class="card-img-top" src="${ctx}/resources/images/a.png" alt="Card image cap">
+                        <div class="card-block">
+                            <h4 class="card-title" title="${posts.title}">
+                                <c:choose>
+                                    <c:when test="${fn:length(posts.title) > 12}">
+                                        ${fn:substring(posts.title,0,12)}...
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${posts.title}
+                                    </c:otherwise>
+                                </c:choose>
+                            </h4>
+                            <p class="card-text" title="${posts.summary}">
+                                <c:choose>
+                                    <c:when test="${fn:length(posts.summary) > 50}">
+                                        ${fn:substring(posts.summary,0,50)}...
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${posts.summary}
+                                    </c:otherwise>
+                                </c:choose>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-inverse pull-right">
+                                    <i class="fa fa-heart" aria-hidden="true"></i> ${posts.likeCount}
+                                    <i class="fa fa-eye" aria-hidden="true"></i> ${posts.viewCount}
+                                </small>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-inverse pull-right">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i> <fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"/>
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+
+                </c:forEach>
+
             </div>
         </div>
-    </div>
+
+    </c:forEach>
 
 
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">Foods </li>
-    </ol>
-    <div class="card-deck-wrapper">
-        <div class="card-deck">
-            <div class="card">
-                <img class="card-img-top" src="${ctx}/resources/images/a.png" alt="Card image cap">
-                <div class="card-block">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                    <p class="card-text">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="${ctx}/resources/images/a.png" alt="Card image cap">
-                <div class="card-block">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                        content.</p>
-                    <p class="card-text">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="${ctx}/resources/images/a.png" alt="Card image cap">
-                <div class="card-block">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This card has even longer content than the first to show that equal height
-                        action.</p>
-                    <p class="card-text">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 
 </div>

@@ -29,4 +29,7 @@ public interface PostsModelMapper {
     List<PostsModel> searchByPage(Map<String,?> map);
 
     int searchCount(Map<String,?> map);
+
+
+    List<PostsModel> selectByTag(Map map);
 }

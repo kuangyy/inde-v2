@@ -230,5 +230,22 @@
     </where>
   </select>
 
+
+
+  <select id="selectByTag" parameterType="Map" resultMap="BaseResultMap">
+    select
+    p.*
+    from posts p LEFT JOIN r_post_tag r ON r.post_id = p.id
+    <where>
+      <if test="id != null">
+        p.tag_id = #{tagId}
+      </if>
+    </where>
+    ORDER BY p.weight DESC ,p.update_time DESC ,p.create_time DESC
+    <if test="offset != null and limit != null">
+      limit #{offset},#{limit}
+    </if>
+  </select>
+
   
 </mapper>

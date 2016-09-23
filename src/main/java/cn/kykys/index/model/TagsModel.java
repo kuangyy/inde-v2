@@ -1,6 +1,7 @@
 package cn.kykys.index.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class TagsModel {
     private Long id;
@@ -12,6 +13,36 @@ public class TagsModel {
     private Date createTime;
 
     private Date updateTime;
+
+
+
+
+    private Long postsCount;
+
+    private List<PostsModel> postsModelList;
+
+    public Long getPostsCount() {
+        return postsCount;
+    }
+
+    public void setPostsCount(Long postsCount) {
+        this.postsCount = postsCount;
+    }
+
+    public List<PostsModel> getPostsModelList() {
+        return postsModelList;
+    }
+
+    public void setPostsModelList(List<PostsModel> postsModelList) {
+        this.postsModelList = postsModelList;
+    }
+
+
+
+
+
+
+
 
     public Long getId() {
         return id;

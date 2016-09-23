@@ -97,25 +97,39 @@ public class PostsBusiness implements IPosts {
     }
 
 
+    public Map<String, ?> searchByPage(String word, PageWeb pageWeb) {
+        Map<String, Object> result = new HashMap<>();
 
-  public   Map<String, ?> searchByPage(String word, PageWeb pageWeb){
-      Map<String, Object> result = new HashMap<>();
+        Map<String, Object> param = new HashMap<>();
+        param.put("word", word);
+        param.put("offset", pageWeb.getOffset());
+        param.put("limit", pageWeb.getLimit());
 
-      Map<String, Object> param = new HashMap<>();
-      param.put("word", word);
-      param.put("offset", pageWeb.getOffset());
-      param.put("limit", pageWeb.getLimit());
+        List<PostsModel> postsModelList = postsModelMapper.searchByPage(param);
+        result.put("postsModelList", postsModelList);
 
-      List<PostsModel> postsModelList = postsModelMapper.searchByPage(param);
-      result.put("postsModelList", postsModelList);
+        int count = postsModelMapper.searchCount(param);
+        pageWeb.setPageIndex(pageWeb.getPageIndex());
+        pageWeb.setCount(count);
 
-      int count = postsModelMapper.searchCount(param);
-      pageWeb.setPageIndex(pageWeb.getPageIndex());
-      pageWeb.setCount(count);
+        result.put("pageWeb", pageWeb);
 
-      result.put("pageWeb", pageWeb);
+        return result;
+    }
 
-      return result;
-  }
+
+    public List<PostsModel> selectByTag(Long tagId, PageWeb pageWeb) {
+
+        Map<String, Object> result = new HashMap<>();
+
+        Map<String, Object> param = new HashMap<>();
+        param.put("tagId", tagId);
+        param.put("offset", pageWeb.getOffset());
+        param.put("limit", pageWeb.getLimit());
+
+        List<PostsModel> postsModelList = postsModelMapper.searchByPage(param);
+
+        return postsModelList;
+    }
 
 }

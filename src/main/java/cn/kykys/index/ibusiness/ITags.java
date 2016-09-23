@@ -3,6 +3,7 @@ package cn.kykys.index.ibusiness;
 import cn.kykys.index.model.TagsModel;
 import cn.kykys.index.model.page.PageWeb;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,5 +22,10 @@ public interface ITags {
 
     Map<String, ?> selectByPage(TagsModel postsModel, PageWeb pageWeb);
 
-    Map<String, ?> searchByPage(String word, PageWeb pageWeb);
+
+    List<TagsModel> selectHotTagByPage(PageWeb pageWeb);
+
+    List<TagsModel> selectHotTagByPage(PageWeb pageWeb, Integer postsCount, boolean needPosts);
+
+
 }

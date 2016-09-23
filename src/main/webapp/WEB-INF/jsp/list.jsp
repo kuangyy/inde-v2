@@ -88,7 +88,7 @@
                                 <div class="card card-inverse">
                                     <img class="card-img" width="100%" height="200px" src="${posts.pic}" alt="Card image">
                                     <div class="card-img-overlay">
-                                        <h3 class="card-title">
+                                        <h3 class="card-title" title="${posts.title}">
                                             <c:choose>
                                                 <c:when test="${fn:length(posts.title) > 12}">
                                                     ${fn:substring(posts.title,0,12)}...
@@ -109,6 +109,12 @@
                                             </c:choose>
                                         </p>
                                         <p class="card-text">
+                                            <small class="text-inverse pull-right">
+                                                <i class="fa fa-heart" aria-hidden="true"></i> ${posts.likeCount}
+                                                <i class="fa fa-eye" aria-hidden="true"></i> ${posts.viewCount}
+                                            </small>
+                                        </p>
+                                        <p class="card-text">
                                             <small class="text-inverse pull-right"> <i class="fa fa-clock-o" aria-hidden="true"></i> <fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"/> </small>
                                         </p>
                                     </div>
@@ -118,7 +124,7 @@
                             <c:otherwise>
                                 <div class="card card-inverse" style="background-color: #333; border-color: #333;">
                                     <div class="card-block">
-                                        <h3 class="card-title">
+                                        <h3 class="card-title" title="${posts.title}">
                                             <c:choose>
                                                 <c:when test="${fn:length(posts.title) > 12}">
                                                     ${fn:substring(posts.title,0,12)}...
@@ -137,6 +143,12 @@
                                                     ${posts.summary}
                                                 </c:otherwise>
                                             </c:choose>
+                                        </p>
+                                        <p class="card-text">
+                                            <small class="text-inverse pull-right">
+                                                <i class="fa fa-heart" aria-hidden="true"></i> ${posts.likeCount}
+                                                <i class="fa fa-eye" aria-hidden="true"></i> ${posts.viewCount}
+                                            </small>
                                         </p>
                                         <p class="card-text">
                                             <small class="text-inverse pull-right"> <i class="fa fa-clock-o" aria-hidden="true"></i> <fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"/> </small>

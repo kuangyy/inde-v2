@@ -24,4 +24,7 @@ public interface IPosts {
     Map<String, ?> selectByPage(PostsModel postsModel, PageWeb pageWeb);
 
     Map<String, ?> searchByPage(String word, PageWeb pageWeb);
+
+
+    List<PostsModel> selectByTag(Long tagId, PageWeb pageWeb);
 }

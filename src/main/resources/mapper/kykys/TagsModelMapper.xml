@@ -114,4 +114,16 @@
 
         </where>
     </select>
+
+    <select id="selectByPostsCount" parameterType="Map" resultType="Map">
+      select t.id, t.name, t.simbol,count(r.post_id) postCount
+      from tags t left join r_post_tag r on r.tag_id = t.id
+			group by t.id order by postCount desc,name,simbol
+
+      <if test="offset != null and limit != null">
+        limit #{offset},#{limit}
+      </if>
+    </select>
+
+
 </mapper>
