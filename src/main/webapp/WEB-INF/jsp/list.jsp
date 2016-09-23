@@ -110,12 +110,10 @@
                                         </p>
                                         <p class="card-text">
                                             <small class="text-inverse pull-right">
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i> <fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"/>
                                                 <i class="fa fa-heart" aria-hidden="true"></i> ${posts.likeCount}
                                                 <i class="fa fa-eye" aria-hidden="true"></i> ${posts.viewCount}
                                             </small>
-                                        </p>
-                                        <p class="card-text">
-                                            <small class="text-inverse pull-right"> <i class="fa fa-clock-o" aria-hidden="true"></i> <fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"/> </small>
                                         </p>
                                     </div>
                                 </div>
@@ -146,12 +144,10 @@
                                         </p>
                                         <p class="card-text">
                                             <small class="text-inverse pull-right">
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i> <fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"/>
                                                 <i class="fa fa-heart" aria-hidden="true"></i> ${posts.likeCount}
                                                 <i class="fa fa-eye" aria-hidden="true"></i> ${posts.viewCount}
                                             </small>
-                                        </p>
-                                        <p class="card-text">
-                                            <small class="text-inverse pull-right"> <i class="fa fa-clock-o" aria-hidden="true"></i> <fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"/> </small>
                                         </p>
                                         <a href="${ctx}/p/${posts.id}" target="_blank" class="btn btn-primary">View</a>
                                     </div>
