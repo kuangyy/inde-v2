@@ -3,8 +3,8 @@
 
 <div class="bg"></div>
 
-<nav class="navbar navbar-light navbar-fixed-top">
-	<!-- <div class="clearfix"> -->
+<nav class="navbar navbar-light ">
+	<!-- <div class="clearfix">  navbar-fixed-top-->
 	<button class="navbar-toggler pull-xs-right hidden-sm-up" type="button" data-toggle="collapse" data-target="#bd-main-nav" aria-controls="bd-main-nav" aria-expanded="false" aria-label="Toggle navigation">
 		&#9776;
 	</button>
@@ -40,10 +40,10 @@
 
 	$(function(){
 
-//		generateBG();
+		generateBG();
 
 		$(window).resize(function(){
-//			generateBG();
+			generateBG();
 		});
 
 		// $(".jumbotron .row .div").animate({

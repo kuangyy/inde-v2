@@ -23,7 +23,7 @@
                 </p>
                 <div class="pull-right">
                     <span> <i class="fa fa-male" aria-hidden="true"></i> [ ky ]</span>
-                    <span> <i class="fa fa-clock-o" aria-hidden="true"></i> <fmt:formatDate type="both" value="${posts.publishTime}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate> </span>
+                    <span> <i class="fa fa-clock-o" aria-hidden="true"></i> <fmt:formatDate type="both" value="${posts.publishTime}" pattern="yyyy-MM-dd HH:mm"/> </span>
                 </div>
             </div>
         </div>

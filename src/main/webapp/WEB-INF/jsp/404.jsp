@@ -92,15 +92,15 @@
             Check the URL you entered for any mistakes and try again. Alternatively, search for whatever is missing or take a look around the rest of our site.
         </p>
         <div id="search">
-            <form>
-                <input type="text" placeholder="Search">
+            <form action="${ctx}/s">
+                <input type="text" placeholder="Search" name="s">
                 <button type="submit" class="input-search"> <i class="fa fa-search"></i>
                 </button>
             </form>
         </div>
         <div id="navigation">
-            <a class="navigation" href="index.html">Home</a>
-            <a class="navigation" href="contact.html">About Us</a>
+            <a class="navigation" href="${ctx}">Home</a>
+            <a class="navigation" href="${ctx}/about">About Us</a>
             <!-- <a class="navigation" href="">Site Map</a>
             <a class="navigation" href="">Contact</a> -->
             <!-- <a class="navigation" href="http://twitter.com/SeptimusFossett"> <i class="fa fa-twitter"></i>

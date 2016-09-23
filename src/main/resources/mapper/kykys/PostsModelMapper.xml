@@ -190,7 +190,7 @@
    <where>
 
    </where>
-
+    ORDER BY weight DESC ,update_time DESC ,create_time DESC
     <if test="offset != null and limit != null">
       limit #{offset},#{limit}
     </if>
@@ -214,9 +214,7 @@
         AND title like CONCAT('%',#{word},'%') OR content like CONCAT('%',#{word},'%')
       </if>
     </where>
-
-    ORDER BY weight desc,update_time desc,create_time desc
-
+      ORDER BY weight DESC ,update_time DESC ,create_time DESC
     <if test="offset != null and limit != null">
       limit #{offset},#{limit}
     </if>

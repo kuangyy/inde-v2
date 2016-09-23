@@ -36,7 +36,7 @@ public class IndexController extends BaseController {
         if (StringUtils.hasText(wd)) {
             String word = StringEscapeUtils.unescapeHtml(wd);
 
-            Map map = iPosts.searchByPage(word, pageWeb);
+            Map<String, ?> map = iPosts.searchByPage(word, pageWeb);
             mav.addAllObjects(map);
         } else {
             mav = this.list(pageWeb);

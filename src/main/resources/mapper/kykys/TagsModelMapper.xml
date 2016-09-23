@@ -90,4 +90,28 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+
+
+    <select id="selectByPage" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tags
+        <where>
+
+        </where>
+        ORDER BY update_time DESC ,create_time DESC
+        <if test="offset != null and limit != null">
+            limit #{offset},#{limit}
+        </if>
+    </select>
+    <select id="count" parameterType="Map" resultType="int">
+        select
+        count(1)
+        from tags
+        <where>
+
+        </where>
+    </select>
 </mapper>

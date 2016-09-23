@@ -135,7 +135,7 @@
     </script>
     <script>
         $(function(){
-            $("#text-input").height($("#preview").height());
+            $("#text-input").height($("#preview").height()<200?$("#preview").height():200);
             $('#fileupload').fileupload({
                 url: "${ctx}/file/fileuploads",//server
                 type: "POST",//type default post

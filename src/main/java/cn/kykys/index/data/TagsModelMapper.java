@@ -2,6 +2,9 @@ package cn.kykys.index.data;
 
 import cn.kykys.index.model.TagsModel;
 
+import java.util.List;
+import java.util.Map;
+
 @KykysDB
 public interface TagsModelMapper {
     int deleteByPrimaryKey(Long id);
@@ -15,4 +18,9 @@ public interface TagsModelMapper {
     int updateByPrimaryKeySelective(TagsModel record);
 
     int updateByPrimaryKey(TagsModel record);
+
+    List<TagsModel> selectByPage(Map<String,?> map);
+
+    int count(Map<String,?> map);
+
 }

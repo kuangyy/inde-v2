@@ -44,7 +44,7 @@
         <div class="container">
 
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">Search results :</li>
+                <li class="breadcrumb-item">Search results : (${pageWeb.count}) matches. </li>
             </ol>
 
 
@@ -109,7 +109,7 @@
                                             </c:choose>
                                         </p>
                                         <p class="card-text">
-                                            <small class="text-inverse pull-right"><fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"></fmt:formatDate> </small>
+                                            <small class="text-inverse pull-right"> <i class="fa fa-clock-o" aria-hidden="true"></i> <fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"/> </small>
                                         </p>
                                     </div>
                                 </div>
@@ -139,7 +139,7 @@
                                             </c:choose>
                                         </p>
                                         <p class="card-text">
-                                            <small class="text-inverse pull-right"><fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"></fmt:formatDate> </small>
+                                            <small class="text-inverse pull-right"> <i class="fa fa-clock-o" aria-hidden="true"></i> <fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"/> </small>
                                         </p>
                                         <a href="${ctx}/p/${posts.id}" target="_blank" class="btn btn-primary">View</a>
                                     </div>
