@@ -127,7 +127,7 @@ public class PostsBusiness implements IPosts {
         param.put("offset", pageWeb.getOffset());
         param.put("limit", pageWeb.getLimit());
 
-        List<PostsModel> postsModelList = postsModelMapper.searchByPage(param);
+        List<PostsModel> postsModelList = postsModelMapper.selectByTag(param);
 
         return postsModelList;
     }
