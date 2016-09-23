@@ -42,14 +42,14 @@ public class TagsBusiness implements ITags {
         return false;
     }
 
-    public boolean delete(Long id){
+    public boolean delete(Long id) {
         if (id != null) {
             return tagsModelMapper.deleteByPrimaryKey(id) > 0;
         }
         return false;
     }
 
-    public Map<String, ?> selectByPage(TagsModel postsModel, PageWeb pageWeb){
+    public Map<String, ?> selectByPage(TagsModel postsModel, PageWeb pageWeb) {
         Map<String, Object> result = new HashMap<>();
 
         Map<String, Object> param = new HashMap<>();
@@ -57,32 +57,10 @@ public class TagsBusiness implements ITags {
         param.put("offset", pageWeb.getOffset());
         param.put("limit", pageWeb.getLimit());
 
-        List<PostsModel> postsModelList = postsModelMapper.selectByPage(param);
-        result.put("postsModelList", postsModelList);
-
-        int count = postsModelMapper.count(param);
-        pageWeb.setPageIndex(pageWeb.getPageIndex());
-        pageWeb.setCount(count);
-
-        result.put("pageWeb", pageWeb);
-
-        return result;
-    }
-
-
-
-    public   Map<String, ?> searchByPage(String word, PageWeb pageWeb) {
-        Map<String, Object> result = new HashMap<>();
-
-        Map<String, Object> param = new HashMap<>();
-        param.put("word", word);
-        param.put("offset", pageWeb.getOffset());
-        param.put("limit", pageWeb.getLimit());
-
-        List<TagsModel> tagsModelList = tagsModelMapper.searchByPage(param);
+        List<TagsModel> tagsModelList = tagsModelMapper.selectByPage(param);
         result.put("tagsModelList", tagsModelList);
 
-        int count = tagsModelMapper.searchCount(param);
+        int count = tagsModelMapper.count(param);
         pageWeb.setPageIndex(pageWeb.getPageIndex());
         pageWeb.setCount(count);
 
@@ -91,26 +69,6 @@ public class TagsBusiness implements ITags {
         return result;
     }
 
-        public Map<String, ?> searchByPage(String word, PageWeb pageWeb){
-            Map<String, Object> result = new HashMap<>();
-
-            Map<String, Object> param = new HashMap<>();
-            param.put("word", word);
-            param.put("offset", pageWeb.getOffset());
-            param.put("limit", pageWeb.getLimit());
-
-            List<TagsModel> tagsModelList = tagsModelMapper.searchByPage(param);
-            result.put("tagsModelList", tagsModelList);
-
-            int count = tagsModelMapper.searchCount(param);
-            pageWeb.setPageIndex(pageWeb.getPageIndex());
-            pageWeb.setCount(count);
-
-            result.put("pageWeb", pageWeb);
-
-            return result;
-        }
-}
 }
 
 
