@@ -575,4 +575,6 @@ footer {
 
 
 /*  list  */
-
+.breadcrumb {
+    opacity: .75;
+}

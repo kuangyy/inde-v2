@@ -3,8 +3,8 @@
 <%
 	int _port = request.getServerPort();
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path;
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+
 	if (_port == 80) {
 		basePath =  request.getScheme() + "://" + request.getServerName();
 	}
