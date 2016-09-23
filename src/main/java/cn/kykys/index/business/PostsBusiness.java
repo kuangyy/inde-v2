@@ -120,8 +120,6 @@ public class PostsBusiness implements IPosts {
 
     public List<PostsModel> selectByTag(Long tagId, PageWeb pageWeb) {
 
-        Map<String, Object> result = new HashMap<>();
-
         Map<String, Object> param = new HashMap<>();
         param.put("tagId", tagId);
         param.put("offset", pageWeb.getOffset());
