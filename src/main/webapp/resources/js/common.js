@@ -230,3 +230,29 @@ var alertify = {
         callback && callback();
     }
 }
+
+
+var insertOrReplaceSelect = function(obj,str) {
+
+    var insertText = function(obj,str) {
+        if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number') {
+            var startPos = obj.selectionStart,
+                endPos = obj.selectionEnd,
+                cursorPos = startPos,
+                tmpStr = obj.value;
+            obj.value = tmpStr.substring(0, startPos) + str + tmpStr.substring(endPos, tmpStr.length);
+            cursorPos += str.length;
+            obj.selectionStart = obj.selectionEnd = cursorPos;
+        } else {
+            obj.value += str;
+        }
+    };
+
+    if(typeof obj == 'object'){
+        for(i in obj){
+            insertText(obj[i],str);
+        }
+    }else{
+        insertText(obj,str);
+    }
+}

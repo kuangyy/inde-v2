@@ -162,7 +162,11 @@
                     $.each(data.result.urls, function (index, file) {
 
                         //判断文件类型
-                        $("#text-input").val( $("#text-input").val()+"![图片]("+file+")");
+
+//                        $("#text-input").val( $("#text-input").val()+"![图片]("+file+")");
+
+                        //插入光标位置
+                        insertOrReplaceSelect($("#text-input"),"![图片]("+file+")");
                     });
                 },
                 fail:  function (e, data) {
