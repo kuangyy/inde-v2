@@ -32,4 +32,6 @@ public interface PostsModelMapper {
 
 
     List<PostsModel> selectByTag(Map map);
+
+    int selectByTagCount(Map map);
 }

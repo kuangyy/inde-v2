@@ -554,18 +554,33 @@ footer {
 }
 
 /* upload btn */
-.fileinput-button input {
+#fileupload {
+    width: 8em;
+}
+#fileupload input {
+    width: 8em;
     position: absolute;
     top: 0;
-    right: -.5em;
+    right: -60px;
     margin: 0;
     opacity: 0;
     -ms-filter: 'alpha(opacity=0)';
-    font-size: 200px !important;
+    /*font-size: 200px !important;*/
     direction: ltr;
     cursor: pointer;
-    width: 200%;
-    height: 100%;
+}
+.fileinput-button input {
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*right: -.5em;*/
+    /*margin: 0;*/
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    /*font-size: 200px !important;*/
+    /*direction: ltr;*/
+    /*cursor: pointer;*/
+    /*width: 0;*/
+    /*height: 0;*/
 }
 
 /* edit bar [not good :( ] */
@@ -579,4 +594,8 @@ footer {
 /*  list  */
 .breadcrumb {
     opacity: .75;
+}
+
+.hide {
+    display: none;
 }

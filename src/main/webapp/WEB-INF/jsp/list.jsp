@@ -5,7 +5,7 @@
 
    <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"/>
 
-    <title>狂or野-你喜欢哪一个我</title>
+    <title><c:if test="${tag!=null}">${tag.name} - </c:if>狂or野-你喜欢哪一个我</title>
     <meta name="description" content="ky's home page">
     <meta name="author" content="kuangye">
 </head>
@@ -44,7 +44,7 @@
         <div class="container">
 
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">Search results : (${pageWeb.count}) matches. </li>
+                <li class="breadcrumb-item"><c:if test="${tag!=null}">Tag : ${tag.name} - </c:if> Search results : (${pageWeb.count}) matches. </li>
             </ol>
 
 

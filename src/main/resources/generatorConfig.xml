@@ -32,7 +32,9 @@
 		<!-- 表名和生成的实体名 -->
 		<!--<table tableName="a" domainObjectName="a" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
 
-        <table tableName="posts" domainObjectName="PostsModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
+        <!--<table tableName="posts" domainObjectName="PostsModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
+
+        <!--<table tableName="motto" domainObjectName="MottoModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
 
 
     </context>

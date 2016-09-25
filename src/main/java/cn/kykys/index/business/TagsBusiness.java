@@ -1,13 +1,17 @@
 package cn.kykys.index.business;
 
+import cn.kykys.index.data.RPostTagModelMapper;
 import cn.kykys.index.data.TagsModelMapper;
 import cn.kykys.index.ibusiness.IPosts;
 import cn.kykys.index.ibusiness.ITags;
 import cn.kykys.index.model.PostsModel;
+import cn.kykys.index.model.RPostTagModelKey;
 import cn.kykys.index.model.TagsModel;
 import cn.kykys.index.model.page.PageWeb;
+import cn.kykys.index.utils.language.Chinese2Pinyin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +29,8 @@ public class TagsBusiness implements ITags {
 
     @Autowired
     TagsModelMapper tagsModelMapper;
+    @Autowired
+    RPostTagModelMapper rPostTagModelMapper;
 
     public TagsModel getById(Long id) {
         if (id != null && id > 0) {
@@ -84,7 +90,7 @@ public class TagsBusiness implements ITags {
 
         List<TagsModel> tagsModelList = new ArrayList<>();
 
-        Map map = new HashMap();
+        Map<String, Object> map = new HashMap<>();
 
         if (pageWeb != null) {
             map.put("offset", pageWeb.getOffset());
@@ -106,7 +112,6 @@ public class TagsBusiness implements ITags {
                 if (needPosts) {
                     postsCount = postsCount == null ? 0 : postsCount;
                     //set posts
-                    Map param = new HashMap();
                     PageWeb pageWeb1 = new PageWeb();
                     pageWeb1.setPageSize(postsCount);
 
@@ -122,6 +127,52 @@ public class TagsBusiness implements ITags {
     }
 
 
+    public List<TagsModel> getByPostId(Long id) {
+        if (id != null) {
+
+            List<Long> ids = rPostTagModelMapper.selectTagidByPostid(id);
+            if (ids != null && ids.size() > 0) {
+                return tagsModelMapper.selectByPostId(ids);
+            }
+        }
+        return null;
+    }
+
+
+    public void addTagAndLinkPost(String name, Long postid) {
+
+        TagsModel tagsModel = tagsModelMapper.selectByName(name);
+
+        Long tagid;
+        if (tagsModel != null) {
+            tagid = tagsModel.getId();
+        } else {
+            TagsModel model = new TagsModel();
+            model.setName(name);
+            model.setSimbol(Chinese2Pinyin.cn2Spell(name));
+            tagsModelMapper.insertSelective(model);
+
+            tagid = model.getId();
+        }
+
+
+        RPostTagModelKey rPostTagModelKey = new RPostTagModelKey();
+        rPostTagModelKey.setPostId(postid);
+        rPostTagModelKey.setTagId(tagid);
+        rPostTagModelMapper.insert(rPostTagModelKey);
+    }
+
+
+    public void deleteByPostid(Long postid) {
+        rPostTagModelMapper.deleteByPostid(postid);
+    }
+
+    public TagsModel getByName(String name) {
+        if (StringUtils.hasText(name)) {
+            return tagsModelMapper.selectByName(name);
+        }
+        return null;
+    }
 }
 
 

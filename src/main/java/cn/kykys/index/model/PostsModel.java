@@ -3,6 +3,7 @@ package cn.kykys.index.model;
 import cn.kykys.index.model.dto.ContentModel;
 
 import java.util.Date;
+import java.util.List;
 
 public class PostsModel {
     private Long id;
@@ -28,6 +29,25 @@ public class PostsModel {
     private String content;
 
     ContentModel contentModel;
+
+
+
+
+
+
+    List<TagsModel> tagsModelList;
+
+    public List<TagsModel> getTagsModelList() {
+        return tagsModelList;
+    }
+
+    public void setTagsModelList(List<TagsModel> tagsModelList) {
+        this.tagsModelList = tagsModelList;
+    }
+
+
+
+
 
     public Long getId() {
         return id;

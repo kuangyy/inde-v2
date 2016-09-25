@@ -10,7 +10,7 @@
 	}
 	request.setAttribute("ctx", basePath);
 %>
-<c:set var="resourcesVersion" value="1.0" />
+<c:set var="resourcesVersion" value="1.0.1" />
 <!-- meta -->
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

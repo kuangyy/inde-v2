@@ -1,6 +1,5 @@
 package cn.kykys.index.data;
 
-import cn.kykys.index.model.RPostTagModelKey;
 import cn.kykys.index.model.TagsModel;
 
 import java.util.List;
@@ -26,4 +25,8 @@ public interface TagsModelMapper {
 
     List<Map<String,Object>> selectByPostsCount(Map map);
 
+
+    List<TagsModel> selectByPostId(List<Long> id);
+
+    TagsModel selectByName(String name);
 }

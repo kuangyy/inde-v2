@@ -36,4 +36,12 @@
 
 
 
+    <select id="selectTagidByPostid" parameterType="java.lang.Long" resultType="java.lang.Long">
+       SELECT tag_id FROM r_post_tag r WHERE r.`post_id` = #{id}
+    </select>
+
+    <delete id="deleteByPostid" parameterType="java.lang.Long">
+        delete from r_post_tag where post_id =#{postid}
+    </delete>
+
 </mapper>

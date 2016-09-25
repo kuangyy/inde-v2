@@ -1,7 +1,9 @@
 package cn.kykys.index.controller;
 
+import cn.kykys.index.data.MottoModelMapper;
 import cn.kykys.index.ibusiness.IPosts;
 import cn.kykys.index.ibusiness.ITags;
+import cn.kykys.index.model.MottoModel;
 import cn.kykys.index.model.TagsModel;
 import cn.kykys.index.model.page.PageWeb;
 import org.apache.commons.lang.StringEscapeUtils;
@@ -25,6 +27,8 @@ public class IndexController extends BaseController {
     IPosts iPosts;
     @Autowired
     ITags iTags;
+    @Autowired
+    MottoModelMapper mottoModelMapper;
 
     //home page
     @RequestMapping("/")
@@ -42,6 +46,10 @@ public class IndexController extends BaseController {
         //all tags
         List<TagsModel> allTagList = iTags.selectHotTagByPage(null);
         mav.addObject("allTagList", allTagList);
+
+        //motto
+        MottoModel mottoModel = mottoModelMapper.selectByRandom();
+        mav.addObject("motto", mottoModel);
 
         return mav;
     }
@@ -84,6 +92,22 @@ public class IndexController extends BaseController {
         ModelAndView mav = new ModelAndView("detail");
 
         mav.addObject("posts", iPosts.getByIdAddViewCount(id));
+        return mav;
+    }
+
+
+    @RequestMapping("/tag/{w}")
+    public ModelAndView tag(@PathVariable("w") String w, PageWeb pageWeb) {
+
+        ModelAndView mav = new ModelAndView("list");
+
+        TagsModel tagsModel = iTags.getByName(w);
+
+        mav.addAllObjects(iPosts.selectByTagWithPage(tagsModel.getId(), pageWeb));
+
+        mav.addObject("pageWeb", pageWeb);
+        mav.addObject("tag", tagsModel);
+
         return mav;
     }
 

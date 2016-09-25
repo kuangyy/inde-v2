@@ -76,6 +76,16 @@
                        <button class="btn btn-info" type="button" id="commit" >Post</button>
                    </div>
                </div>
+               <div class="form-group row">
+                   <label class="col-xs-2 col-form-label">Tag</label>
+                   <div class="col-xs-5">
+                       <input class="form-control" name="tags"
+                              value="<c:forEach var='tags' items="${posts.tagsModelList}" varStatus="varStatus">${tags.name}<c:if test='${!varStatus.last}'>,</c:if></c:forEach>" >
+                   </div>
+                   <div class="col-xs-5">
+                       <button class="btn btn-info" type="button" id="addTagFromDouban" >AddFromDouban</button>
+                   </div>
+               </div>
                <div class="row">
                    <div class="col-xs-12">
                        <label class="label">Content</label>
@@ -97,10 +107,10 @@
     <!-- tool bar -->
     <div class="edit-toolbar col-xs-1">
         <div class="col-xs-12">
-            <span class="btn btn-success fileinput-button">
+            <span class="btn btn-success fileinput-button" id="fileupload" >
                 <i class="fa fa-plus"></i>
                 <span>Select files...</span>
-                <input id="fileupload" type="file" name="files" multiple>
+                <input  type="file" name="files" multiple >
             </span>
         </div>
     </div>

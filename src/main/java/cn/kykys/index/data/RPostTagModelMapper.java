@@ -13,4 +13,8 @@ public interface RPostTagModelMapper {
 
     int insertSelective(RPostTagModelKey record);
 
+    List<Long> selectTagidByPostid(Long id);
+
+    int deleteByPostid(Long id);
+
 }

@@ -28,4 +28,11 @@ public interface ITags {
     List<TagsModel> selectHotTagByPage(PageWeb pageWeb, Integer postsCount, boolean needPosts);
 
 
+    List<TagsModel> getByPostId(Long id);
+
+    void addTagAndLinkPost(String name, Long postid);
+
+    void deleteByPostid(Long postid);
+
+    TagsModel getByName(String name);
 }

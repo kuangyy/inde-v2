@@ -19,6 +19,10 @@ public interface IPosts {
 
     boolean update(PostsModel postsModel);
 
+    boolean add(PostsModel postsModel, String tag);
+
+    boolean update(PostsModel postsModel, String tag);
+
     boolean delete(Long id);
 
     Map<String, ?> selectByPage(PostsModel postsModel, PageWeb pageWeb);
@@ -27,4 +31,7 @@ public interface IPosts {
 
 
     List<PostsModel> selectByTag(Long tagId, PageWeb pageWeb);
+
+    Map<String, ?> selectByTagWithPage(Long tagId, PageWeb pageWeb);
+
 }

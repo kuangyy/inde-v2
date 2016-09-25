@@ -45,7 +45,7 @@
       #{weight,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{publishTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.kykys.index.model.PostsModel" >
+  <insert id="insertSelective" parameterType="cn.kykys.index.model.PostsModel" keyProperty="id" useGeneratedKeys="true">
     insert into posts
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -247,5 +247,15 @@
     </if>
   </select>
 
+    <select id="selectByTagCount" parameterType="java.util.Map" resultType="int">
+        select
+        COUNT(1)
+        from posts p LEFT JOIN r_post_tag r ON r.post_id = p.id
+        <where>
+            <if test="tagId != null">
+                AND r.tag_id = #{tagId}
+            </if>
+        </where>
+    </select>
   
 </mapper>
