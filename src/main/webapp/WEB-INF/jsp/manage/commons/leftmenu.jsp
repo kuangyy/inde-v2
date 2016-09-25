@@ -33,7 +33,7 @@
                     <a href="${ctx}/manage/posts">Posts</a>
                 </li>
                 <li>
-                    <a href="../fluid/index.html">Fluid layout</a>
+                    <a href="${ctx}/manage/motto">Motto</a>
                 </li>
                 <li>
                     <a href="../icon-nav/index.html">Icon nav</a>

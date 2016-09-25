@@ -76,6 +76,7 @@
     <jsp:include page="/WEB-INF/jsp/commons/footer.jsp"/>
 
     <script>
+        $(function(){
             $("#commit").on("click",function(){
                 $.ajax({
                     url : $.baseData.basePath+"/manage/motto/updateDo",
