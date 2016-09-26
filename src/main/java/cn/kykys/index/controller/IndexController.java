@@ -75,6 +75,7 @@ public class IndexController extends BaseController {
         return mav;
     }
 
+    //list
     @RequestMapping("/list")
     public ModelAndView list(PageWeb pageWeb) {
 
@@ -85,7 +86,7 @@ public class IndexController extends BaseController {
         return mav;
     }
 
-
+    //article
     @RequestMapping("/p/{id}")
     public ModelAndView detail(@PathVariable("id") Long id) {
 
@@ -95,7 +96,7 @@ public class IndexController extends BaseController {
         return mav;
     }
 
-
+    //tag
     @RequestMapping("/tag/{w}")
     public ModelAndView tag(@PathVariable("w") String w, PageWeb pageWeb) {
 
@@ -111,7 +112,13 @@ public class IndexController extends BaseController {
         return mav;
     }
 
+    //about
+    @RequestMapping("/about")
+    public ModelAndView about() {
+        return new ModelAndView("about");
+    }
 
+    //404
     @RequestMapping("/404")
     public ModelAndView err404() {
         return new ModelAndView("404");
