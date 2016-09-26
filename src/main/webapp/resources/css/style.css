@@ -599,3 +599,9 @@ footer {
 .hide {
     display: none;
 }
+
+/* taglist */
+.taglist a {
+    padding: .5em;
+    margin: 3.5px 2px;
+}

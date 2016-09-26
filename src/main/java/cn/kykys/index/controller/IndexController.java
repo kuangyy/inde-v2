@@ -112,6 +112,19 @@ public class IndexController extends BaseController {
         return mav;
     }
 
+    //tags
+    @RequestMapping("/tags")
+    public ModelAndView tag() {
+
+        ModelAndView mav = new ModelAndView("tags");
+
+       List<TagsModel> tagsModelList = iTags.selectHotTagByPage(null);
+
+        mav.addObject("tagsModelList", tagsModelList);
+
+        return mav;
+    }
+
     //about
     @RequestMapping("/about")
     public ModelAndView about() {

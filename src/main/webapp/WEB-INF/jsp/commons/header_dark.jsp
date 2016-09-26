@@ -17,19 +17,19 @@
 			</li>
 
 			<li class="nav-item">
-				<a class="nav-link" href="#">Photos</a>
+				<a class="nav-link" href="${ctx}/photos">Photos</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Foods</a>
+				<a class="nav-link" href="${ctx}/foods">Foods</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Movies</a>
+				<a class="nav-link" href="${ctx}/movies">Movies</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Books</a>
+				<a class="nav-link" href="${ctx}/books">Books</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="http://oooc.lol">Others</a>
+				<a class="nav-link" href="${ctx}/tags">Others</a>
 			</li>
 		</ul>
 	</div>
