@@ -159,6 +159,7 @@
 
                 </div>
 
+                <script>var pageUrl = "/list";</script>
                 <jsp:include page="/WEB-INF/jsp/commons/page.jsp"/>
 
             </div>

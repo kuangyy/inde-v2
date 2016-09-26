@@ -80,6 +80,8 @@
 
                             </tbody>
                         </table>
+
+                        <script>var pageUrl = "/manage/motto";</script>
                         <jsp:include page="/WEB-INF/jsp/commons/page.jsp"/>
                     </div>
                 </div>

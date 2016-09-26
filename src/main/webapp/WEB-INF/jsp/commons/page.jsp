@@ -65,6 +65,6 @@
     /*************************分页*******************************/
 
     function goForm(page){
-        postUrl($.baseData.basePath+"/list",{pageIndex:page})
+        postUrl($.baseData.basePath+pageUrl,{pageIndex:page})
     }
 </script>
