@@ -1,5 +1,6 @@
 package cn.kykys.index.business;
 
+import cn.kykys.index.data.RBookTagModelMapper;
 import cn.kykys.index.data.RPostTagModelMapper;
 import cn.kykys.index.data.TagsModelMapper;
 import cn.kykys.index.ibusiness.IPosts;
@@ -31,6 +32,8 @@ public class TagsBusiness implements ITags {
     TagsModelMapper tagsModelMapper;
     @Autowired
     RPostTagModelMapper rPostTagModelMapper;
+    @Autowired
+    RBookTagModelMapper rBookTagModelMapper;
 
     public TagsModel getById(Long id) {
         if (id != null && id > 0) {
@@ -131,6 +134,17 @@ public class TagsBusiness implements ITags {
         if (id != null) {
 
             List<Long> ids = rPostTagModelMapper.selectTagidByPostid(id);
+            if (ids != null && ids.size() > 0) {
+                return tagsModelMapper.selectByPostId(ids);
+            }
+        }
+        return null;
+    }
+
+    public List<TagsModel> getByBookId(Long id){
+        if (id != null) {
+
+            List<Long> ids = rBookTagModelMapper.selectTagidByBookid(id);
             if (ids != null && ids.size() > 0) {
                 return tagsModelMapper.selectByPostId(ids);
             }

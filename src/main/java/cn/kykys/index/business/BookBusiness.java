@@ -1,9 +1,9 @@
 package cn.kykys.index.business;
 
-import cn.kykys.index.data.PostsModelMapper;
-import cn.kykys.index.data.RPostTagModelMapper;
-import cn.kykys.index.ibusiness.IPosts;
+import cn.kykys.index.data.BookModelMapper;
+import cn.kykys.index.ibusiness.IBook;
 import cn.kykys.index.ibusiness.ITags;
+import cn.kykys.index.model.BookModel;
 import cn.kykys.index.model.PostsModel;
 import cn.kykys.index.model.TagsModel;
 import cn.kykys.index.model.dto.ContentModel;
@@ -19,20 +19,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by kuangye on 2016/9/21.
+ * Created by kuangye on 2016/9/27.
  */
 @Service
-public class PostsBusiness implements IPosts {
+public class BookBusiness implements IBook {
 
     @Autowired
-    PostsModelMapper postsModelMapper;
+    BookModelMapper bookModelMapper;
     @Autowired
     ITags iTags;
 
-    public PostsModel getById(Long id) {
+    public BookModel getById(Long id) {
         if (id != null && id > 0) {
-            PostsModel postsModel = postsModelMapper.selectByPrimaryKey(id);
-            postsModel.setContentModel(JSON.parseObject(postsModel.getContent(), ContentModel.class));
+            BookModel postsModel = bookModelMapper.selectByPrimaryKey(id);
 
             List<TagsModel> tagsModelList = iTags.getByPostId(id);
             postsModel.setTagsModelList(tagsModelList);
@@ -42,14 +41,14 @@ public class PostsBusiness implements IPosts {
         return null;
     }
 
-    public PostsModel getByIdAddViewCount(Long id) {
+    public BookModel getByIdAddViewCount(Long id) {
 
-        PostsModel postsModel = this.getById(id);
+        BookModel postsModel = this.getById(id);
         if (postsModel != null) {
-            PostsModel model = new PostsModel();
+            BookModel model = new BookModel();
             model.setId(postsModel.getId());
             model.setViewCount(postsModel.getViewCount() + 1);
-            postsModelMapper.updateByPrimaryKeySelective(model);
+            bookModelMapper.updateByPrimaryKeySelective(model);
 
 
             List<TagsModel> tagsModelList = iTags.getByPostId(id);
@@ -59,20 +58,15 @@ public class PostsBusiness implements IPosts {
         return postsModel;
     }
 
-    public boolean add(PostsModel postsModel) {
+    public boolean add(BookModel postsModel) {
         return this.add(postsModel, null);
     }
 
 
-    public boolean add(PostsModel postsModel, String tag) {
+    public boolean add(BookModel postsModel, String tag) {
         if (postsModel != null) {
 
-            //default publish now
-            if (postsModel.getPublishTime() == null) {
-                postsModel.setPublishTime(new Date());
-            }
-
-            int i = postsModelMapper.insertSelective(postsModel);
+            int i = bookModelMapper.insertSelective(postsModel);
 
             if (StringUtils.hasText(tag)) {
                 this.addTag(postsModel.getId(), tag);
@@ -84,18 +78,18 @@ public class PostsBusiness implements IPosts {
         return false;
     }
 
-    public boolean update(PostsModel postsModel) {
+    public boolean update(BookModel postsModel) {
         return this.update(postsModel, null);
     }
 
-    public boolean update(PostsModel postsModel, String tag) {
+    public boolean update(BookModel postsModel, String tag) {
         if (postsModel != null) {
 
             if (StringUtils.hasText(tag)) {
                 this.addTag(postsModel.getId(), tag);
             }
 
-            return postsModelMapper.updateByPrimaryKeySelective(postsModel) > 0;
+            return bookModelMapper.updateByPrimaryKeySelective(postsModel) > 0;
         }
 
         return false;
@@ -117,31 +111,11 @@ public class PostsBusiness implements IPosts {
 
     public boolean delete(Long id) {
         if (id != null) {
-            return postsModelMapper.deleteByPrimaryKey(id) > 0;
+            return bookModelMapper.deleteByPrimaryKey(id) > 0;
         }
         return false;
     }
 
-    public Map<String, ?> selectByPage(PostsModel postsModel, PageWeb pageWeb) {
-
-        Map<String, Object> result = new HashMap<>();
-
-        Map<String, Object> param = new HashMap<>();
-        param.put("model", postsModel);
-        param.put("offset", pageWeb.getOffset());
-        param.put("limit", pageWeb.getLimit());
-
-        List<PostsModel> postsModelList = postsModelMapper.selectByPage(param);
-        result.put("postsModelList", postsModelList);
-
-        int count = postsModelMapper.count(param);
-        pageWeb.setPageIndex(pageWeb.getPageIndex());
-        pageWeb.setCount(count);
-
-        result.put("pageWeb", pageWeb);
-
-        return result;
-    }
 
 
     public Map<String, ?> searchByPage(String word, PageWeb pageWeb) {
@@ -150,12 +124,12 @@ public class PostsBusiness implements IPosts {
         Map<String, Object> param = new HashMap<>();
         param.put("word", word);
         param.put("offset", pageWeb.getOffset());
-        param.put("limit", pageWeb.getLimit());
+        param.put("limit", pageWeb.getPageSize());
 
-        List<PostsModel> postsModelList = postsModelMapper.searchByPage(param);
-        result.put("postsModelList", postsModelList);
+        List<BookModel> bookModelList = bookModelMapper.searchByPage(param);
+        result.put("bookModelList", bookModelList);
 
-        int count = postsModelMapper.searchCount(param);
+        int count = bookModelMapper.searchCount(param);
         pageWeb.setPageIndex(pageWeb.getPageIndex());
         pageWeb.setCount(count);
 
@@ -165,14 +139,14 @@ public class PostsBusiness implements IPosts {
     }
 
 
-    public List<PostsModel> selectByTag(Long tagId, PageWeb pageWeb) {
+    public List<BookModel> selectByTag(Long tagId, PageWeb pageWeb) {
 
         Map<String, Object> param = new HashMap<>();
         param.put("tagId", tagId);
         param.put("offset", pageWeb.getOffset());
         param.put("limit", pageWeb.getLimit());
 
-        return postsModelMapper.selectByTag(param);
+        return bookModelMapper.selectByTag(param);
     }
 
     public  Map<String, ?>  selectByTagWithPage(Long tagId, PageWeb pageWeb) {
@@ -184,10 +158,10 @@ public class PostsBusiness implements IPosts {
         param.put("offset", pageWeb.getOffset());
         param.put("limit", pageWeb.getLimit());
 
-        List<PostsModel> postsModelList = postsModelMapper.selectByTag(param);
+        List<BookModel> bookModelList = bookModelMapper.selectByTag(param);
 
-        result.put("postsModelList", postsModelList);
-        int count = postsModelMapper.selectByTagCount(param);
+        result.put("bookModelList", bookModelList);
+        int count = bookModelMapper.selectByTagCount(param);
         pageWeb.setCount(count);
         result.put("pageWeb", pageWeb);
 

@@ -52,7 +52,7 @@
 
                     <c:forEach items="${tagsModelList}" var="tags" varStatus="varStatus">
 
-                        <a class="d-inline-block bg-primary" href="${ctx}/tag/${tasg.id}" target="_blank" ><span class="">${tags.name}</span></a>
+                        <a class="d-inline-block bg-primary" href="${ctx}/tag/${tags.name}" target="_blank" ><span class="">${tags.name}</span></a>
 
                     </c:forEach>
 

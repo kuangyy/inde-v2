@@ -29,6 +29,7 @@ public interface ITags {
 
 
     List<TagsModel> getByPostId(Long id);
+    List<TagsModel> getByBookId(Long id);
 
     void addTagAndLinkPost(String name, Long postid);
 

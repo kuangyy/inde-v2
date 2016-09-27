@@ -15,17 +15,17 @@
 		</javaTypeResolver>
 
 		<!-- javabeen生成的地方 -->
-		<javaModelGenerator targetPackage="cn.kykys.index.model" targetProject="D:\lastest_workbench\code\inde-v2">
+		<javaModelGenerator targetPackage="cn.kykys.index.model" targetProject="E:\新建文件夹\\inde-v2">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<!-- mapper.xml生成的地方 -->
-		<sqlMapGenerator targetPackage="cn.kykys.index.data" targetProject="D:\lastest_workbench\code\inde-v2">
+		<sqlMapGenerator targetPackage="cn.kykys.index.data" targetProject="E:\新建文件夹\\inde-v2">
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 	
-		<javaClientGenerator type="XMLMAPPER" targetPackage="cn.kykys.index.data" targetProject="D:\lastest_workbench\code\inde-v2">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="cn.kykys.index.data" targetProject="E:\新建文件夹\\inde-v2">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 
@@ -37,5 +37,11 @@
         <!--<table tableName="motto" domainObjectName="MottoModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
 
 
-    </context>
+		<table tableName="book" domainObjectName="BookModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
+		<table tableName="r_book_tag" domainObjectName="RBookTagModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
+
+
+
+
+	</context>
 </generatorConfiguration>
