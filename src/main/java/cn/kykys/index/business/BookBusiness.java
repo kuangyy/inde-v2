@@ -33,7 +33,7 @@ public class BookBusiness implements IBook {
         if (id != null && id > 0) {
             BookModel postsModel = bookModelMapper.selectByPrimaryKey(id);
 
-            List<TagsModel> tagsModelList = iTags.getByPostId(id);
+            List<TagsModel> tagsModelList = iTags.getByBookId(id);
             postsModel.setTagsModelList(tagsModelList);
 
             return postsModel;
@@ -51,7 +51,7 @@ public class BookBusiness implements IBook {
             bookModelMapper.updateByPrimaryKeySelective(model);
 
 
-            List<TagsModel> tagsModelList = iTags.getByPostId(id);
+            List<TagsModel> tagsModelList = iTags.getByBookId(id);
             postsModel.setTagsModelList(tagsModelList);
         }
 
