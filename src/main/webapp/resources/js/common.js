@@ -256,3 +256,30 @@ var insertOrReplaceSelect = function(obj,str) {
         insertText(obj,str);
     }
 }
+
+
+var TOOLS = {
+    MD_HTML : {
+        toMarkdown : function(str){
+            return toMarkdown(str);
+        },
+        toHtml : function(str) {
+            return Markdown.toHTML(str);
+        }
+    },
+    QRCODE : {
+        getTable : function(id,text){
+            $(id).qrcode({
+                render : "table",
+                text : text
+            });
+        },
+        getCavans : function(id,text){
+            $(id).qrcode({
+                text : text
+            });
+        }
+    }
+}
+
+
