@@ -8,7 +8,7 @@ public enum FileTypeEnum {
 
     EXE(".exe","7790","可执行文件"),
     RAR(".rar","52617221","压缩文件"),
-
+    MP3(".mp3","494433","MP3")
 
     ;
 

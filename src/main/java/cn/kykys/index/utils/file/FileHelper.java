@@ -2,7 +2,6 @@ package cn.kykys.index.utils.file;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -62,7 +61,7 @@ public class FileHelper {
 
     public static void main(String[] args) throws Exception {
 
-        System.out.println(getFileType(new File("e://onex3.rar")));
+       File file = new File("E:\\CloudMusic\\双笙 - 采茶纪.mp3");
 
     }
 
