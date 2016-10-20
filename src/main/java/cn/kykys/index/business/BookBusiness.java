@@ -13,10 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by kuangye on 2016/9/27.
@@ -132,7 +132,7 @@ public class BookBusiness implements IBook {
         int count = bookModelMapper.searchCount(param);
         pageWeb.setPageIndex(pageWeb.getPageIndex());
         pageWeb.setCount(count);
-
+        Pattern.compile("");
         result.put("pageWeb", pageWeb);
 
         return result;
