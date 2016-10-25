@@ -12,6 +12,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
+import org.springframework.web.socket.server.support.WebSocketHttpRequestHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +24,7 @@ public class FilterAll implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
 
-        if (handler instanceof DefaultServletHttpRequestHandler || handler instanceof ResourceHttpRequestHandler) {
+        if (handler instanceof DefaultServletHttpRequestHandler || handler instanceof ResourceHttpRequestHandler || handler instanceof WebSocketHttpRequestHandler) {
             return true;
         } else {
             MustLogin mustLogin = ((HandlerMethod) handler).getMethod().getAnnotation(MustLogin.class);

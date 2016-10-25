@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+
+<div id="msg" style="width: 50%"></div>
+
+<input id="text"> <button id="send">send</button>
+
+
+<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/web-socket-js/1.0.0/web_socket.js"></script>
+<script>
+    var websocket;
+    if ('WebSocket' in window) {
+        websocket = new WebSocket("ws://localhost:8088/webSocketServer");
+    } else if ('MozWebSocket' in window) {
+        websocket = new MozWebSocket("ws://localhost:8088/webSocketServer");
+    } else {
+        websocket = new SockJS("http://localhost:8088/sockjs/webSocketServer");
+    }
+    websocket.onopen = function (evnt) {
+
+
+    };
+    websocket.onmessage = function (evnt) {
+        var msg = JSON.parse(evnt.data);
+        $("#msg").append("(<font color='red'>"+msg.content+"</font>)");
+    };
+    websocket.onerror = function (evnt) {
+    };
+    websocket.onclose = function (evnt) {
+    }
+
+
+    $(function(){
+        $("#send").on("click",function(){
+            websocket.send($("#text").val());
+        })
+    })
+</script>
+</body>
+</html>

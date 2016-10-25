@@ -10,4 +10,7 @@ public interface Constants {
     String SESSION_LOGIN_USER_KEY ="kykys_login_user";
 
     String DES_ENCODE_KEY ="@$^|123_";
+
+
+    String WEBSOCKET_USERNAME = "ws_name";
 }
