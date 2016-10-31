@@ -129,7 +129,7 @@
     <script>
         var exports = window;
     </script>
-    <script src="${ctx}/resources/js/markdown.js"></script>
+    <script src="${ctx}/resources/js/markdown/markdown.js"></script>
     <script>
         function Editor(input, preview) {
             this.update = function () {

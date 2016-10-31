@@ -4,6 +4,7 @@ import cn.kykys.index.data.MottoModelMapper;
 import cn.kykys.index.ibusiness.IPosts;
 import cn.kykys.index.ibusiness.ITags;
 import cn.kykys.index.model.MottoModel;
+import cn.kykys.index.model.PhotoModel;
 import cn.kykys.index.model.TagsModel;
 import cn.kykys.index.model.page.PageWeb;
 import org.apache.commons.lang.StringEscapeUtils;
@@ -29,6 +30,7 @@ public class IndexController extends BaseController {
     ITags iTags;
     @Autowired
     MottoModelMapper mottoModelMapper;
+
 
     //home page
     @RequestMapping("/")
