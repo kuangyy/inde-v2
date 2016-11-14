@@ -189,6 +189,15 @@
        </dependency>
 
 
+       <dependency>
+           <groupId>dom4j</groupId>
+           <artifactId>dom4j</artifactId>
+       </dependency>
+       <dependency>
+           <groupId>com.thoughtworks.xstream</groupId>
+           <artifactId>xstream</artifactId>
+       </dependency>
+
 
    </dependencies>
 
@@ -235,6 +244,8 @@
         <commons-io.version>2.4</commons-io.version>
         <hessian.version>4.0.37</hessian.version>
         <pinyin4j.version>2.5.0</pinyin4j.version>
+        <xstream.version>1.4.9</xstream.version>
+
     </properties>
 
 
@@ -520,6 +531,7 @@
                 <artifactId>dom4j</artifactId>
                 <version>${dom4j.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>net.sourceforge.jexcelapi</groupId>
                 <artifactId>jxl</artifactId>
@@ -543,6 +555,12 @@
                 <groupId>com.belerweb</groupId>
                 <artifactId>pinyin4j</artifactId>
                 <version>${pinyin4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.thoughtworks.xstream</groupId>
+                <artifactId>xstream</artifactId>
+                <version>${xstream.version}</version>
             </dependency>
 
         </dependencies>
