@@ -1,5 +1,25 @@
 # inde-v2
 
+###2016年11月14日
+add wechat Public Accounts controller
+
+---
+
+###2016年10月31日
+dream to add a finance dynamic chart
+
+---
+
+###2016年10月25日
+add websocket demo
+
+---
+
+###2016年10月20日
+add some mp3 tool
+
+---
+
 ###2016年10月18日
 long time no see
 
