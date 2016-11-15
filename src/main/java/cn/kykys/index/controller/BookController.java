@@ -1,29 +1,19 @@
 package cn.kykys.index.controller;
 
-import cn.kykys.index.annotations.MustLogin;
-import cn.kykys.index.data.MottoModelMapper;
+import cn.kykys.index.data.kykys.MottoModelMapper;
 import cn.kykys.index.ibusiness.IBook;
-import cn.kykys.index.ibusiness.IPosts;
 import cn.kykys.index.ibusiness.ITags;
 import cn.kykys.index.model.MottoModel;
-import cn.kykys.index.model.PostsModel;
 import cn.kykys.index.model.TagsModel;
-import cn.kykys.index.model.dto.ContentModel;
 import cn.kykys.index.model.page.PageWeb;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;

@@ -1,14 +1,11 @@
 package cn.kykys.index.business;
 
-import cn.kykys.index.data.BookModelMapper;
+import cn.kykys.index.data.kykys.BookModelMapper;
 import cn.kykys.index.ibusiness.IBook;
 import cn.kykys.index.ibusiness.ITags;
 import cn.kykys.index.model.BookModel;
-import cn.kykys.index.model.PostsModel;
 import cn.kykys.index.model.TagsModel;
-import cn.kykys.index.model.dto.ContentModel;
 import cn.kykys.index.model.page.PageWeb;
-import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;

@@ -1,21 +1,12 @@
 package cn.kykys.index.business;
 
-import cn.kykys.index.data.MottoModelMapper;
-import cn.kykys.index.data.PostsModelMapper;
+import cn.kykys.index.data.kykys.MottoModelMapper;
 import cn.kykys.index.ibusiness.IMotto;
-import cn.kykys.index.ibusiness.IPosts;
-import cn.kykys.index.ibusiness.ITags;
 import cn.kykys.index.model.MottoModel;
-import cn.kykys.index.model.PostsModel;
-import cn.kykys.index.model.TagsModel;
-import cn.kykys.index.model.dto.ContentModel;
 import cn.kykys.index.model.page.PageWeb;
-import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

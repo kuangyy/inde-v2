@@ -1,7 +1,6 @@
 package cn.kykys.index.business;
 
-import cn.kykys.index.data.PostsModelMapper;
-import cn.kykys.index.data.RPostTagModelMapper;
+import cn.kykys.index.data.kykys.PostsModelMapper;
 import cn.kykys.index.ibusiness.IPosts;
 import cn.kykys.index.ibusiness.ITags;
 import cn.kykys.index.model.PostsModel;

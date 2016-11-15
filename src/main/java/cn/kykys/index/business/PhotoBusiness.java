@@ -1,6 +1,6 @@
 package cn.kykys.index.business;
 
-import cn.kykys.index.data.PhotoModelMapper;
+import cn.kykys.index.data.kykys.PhotoModelMapper;
 import cn.kykys.index.ibusiness.IPhoto;
 import cn.kykys.index.model.PhotoModel;
 import cn.kykys.index.model.page.PageWeb;

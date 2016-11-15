@@ -7,46 +7,46 @@
     http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
-	<bean id="kykysDbDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	<bean id="wechatDbDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 		<property name="driverClassName">
-			<value>${kykys.driver}</value>
+			<value>${wechat.driver}</value>
 		</property>
 		<property name="url">
-			<value>${kykys.url}</value>
+			<value>${wechat.url}</value>
 		</property>
 		<property name="username">
-			<value>${kykys.username}</value>
+			<value>${wechat.username}</value>
 		</property>
 		<property name="password">
-			<value>${kykys.password}</value>
+			<value>${wechat.password}</value>
 		</property>
 		<!-- 连接池最大使用连接数 20-->
 		<property name="maxActive">
-			<value>${kykys.maxActive}</value>
+			<value>${wechat.maxActive}</value>
 		</property>
 		<!-- 初始化连接大小1 -->
 		<property name="initialSize">
-			<value>${kykys.initialSize}</value>
+			<value>${wechat.initialSize}</value>
 		</property>
 		<!-- 获取连接最大等待时间 60000-->
 		<property name="maxWait">
-			<value>${kykys.maxWait}</value>
+			<value>${wechat.maxWait}</value>
 		</property>
 		<!-- 连接池最大空闲 20-->
 		<property name="maxIdle">
-			<value>${kykys.maxIdle}</value>
+			<value>${wechat.maxIdle}</value>
 		</property>
 		<!-- 连接池最小空闲 3-->
 		<property name="minIdle">
-			<value>${kykys.minIdle}</value>
+			<value>${wechat.minIdle}</value>
 		</property>
 		<!-- 自动清除无用连接true -->
 		<property name="removeAbandoned">
-			<value>${kykys.removeAbandoned}</value>
+			<value>${wechat.removeAbandoned}</value>
 		</property>
 		<!-- 清除无用连接的等待时间 180-->
 		<property name="removeAbandonedTimeout">
-			<value>${kykys.removeAbandonedTimeout}</value>
+			<value>${wechat.removeAbandonedTimeout}</value>
 		</property>
 		<!-- 连接属性 -->
 		<property name="connectionProperties">
@@ -54,32 +54,32 @@
 		</property>
 	</bean>
 
-	<bean id="kykysDbSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="kykysDbDataSource" />
+	<bean id="wechatDbSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="wechatDbDataSource" />
 		<!--<property name="configLocation">-->
 			<!--<value>classpath:config/db/mybatis-config.xml</value>-->
 		<!--</property>-->
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:mapper/kykys/**.xml</value>
+				<value>classpath:mapper/wechat/**.xml</value>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="kykysDbTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="kykysDbDataSource" />
+	<bean id="wechatDbTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="wechatDbDataSource" />
 	</bean>
 
 
 	<!--inject dao list -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="sqlSessionFactoryBeanName" value="kykysDbSessionFactory"></property>
-		<property name="basePackage" value="cn.kykys.index.data.kykys" />
-		<property name="annotationClass" value="cn.kykys.index.data.KykysDB" />
+		<property name="sqlSessionFactoryBeanName" value="wechatDbSessionFactory"></property>
+		<property name="basePackage" value="cn.kykys.index.data" />
+		<property name="annotationClass" value="cn.kykys.index.data.WechatDB" />
 	</bean>
 
-	<bean id="kykysDbTransactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
-		<property name="transactionManager" ref="kykysDbTransactionManager" />
+	<bean id="wechatDbTransactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="wechatDbTransactionManager" />
 	</bean>
-	<tx:annotation-driven  transaction-manager="kykysDbTransactionManager" />
+	<tx:annotation-driven  transaction-manager="wechatDbTransactionManager" />
 </beans>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.kykys.index.data.RPostTagModelMapper" >
+<mapper namespace="cn.kykys.index.data.kykys.RPostTagModelMapper" >
   <resultMap id="BaseResultMap" type="cn.kykys.index.model.RPostTagModelKey" >
     <id column="post_id" property="postId" jdbcType="BIGINT" />
     <id column="tag_id" property="tagId" jdbcType="BIGINT" />

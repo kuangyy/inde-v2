@@ -1,5 +1,6 @@
-package cn.kykys.index.data;
+package cn.kykys.index.data.kykys;
 
+import cn.kykys.index.data.KykysDB;
 import cn.kykys.index.model.RPostTagModelKey;
 
 import java.util.List;
