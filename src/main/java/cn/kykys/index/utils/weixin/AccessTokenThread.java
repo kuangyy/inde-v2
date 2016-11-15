@@ -11,23 +11,19 @@ import java.text.MessageFormat;
  */
 public class AccessTokenThread implements Runnable {
 
-    public static AccessToken accessToken = null;
+    private static AccessToken accessToken = null;
+
+    static {
+        new Thread(new AccessTokenThread()).start();
+    }
+
 
     @Override
     public void run() {
 
         while (true) {
             try {
-                accessToken = WeixinUtil.getNewAccessToken();
-                if (null != accessToken) {
-                    LogUtil.info(MessageFormat.format("获取access_token成功，有效时长{0}秒 token:{1}", accessToken.getExpiresIn(), accessToken.getToken()));
-                    // 休眠7000秒
-                    //冗余 200秒
-                    Thread.sleep((accessToken.getExpiresIn() - 200) * 1000);
-                } else {
-                    // 如果access_token为null，60秒后再获取
-                    Thread.sleep(60 * 1000);
-                }
+                this.getToken();
             } catch (InterruptedException e) {
                 try {
                     Thread.sleep(60 * 1000);
@@ -39,7 +35,29 @@ public class AccessTokenThread implements Runnable {
         }
     }
 
+
+    private static void getToken() throws InterruptedException {
+        accessToken = WeixinUtil.getNewAccessToken();
+        if (null != accessToken) {
+            LogUtil.info(MessageFormat.format("获取access_token成功，有效时长{0}秒 token:{1}", accessToken.getExpiresIn(), accessToken.getToken()));
+            // 休眠7000秒
+            //冗余 200秒
+            Thread.sleep((accessToken.getExpiresIn() - 200) * 1000);
+        } else {
+            // 如果access_token为null，60秒后再获取
+            Thread.sleep(60 * 1000);
+        }
+    }
+
     public static AccessToken getAccessToken() {
+        if (accessToken == null) {
+            try {
+                AccessTokenThread.getToken();
+            } catch (InterruptedException e1) {
+                LogUtil.error("{}", e1);
+            }
+        }
+
         return accessToken;
     }
 }

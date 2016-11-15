@@ -1,9 +1,14 @@
 package cn.kykys.index.business.weixin;
 
 import cn.kykys.index.ibusiness.weixin.IWechat;
+import cn.kykys.index.utils.LogUtil;
 import cn.kykys.index.utils.weixin.MessageUtil;
+import cn.kykys.index.utils.weixin.WeixinUtil;
+import cn.kykys.index.utils.weixin.func.WeixinFunc;
 import cn.kykys.index.utils.weixin.message.req.TextMessage;
+import cn.kykys.index.utils.weixin.model.WechatUserInfo;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.Map;
@@ -41,7 +46,7 @@ public class WechatBusiness implements IWechat {
             // 文本消息
             if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {
 
-                this.doTextMessage(requestMap.get("Content"));
+                respContent = this.doTextMessage(fromUserName, requestMap.get("Content"));
 
 //                respContent = "您发送的是文本消息！";
             }
@@ -89,15 +94,26 @@ public class WechatBusiness implements IWechat {
     }
 
 
+    private String doTextMessage(String openID, String text) throws Exception {
 
+        LogUtil.debug("openid : " + openID + " | send: " + text);
 
-    private String doTextMessage(String text){
+        if (StringUtils.hasText(text)) {
+            switch (text) {
 
+//                case "0":
+//                    WechatUserInfo wechatUserInfo = WeixinUtil.getUserByOpenId(openID);
+//                    return wechatUserInfo == null ? "请先关注本订阅号~" : wechatUserInfo.toString();
 
+                case "?":
+                default:
+                    return WeixinFunc.getMainMenu();
+            }
+        } else {
+            return WeixinFunc.getMainMenu();
+        }
 
-        return null;
     }
-
 
 
 }

@@ -33,5 +33,12 @@ public class WeiXinException extends Exception {
 		this.handle = handle;
 		this.msg = msg;
 	}
+	public WeiXinException(String code) {
+		super();
+		ErrorCode errorCode = ErrorCode.getErrorCode(code);
+		this.code = errorCode.getCode();
+		this.handle = errorCode.getHandle();
+		this.msg = errorCode.getMsg();
+	}
 	
 }

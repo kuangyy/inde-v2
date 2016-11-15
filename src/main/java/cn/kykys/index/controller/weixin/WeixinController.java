@@ -39,7 +39,7 @@ public class WeixinController {
         if (SignUtil.checkSignature(signature, timestamp, nonce)) {
             return echostr;
         }
-        return "";
+        return null;
     }
 
 

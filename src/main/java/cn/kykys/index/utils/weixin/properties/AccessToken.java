@@ -8,12 +8,12 @@ public class AccessToken {
 
     private String token;
 
-    private Long expiresIn;
+    private Integer expiresIn;
 
     public AccessToken() {
     }
 
-    public AccessToken(String token, Long expiresIn) {
+    public AccessToken(String token, Integer expiresIn) {
         this.token = token;
         this.expiresIn = expiresIn;
     }
@@ -26,11 +26,11 @@ public class AccessToken {
         this.token = token;
     }
 
-    public Long getExpiresIn() {
+    public Integer getExpiresIn() {
         return expiresIn;
     }
 
-    public void setExpiresIn(Long expiresIn) {
+    public void setExpiresIn(Integer expiresIn) {
         this.expiresIn = expiresIn;
     }
 }
