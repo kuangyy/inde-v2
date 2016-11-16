@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -38,7 +37,6 @@ public class GameBusiness implements IGame {
             //start
             peopleModel = new PeopleModel();
             peopleModel.setOpenid(openId);
-            iPeople.addPeople(peopleModel);
 
             return this.startGame(peopleModel, true);
         }
@@ -46,7 +44,6 @@ public class GameBusiness implements IGame {
 
 
     private String startGame(PeopleModel peopleModel, boolean isNew) {
-
 
         if (isNew) {
             peopleModel.setCreateTime(new Date());
@@ -68,7 +65,6 @@ public class GameBusiness implements IGame {
         }
 
         Date today = new Date();
-
 
         int day = DateUtils.getIntervalDays(lastAddTime, today);
 

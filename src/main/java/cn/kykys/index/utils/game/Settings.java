@@ -13,18 +13,22 @@ public final class Settings {
 
 
     public static final String MAIN_MENU = new StringBuffer()
-            .append("您好，我是kyy，请回复数字选择服务：").append("\n\n")
+            .append("您好，我是kyy，请回复数字选择服务：").append("\n")
+            .append("\n")
             .append("1  开始游戏/继续游戏").append("\n")
-            .append("2  个人属性").append("\n\n")
-            .append("3  游戏规则").append("\n\n")
+            .append("2  个人属性").append("\n")
+            .append("3  游戏规则").append("\n")
+            .append("\n")
             .append("5  kyy的歌（随机一首）").append("\n")
+            .append("\n")
             .append("回复 ? 显示此帮助菜单")
             .toString();
 
 
 
     public static final String EXPLAIN = new StringBuffer()
-            .append("游戏指南").append("\n\n")
+            .append("游戏指南").append("\n")
+            .append("\n")
             .append("等待完善").append("\n")
             .toString();
 
