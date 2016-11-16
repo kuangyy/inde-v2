@@ -61,7 +61,7 @@
 		<!--</property>-->
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:mapper/kykys/**.xml</value>
+				<value>classpath:config/mapper/kykys/**.xml</value>
 			</list>
 		</property>
 	</bean>

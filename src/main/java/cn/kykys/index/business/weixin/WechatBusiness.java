@@ -1,12 +1,12 @@
 package cn.kykys.index.business.weixin;
 
+import cn.kykys.index.ibusiness.game.IGame;
 import cn.kykys.index.ibusiness.weixin.IWechat;
 import cn.kykys.index.utils.LogUtil;
+import cn.kykys.index.utils.game.Settings;
 import cn.kykys.index.utils.weixin.MessageUtil;
-import cn.kykys.index.utils.weixin.WeixinUtil;
-import cn.kykys.index.utils.weixin.func.WeixinFunc;
 import cn.kykys.index.utils.weixin.message.req.TextMessage;
-import cn.kykys.index.utils.weixin.model.WechatUserInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -18,6 +18,9 @@ import java.util.Map;
  */
 @Service
 public class WechatBusiness implements IWechat {
+
+    @Autowired
+    private IGame iGame;
 
     @Override
     public String processRequest(Map<String, String> requestMap) {
@@ -100,6 +103,13 @@ public class WechatBusiness implements IWechat {
 
         if (StringUtils.hasText(text)) {
             switch (text) {
+                //start / continue   [tell people intime state
+                case "1":
+                    return iGame.startOrContinue(openID);
+
+                case "3":
+                    return Settings.EXPLAIN;
+
 
 //                case "0":
 //                    WechatUserInfo wechatUserInfo = WeixinUtil.getUserByOpenId(openID);
@@ -107,10 +117,10 @@ public class WechatBusiness implements IWechat {
 
                 case "?":
                 default:
-                    return WeixinFunc.getMainMenu();
+                    return Settings.MAIN_MENU;
             }
         } else {
-            return WeixinFunc.getMainMenu();
+            return Settings.MAIN_MENU;
         }
 
     }

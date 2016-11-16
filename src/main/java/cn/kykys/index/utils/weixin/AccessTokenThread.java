@@ -24,7 +24,7 @@ public class AccessTokenThread implements Runnable {
         while (true) {
             try {
                 this.getToken();
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 try {
                     Thread.sleep(60 * 1000);
                 } catch (InterruptedException e1) {
@@ -36,7 +36,7 @@ public class AccessTokenThread implements Runnable {
     }
 
 
-    private static void getToken() throws InterruptedException {
+    private static void getToken() throws Exception {
         accessToken = WeixinUtil.getNewAccessToken();
         if (null != accessToken) {
             LogUtil.info(MessageFormat.format("获取access_token成功，有效时长{0}秒 token:{1}", accessToken.getExpiresIn(), accessToken.getToken()));
@@ -53,7 +53,7 @@ public class AccessTokenThread implements Runnable {
         if (accessToken == null) {
             try {
                 AccessTokenThread.getToken();
-            } catch (InterruptedException e1) {
+            } catch (Exception e1) {
                 LogUtil.error("{}", e1);
             }
         }

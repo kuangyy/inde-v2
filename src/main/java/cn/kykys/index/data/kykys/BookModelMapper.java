@@ -1,7 +1,7 @@
 package cn.kykys.index.data.kykys;
 
 import cn.kykys.index.data.KykysDB;
-import cn.kykys.index.model.BookModel;
+import cn.kykys.index.model.blog.BookModel;
 
 import java.util.List;
 import java.util.Map;

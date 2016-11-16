@@ -7,7 +7,7 @@
 			<property name="suppressAllComments" value="true" /><!-- 是否去除自动生成的注释 true：是 ： false:否 -->
 		</commentGenerator>
 		<!--<jdbcConnection driverClass="oracle.jdbc.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.1.1:1521:a" userId="a" password="a" />-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/kykys?characterEncoding=utf8" userId="root" password="123456" />
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/wechat?characterEncoding=utf8" userId="root" password="123456" />
 
 
 		<javaTypeResolver>
@@ -15,17 +15,17 @@
 		</javaTypeResolver>
 
 		<!-- javabeen生成的地方 -->
-		<javaModelGenerator targetPackage="cn.kykys.index.model" targetProject="E:\新建文件夹\\inde-v2">
+		<javaModelGenerator targetPackage="cn.config.mapper.kykys.index.model.wechat" targetProject="E:\新建文件夹\\inde-v2">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<!-- mapper.xml生成的地方 -->
-		<sqlMapGenerator targetPackage="cn.kykys.index.data" targetProject="E:\新建文件夹\\inde-v2">
+		<sqlMapGenerator targetPackage="cn.config.mapper.kykys.index.data.wechat" targetProject="E:\新建文件夹\\inde-v2">
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 	
-		<javaClientGenerator type="XMLMAPPER" targetPackage="cn.kykys.index.data" targetProject="E:\新建文件夹\\inde-v2">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="cn.config.mapper.kykys.index.data.wechat" targetProject="E:\新建文件夹\\inde-v2">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 
@@ -40,7 +40,7 @@
 		<!--<table tableName="book" domainObjectName="BookModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
 		<!--<table tableName="r_book_tag" domainObjectName="RBookTagModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
 
-		<table tableName="photo" domainObjectName="PhotoModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
+		<table tableName="people" domainObjectName="PeopleModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
 
 
 

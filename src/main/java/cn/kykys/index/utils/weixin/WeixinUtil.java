@@ -43,7 +43,7 @@ public class WeixinUtil {
     }
 
 
-    private static JSONObject weixinAPIRequest(String url, String... args) throws Exception {
+    private static JSONObject weixinAPIRequest(String url, String... args) throws WeiXinException {
         JSONObject jsonObject = null;
         try {
             jsonObject = WeixinUtil.send(url, args);
@@ -66,7 +66,7 @@ public class WeixinUtil {
 
 
     @Test
-    public static AccessToken getNewAccessToken() throws Exception {
+    public static AccessToken getNewAccessToken() throws WeiXinException  {
 //        https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
 
         JSONObject jsonObject = WeixinUtil.weixinAPIRequest(TOKEN_URL, WeixinProperties.getAppID(), WeixinProperties.getAppSecret());

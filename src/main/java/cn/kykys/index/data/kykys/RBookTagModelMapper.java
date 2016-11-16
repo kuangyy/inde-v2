@@ -1,7 +1,7 @@
 package cn.kykys.index.data.kykys;
 
 import cn.kykys.index.data.KykysDB;
-import cn.kykys.index.model.RBookTagModelKey;
+import cn.kykys.index.model.blog.RBookTagModelKey;
 
 import java.util.List;
 

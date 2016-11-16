@@ -40,10 +40,7 @@
 
 	</mvc:interceptors>
 
-	<mvc:resources mapping="/resources/js/**" location="/resources/js/" />
-	<mvc:resources mapping="/resources/css/**" location="/resources/css/" />
-	<mvc:resources mapping="/resources/images/**" location="/resources/images/" />
-	<mvc:resources mapping="/resources/fonts/**" location="/resources/fonts/" />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:resources mapping="/errors/**" location="/errors/" />
 
 	<bean id="validator"

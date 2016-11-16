@@ -16,7 +16,7 @@ public class DateUtils {
 	public static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
 	public static final String NUMBER_FORMAT = "yyyyMMdd";
 	public static String WEEKS[] = { "日", "一", "二", "三", "四", "五", "六" };
-	
+
 	/**
 	 * 短租最大天数(不包括)
 	 */
@@ -204,5 +204,6 @@ public class DateUtils {
 		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 		return WEEKS[dayOfWeek];
 	}
+
 
 }

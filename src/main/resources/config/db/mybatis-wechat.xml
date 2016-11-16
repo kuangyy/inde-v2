@@ -61,7 +61,7 @@
 		<!--</property>-->
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:mapper/wechat/**.xml</value>
+				<value>classpath:config/mapper/wechat/**.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -74,7 +74,7 @@
 	<!--inject dao list -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName" value="wechatDbSessionFactory"></property>
-		<property name="basePackage" value="cn.kykys.index.data" />
+		<property name="basePackage" value="cn.kykys.index.data.wechat" />
 		<property name="annotationClass" value="cn.kykys.index.data.WechatDB" />
 	</bean>
 
