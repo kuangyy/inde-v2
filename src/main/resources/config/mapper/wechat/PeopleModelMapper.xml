@@ -170,5 +170,9 @@
   </select>
 
 
+  <select id="selectByName" parameterType="java.lang.String" resultType="int">
+    select count(1) from people where name = #{name}
+  </select>
+
 
 </mapper>

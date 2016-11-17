@@ -7,4 +7,10 @@ public interface IGame {
 
     String startOrContinue(String openId);
 
+    String rename(String openId,String name);
+
+    String chooseDrama(String openId,Integer dramaId);
+
+    String exitDrama(String openId,Integer dramaId);
+
 }

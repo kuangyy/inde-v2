@@ -15,17 +15,17 @@
 		</javaTypeResolver>
 
 		<!-- javabeen生成的地方 -->
-		<javaModelGenerator targetPackage="cn.config.mapper.kykys.index.model.wechat" targetProject="E:\新建文件夹\\inde-v2">
+		<javaModelGenerator targetPackage="cn.kykys.index.model.wechat" targetProject="E:\新建文件夹\\inde-v2">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<!-- mapper.xml生成的地方 -->
-		<sqlMapGenerator targetPackage="cn.config.mapper.kykys.index.data.wechat" targetProject="E:\新建文件夹\\inde-v2">
+		<sqlMapGenerator targetPackage="cn.kykys.index.data.wechat" targetProject="E:\新建文件夹\\inde-v2">
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 	
-		<javaClientGenerator type="XMLMAPPER" targetPackage="cn.config.mapper.kykys.index.data.wechat" targetProject="E:\新建文件夹\\inde-v2">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="cn.kykys.index.data.wechat" targetProject="E:\新建文件夹\\inde-v2">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 
@@ -40,7 +40,15 @@
 		<!--<table tableName="book" domainObjectName="BookModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
 		<!--<table tableName="r_book_tag" domainObjectName="RBookTagModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
 
-		<table tableName="people" domainObjectName="PeopleModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
+		<!--<table tableName="people" domainObjectName="PeopleModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
+
+
+
+
+		<table tableName="drama" domainObjectName="DramaModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
+		<!--<table tableName="node" domainObjectName="NodeModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
+		<!--<table tableName="people_login" domainObjectName="PeopleLoginModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
+		<!--<table tableName="drama_play" domainObjectName="DramaPlayModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
 
 
 

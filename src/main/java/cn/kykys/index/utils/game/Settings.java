@@ -27,8 +27,9 @@ public final class Settings {
 
 
     public static final String EXPLAIN = new StringBuffer()
-            .append("游戏指南").append("\n")
+            .append("游戏指南:").append("\n")
             .append("\n")
+            .append("等待完善").append("\n")
             .append("等待完善").append("\n")
             .toString();
 
@@ -40,7 +41,42 @@ public final class Settings {
             .append("金币:{1} ").append("\n")
             .append("积分:{2} ").append("\n")
             .append("等级:{3} ").append("\n")
+            .append("正处于故事: XXXX中 / 你还在现充中").append("\n")
             .append("上次登录时间:{4} ").append("\n").append("\n")
             .append("输入 ? 查看更多命令.")
             .toString();
+
+
+
+
+
+
+
+
+
+    public static final String
+            REGEX_RENAME = "^改名 (.*?)$",
+            REGEX_DRAMA_CHOOSE = "^进入 (.*?)$",
+            REGEX_DRAMA_EXIT = "^退出 (.*?)$"
+    ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

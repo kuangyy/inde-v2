@@ -1,6 +1,7 @@
 package cn.kykys.index.business.weixin;
 
 import cn.kykys.index.ibusiness.game.IGame;
+import cn.kykys.index.ibusiness.weixin.IPeople;
 import cn.kykys.index.ibusiness.weixin.IWechat;
 import cn.kykys.index.utils.LogUtil;
 import cn.kykys.index.utils.game.Settings;
@@ -12,6 +13,8 @@ import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by kuangye on 2016/11/14.
@@ -102,6 +105,8 @@ public class WechatBusiness implements IWechat {
         LogUtil.debug("openid : " + openID + " | send: " + text);
 
         if (StringUtils.hasText(text)) {
+
+            // total match
             switch (text) {
                 //start / continue   [tell people intime state
                 case "1":
@@ -116,13 +121,67 @@ public class WechatBusiness implements IWechat {
 //                    return wechatUserInfo == null ? "请先关注本订阅号~" : wechatUserInfo.toString();
 
                 case "?":
-                default:
                     return Settings.MAIN_MENU;
+
+
+                default:
+                    //regex match
+                    this.regexMatch(openID, text);
             }
-        } else {
-            return Settings.MAIN_MENU;
+        }
+        return Settings.MAIN_MENU;
+    }
+
+
+    private String regexMatch(String openId, String text) {
+
+        String matchText;
+
+        //rename
+        matchText = this.regexHandler(text, Settings.REGEX_RENAME);
+        if (StringUtils.hasText(matchText)) {
+            iGame.rename(openId, matchText);
         }
 
+
+        //choose
+        matchText = this.regexHandler(text, Settings.REGEX_DRAMA_CHOOSE);
+        if (StringUtils.hasText(matchText)) {
+            try {
+                Integer dramaId = Integer.parseInt(matchText);
+                iGame.chooseDrama(openId, dramaId);
+            }catch (NumberFormatException e){
+                return "输入错误请检查后重试！";
+            }
+        }
+
+
+        //exit
+        matchText = this.regexHandler(text, Settings.REGEX_DRAMA_EXIT);
+        if (StringUtils.hasText(matchText)) {
+            try {
+                Integer dramaId = Integer.parseInt(matchText);
+                iGame.exitDrama(openId, dramaId);
+            }catch (NumberFormatException e){
+                return "输入错误请检查后重试！";
+            }
+        }
+
+
+        return Settings.MAIN_MENU;
+    }
+
+
+    private String regexHandler(String text, String pattern) {
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(text);
+        if (m.matches()) {
+            String name = m.group(0);
+            if (StringUtils.hasText(name)) {
+                return name;
+            }
+        }
+        return null;
     }
 
 

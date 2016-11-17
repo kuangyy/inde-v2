@@ -43,6 +43,7 @@ public class GameBusiness implements IGame {
     }
 
 
+    //start
     private String startGame(PeopleModel peopleModel, boolean isNew) {
 
         if (isNew) {
@@ -55,6 +56,7 @@ public class GameBusiness implements IGame {
     }
 
 
+    //continue
     private String continueGame(PeopleModel peopleModel) {
 
         //get last add time
@@ -85,5 +87,40 @@ public class GameBusiness implements IGame {
         return info;
     }
 
+
+    public String rename(String openId, String name) {
+
+        PeopleModel peopleModel = iPeople.selectByOpenId(openId);
+
+        if (peopleModel.getName() != null && peopleModel.getName().equals(name)) {
+            return "昵称未发生改变";
+        }
+
+        if (iPeople.nameExist(name)) {
+            return "昵称已存在，请换一个~";
+        }
+
+        PeopleModel model = new PeopleModel();
+        model.setId(peopleModel.getId());
+        model.setName(name);
+        model.setUpdateTime(new Date());
+        iPeople.updatePeople(peopleModel);
+
+        return "修改成功";
+    }
+
+
+    public String chooseDrama(String openId,Integer dramaId){
+
+
+
+        return null;
+    }
+
+    public String exitDrama(String openId,Integer dramaId){
+
+
+        return null;
+    }
 
 }

@@ -21,4 +21,7 @@ public interface PeopleModelMapper {
 
 
     PeopleModel selectByOpenId(String openId);
+
+    int selectByName(String name);
+
 }

@@ -39,4 +39,11 @@ public class PeopleBusiness implements IPeople {
         return false;
     }
 
+
+    public boolean nameExist(String name) {
+        if (StringUtils.hasText(name)) {
+            return peopleModelMapper.selectByName(name) > 0;
+        }
+        return true;
+    }
 }

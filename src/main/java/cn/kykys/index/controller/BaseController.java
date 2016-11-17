@@ -82,7 +82,15 @@ public abstract class BaseController {
             }
         } else {
             try {
-                httpResponse.sendRedirect("/404");
+
+                if (httpRequest.getRequestURL().indexOf("/wechat") > 0) {
+                    ps = httpResponse.getOutputStream();
+                    ps.write("success" .getBytes());
+                    ps.flush();
+                    ps.close();
+                }else{
+                    httpResponse.sendRedirect("/404");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -133,9 +141,9 @@ public abstract class BaseController {
         return new ModelAndView("redirect:/404");
     }
 
-    public JSONObject getJSON(){
+    public JSONObject getJSON() {
         JSONObject json = new JSONObject();
-        json.put("status",-1);
+        json.put("status", -1);
         return json;
     }
 }

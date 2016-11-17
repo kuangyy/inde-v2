@@ -12,4 +12,7 @@ public interface IPeople {
     boolean addPeople(PeopleModel peopleModel);
 
     boolean updatePeople(PeopleModel peopleModel);
+
+
+    boolean nameExist(String name);
 }
