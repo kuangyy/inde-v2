@@ -1,7 +1,10 @@
 package cn.kykys.index.business.game;
 
+import cn.kykys.index.ibusiness.game.IDrama;
 import cn.kykys.index.ibusiness.game.IGame;
 import cn.kykys.index.ibusiness.weixin.IPeople;
+import cn.kykys.index.model.enumeration.DramaStatusEnum;
+import cn.kykys.index.model.wechat.DramaModel;
 import cn.kykys.index.model.wechat.PeopleModel;
 import cn.kykys.index.utils.DateUtils;
 import cn.kykys.index.utils.game.Settings;
@@ -19,6 +22,8 @@ public class GameBusiness implements IGame {
 
     @Autowired
     IPeople iPeople;
+    @Autowired
+    IDrama iDrama;
 
 
     public String startOrContinue(String openId) {
@@ -111,6 +116,23 @@ public class GameBusiness implements IGame {
 
 
     public String chooseDrama(String openId,Integer dramaId){
+
+
+        DramaModel dramaModel = iDrama.getById(dramaId);
+
+        if(dramaModel==null){
+            return "无该剧本，请重新选择~";
+        }
+
+        if(dramaModel.getData()==null || !dramaModel.getStatus().equals(DramaStatusEnum.ON.getStatus())){
+            return "该剧本暂未启用";
+        }
+
+
+        //select first node
+
+
+
 
 
 

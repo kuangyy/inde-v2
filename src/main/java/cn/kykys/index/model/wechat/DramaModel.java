@@ -21,6 +21,8 @@ public class DramaModel {
 
     private Date lastUpdateTime;
 
+    private Integer status;
+
     private String data;
 
     public Integer getId() {
@@ -93,6 +95,14 @@ public class DramaModel {
 
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getData() {

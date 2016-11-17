@@ -1,4 +1,4 @@
-package cn.kykys.index.model.dto;
+package cn.kykys.index.model.ext;
 
 import java.util.Date;
 

@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="drama_id" property="dramaId" jdbcType="INTEGER" />
     <result column="next_node_id" property="nextNodeId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -13,7 +14,7 @@
     <result column="choices" property="choices" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, drama_id, next_node_id, create_time, update_time
+    id, drama_id, next_node_id, type, create_time, update_time
   </sql>
   <sql id="Blob_Column_List" >
     description, choices
@@ -32,11 +33,11 @@
   </delete>
   <insert id="insert" parameterType="cn.kykys.index.model.wechat.NodeModelWithBLOBs" >
     insert into node (id, drama_id, next_node_id, 
-      create_time, update_time, description, 
-      choices)
+      type, create_time, update_time, 
+      description, choices)
     values (#{id,jdbcType=BIGINT}, #{dramaId,jdbcType=INTEGER}, #{nextNodeId,jdbcType=BIGINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}, 
-      #{choices,jdbcType=LONGVARCHAR})
+      #{type,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=LONGVARCHAR}, #{choices,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.kykys.index.model.wechat.NodeModelWithBLOBs" >
     insert into node
@@ -49,6 +50,9 @@
       </if>
       <if test="nextNodeId != null" >
         next_node_id,
+      </if>
+      <if test="type != null" >
+        type,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -73,6 +77,9 @@
       <if test="nextNodeId != null" >
         #{nextNodeId,jdbcType=BIGINT},
       </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -96,6 +103,9 @@
       <if test="nextNodeId != null" >
         next_node_id = #{nextNodeId,jdbcType=BIGINT},
       </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -115,6 +125,7 @@
     update node
     set drama_id = #{dramaId,jdbcType=INTEGER},
       next_node_id = #{nextNodeId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       description = #{description,jdbcType=LONGVARCHAR},
@@ -125,8 +136,21 @@
     update node
     set drama_id = #{dramaId,jdbcType=INTEGER},
       next_node_id = #{nextNodeId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+
+
+
+  <select id="selectByType" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+    select * from node where drama_id = #{drama_id} and type = #{type}
+  </select>
+
+
+
+
 </mapper>

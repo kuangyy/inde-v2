@@ -4,6 +4,8 @@ import cn.kykys.index.data.WechatDB;
 import cn.kykys.index.model.wechat.NodeModel;
 import cn.kykys.index.model.wechat.NodeModelWithBLOBs;
 
+import java.util.Map;
+
 @WechatDB
 public interface NodeModelMapper {
     int deleteByPrimaryKey(Long id);
@@ -19,4 +21,10 @@ public interface NodeModelMapper {
     int updateByPrimaryKeyWithBLOBs(NodeModelWithBLOBs record);
 
     int updateByPrimaryKey(NodeModel record);
+
+
+
+
+
+    NodeModelWithBLOBs selectByType(Map map);
 }

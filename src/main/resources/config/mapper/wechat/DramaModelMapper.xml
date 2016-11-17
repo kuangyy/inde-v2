@@ -11,12 +11,14 @@
     <result column="weight" property="weight" jdbcType="DOUBLE" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="cn.kykys.index.model.wechat.DramaModel" extends="BaseResultMap" >
     <result column="data" property="data" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, description, author_id, score, like_count, weight, create_time, last_update_time
+    id, name, description, author_id, score, like_count, weight, create_time, last_update_time, 
+    status
   </sql>
   <sql id="Blob_Column_List" >
     data
@@ -37,11 +39,11 @@
     insert into drama (id, name, description, 
       author_id, score, like_count, 
       weight, create_time, last_update_time, 
-      data)
+      status, data)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{authorId,jdbcType=BIGINT}, #{score,jdbcType=DOUBLE}, #{likeCount,jdbcType=BIGINT}, 
       #{weight,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
-      #{data,jdbcType=LONGVARCHAR})
+      #{status,jdbcType=INTEGER}, #{data,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.kykys.index.model.wechat.DramaModel" >
     insert into drama
@@ -72,6 +74,9 @@
       </if>
       <if test="lastUpdateTime != null" >
         last_update_time,
+      </if>
+      <if test="status != null" >
+        status,
       </if>
       <if test="data != null" >
         data,
@@ -105,6 +110,9 @@
       <if test="lastUpdateTime != null" >
         #{lastUpdateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
       <if test="data != null" >
         #{data,jdbcType=LONGVARCHAR},
       </if>
@@ -137,6 +145,9 @@
       <if test="lastUpdateTime != null" >
         last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
       <if test="data != null" >
         data = #{data,jdbcType=LONGVARCHAR},
       </if>
@@ -153,6 +164,7 @@
       weight = #{weight,jdbcType=DOUBLE},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
       data = #{data,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -165,7 +177,8 @@
       like_count = #{likeCount,jdbcType=BIGINT},
       weight = #{weight,jdbcType=DOUBLE},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
