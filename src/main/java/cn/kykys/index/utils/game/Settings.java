@@ -8,7 +8,7 @@ public final class Settings {
     public static final Integer COINS_SEED = 10, POINTS_SEED = 10;
 
 
-
+    public static final Integer REFRESH_TIME = 7;
 
 
 

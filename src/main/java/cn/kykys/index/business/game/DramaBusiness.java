@@ -11,6 +11,7 @@ import cn.kykys.index.model.wechat.DramaModel;
 import cn.kykys.index.model.wechat.NodeModelWithBLOBs;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -42,7 +43,7 @@ public class DramaBusiness implements IDrama {
     }
 
 
-    NodeDetail getFirstNodeByDramaId(Integer dramaId) {
+    public NodeDetail getFirstNodeByDramaId(Integer dramaId) {
 
         HashMap map = new HashMap();
         map.put("dramaId", dramaId);
@@ -50,22 +51,35 @@ public class DramaBusiness implements IDrama {
 
         NodeModelWithBLOBs nodeModelWithBLOBs = nodeModelMapper.selectByType(map);
 
+        return this.nodeHandler(nodeModelWithBLOBs);
+    }
+
+    public NodeDetail getNextNodeByDramaId(Long nodeId) {
+
+        if (nodeId != null && nodeId > 0) {
+            NodeModelWithBLOBs nodeModelWithBLOBs = nodeModelMapper.selectByPrimaryKey(nodeId);
+
+            return this.nodeHandler(nodeModelWithBLOBs);
+        }
+        return null;
+    }
+
+
+    private NodeDetail nodeHandler(NodeModelWithBLOBs nodeModelWithBLOBs) {
+
         if (StringUtils.hasText(nodeModelWithBLOBs.getChoices())) {
 
             List<ChooseModel> chooseModelList = JSON.parseObject(nodeModelWithBLOBs.getChoices(), new TypeReference<List<ChooseModel>>() {
             });
 
+            NodeDetail nodeDetail = new NodeDetail();
+            BeanUtils.copyProperties(nodeModelWithBLOBs, nodeDetail);
+            nodeDetail.setChooseModelList(chooseModelList);
 
-
-
-
+            return nodeDetail;
         }
 
-
-    }
-
-    NodeDetail getNextNodeByDramaId(Integer dramaId) {
-
+        return null;
     }
 
 }

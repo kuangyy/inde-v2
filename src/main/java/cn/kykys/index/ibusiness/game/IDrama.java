@@ -14,7 +14,7 @@ public interface IDrama {
 
     NodeDetail getFirstNodeByDramaId(Integer dramaId);
 
-    NodeDetail getNextNodeByDramaId(Integer dramaId);
+    NodeDetail getNextNodeByDramaId(Long nodeId);
 
 
 }
