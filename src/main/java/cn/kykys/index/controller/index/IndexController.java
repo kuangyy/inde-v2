@@ -127,6 +127,20 @@ public class IndexController extends BaseController {
         return mav;
     }
 
+
+
+
+
+    //game page
+    @RequestMapping("/game")
+    public ModelAndView game() {
+
+        ModelAndView mav = new ModelAndView("/game/index");
+
+        return mav;
+    }
+
+
     //about
     @RequestMapping("/about")
     public ModelAndView about() {
