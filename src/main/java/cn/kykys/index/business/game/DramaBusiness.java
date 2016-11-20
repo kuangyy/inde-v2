@@ -45,7 +45,7 @@ public class DramaBusiness implements IDrama {
 
     public NodeDetail getFirstNodeByDramaId(Integer dramaId) {
 
-        HashMap map = new HashMap();
+        HashMap<String,Object> map = new HashMap<>();
         map.put("dramaId", dramaId);
         map.put("type", NodeTypeEnum.START.getStatus());
 

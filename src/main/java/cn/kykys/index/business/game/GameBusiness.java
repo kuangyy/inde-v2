@@ -3,8 +3,11 @@ package cn.kykys.index.business.game;
 import cn.kykys.index.ibusiness.game.IDrama;
 import cn.kykys.index.ibusiness.game.IGame;
 import cn.kykys.index.ibusiness.weixin.IPeople;
+import cn.kykys.index.model.enumeration.DramaPeopleStatusEnum;
 import cn.kykys.index.model.enumeration.DramaStatusEnum;
+import cn.kykys.index.model.ext.NodeDetail;
 import cn.kykys.index.model.wechat.DramaModel;
+import cn.kykys.index.model.wechat.DramaPlayModelKey;
 import cn.kykys.index.model.wechat.PeopleModel;
 import cn.kykys.index.utils.DateUtils;
 import cn.kykys.index.utils.game.Settings;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by kuangye on 2016/11/16.
@@ -58,7 +62,7 @@ public class GameBusiness implements IGame {
             iPeople.addPeople(peopleModel);
         }
 
-        return MessageFormat.format(Settings.GAME_REALTIME_INFO, "未设置", 0, 0, 0, "无");
+        return MessageFormat.format(Settings.GAME_REAL_TIME_INFO, "未设置", 0, 0, 0, "无");
     }
 
 
@@ -80,7 +84,7 @@ public class GameBusiness implements IGame {
             peopleModel.setLastIncreaseTime(new Date());
         }
 
-        String info = MessageFormat.format(Settings.GAME_REALTIME_INFO, peopleModel.getName() == null ? "未设置" : peopleModel.getName(),
+        String info = MessageFormat.format(Settings.GAME_REAL_TIME_INFO, peopleModel.getName() == null ? "未设置" : peopleModel.getName(),
                 peopleModel.getCoins(), peopleModel.getPoints(), peopleModel.getLevel(), peopleModel.getLastLoginTime());
 
 
@@ -163,28 +167,67 @@ public class GameBusiness implements IGame {
 
     public String chooseDrama(String openId, Integer dramaId) {
 
+        PeopleModel peopleModel = iPeople.selectByOpenId(openId);
+        if (peopleModel != null) {
 
-        DramaModel dramaModel = iDrama.getById(dramaId);
+            List<DramaPlayModelKey> dramaPlayModelKeyList = iPeople.getInPlayDramaByPeopleId(peopleModel.getId());
 
-        if (dramaModel == null) {
-            return "无该剧本，请重新选择~";
+            if (dramaPlayModelKeyList != null && dramaPlayModelKeyList.size() > 0) {
+                return "已有参与的剧本，无法参与多个剧本";
+            }
+
+            DramaModel dramaModel = iDrama.getById(dramaId);
+
+            if (dramaModel == null) {
+                return "无该剧本，请重新选择~";
+            }
+
+            if (dramaModel.getData() == null || !dramaModel.getStatus().equals(DramaStatusEnum.ON.getStatus())) {
+                return "该剧本暂未启用";
+            }
+
+
+            //select first node
+            NodeDetail nodeDetail = iDrama.getFirstNodeByDramaId(dramaId);
+
+            if (nodeDetail.getChooseModelList() == null) {
+                //已到结尾
+                return "结尾 END 撒花~";
+            }
+
+            return MessageFormat.format(Settings.DRAMA_PLAY,
+                    dramaId, dramaModel.getName(), dramaModel.getDescription(),
+                    Settings.formatChoice(nodeDetail.getChooseModelList()));
+
         }
 
-        if (dramaModel.getData() == null || !dramaModel.getStatus().equals(DramaStatusEnum.ON.getStatus())) {
-            return "该剧本暂未启用";
-        }
-
-
-        //select first node
-
-
-        return null;
+        return "系统错误";
     }
 
     public String exitDrama(String openId, Integer dramaId) {
 
+        PeopleModel peopleModel = iPeople.selectByOpenId(openId);
+        if (peopleModel != null) {
 
-        return null;
+            DramaPlayModelKey dramaPlayModelKey = iPeople.getPlayDrama(peopleModel.getId(), dramaId);
+
+            if (dramaPlayModelKey != null) {
+                if (dramaPlayModelKey.getStatus().equals(DramaPeopleStatusEnum.IN.getStatus())) {
+
+                    dramaPlayModelKey.setStatus(DramaPeopleStatusEnum.INTERRUPT.getStatus());
+
+                    iPeople.updateInDramaStatus(dramaPlayModelKey);
+
+                    return "已中断该剧本。";
+                }
+
+                return "已结束该剧本。";
+            }
+
+            return "您还未参与该剧本";
+        }
+
+        return "系统错误";
     }
 
 }

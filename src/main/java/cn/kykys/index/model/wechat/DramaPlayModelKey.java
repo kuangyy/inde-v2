@@ -1,17 +1,19 @@
 package cn.kykys.index.model.wechat;
 
 public class DramaPlayModelKey {
-    private Long dramaId;
+    private Integer dramaId;
 
     private Long nodeId;
 
     private Integer peopleId;
 
-    public Long getDramaId() {
+    private Integer status;
+
+    public Integer getDramaId() {
         return dramaId;
     }
 
-    public void setDramaId(Long dramaId) {
+    public void setDramaId(Integer dramaId) {
         this.dramaId = dramaId;
     }
 
@@ -29,5 +31,13 @@ public class DramaPlayModelKey {
 
     public void setPeopleId(Integer peopleId) {
         this.peopleId = peopleId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }
