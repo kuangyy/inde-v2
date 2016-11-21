@@ -114,44 +114,51 @@ public class DramaBusiness implements IDrama {
 
         dramaModel.setData(data);
 
+        dramaModelMapper.updateByPrimaryKeySelective(dramaModel);
+
+        updateDrama2(dramaId, gooflowModel, data);
+
         return true;
     }
 
+    /**
+     * 需要先指定id 不然不好创建关系
+     * @param dramaId
+     * @param gooflowModel
+     * @param data
+     * @return
+     */
     public boolean updateDrama2(Integer dramaId, GooflowModel gooflowModel, String data) {
 
         DramaModel dramaModel = dramaModelMapper.selectByPrimaryKey(dramaId);
-
+        //保存流程
         dramaModel.setData(data);
-
-        List<NodeDetail> nodeDetailList = new ArrayList<>(0);
-
-
+        //获取所有节点
         Map<String, GooflowNodeModel> gooflowNodeModelMap = gooflowModel.getNodes();
+        //获取所有关系
+        Map<String, GooflowLineModel> gooflowLineModelMap = gooflowModel.getLines();
+
+        //节点列表
+        List<NodeDetail> nodeDetailList = new ArrayList<>(0);
 
         Set<Map.Entry<String, GooflowNodeModel>> set = gooflowNodeModelMap.entrySet();
 
-        //第一步 获取所有场景
-        for (Map.Entry<String, GooflowNodeModel> entry : set) {
-//            String key = entry.getKey();
-            GooflowNodeModel gooflowNodeModel = entry.getValue();
-            //插入场景
-            if (gooflowNodeModel.getType().equals(GooflowNodeTypeEnum.TASK)) {
-                NodeDetail nodeDetail = new NodeDetail();
-                nodeDetail.setDescription(gooflowNodeModel.getName());
-                nodeDetailList.add(nodeDetail);
-            }
-        }
-
-        //第二步 获取所有选项
+        //所有的选项
         Map<String, List<ChooseModel>> chooseMap = new HashMap<>();
-
+        //第一步 获取所有场景 获取所有选项
         for (Map.Entry<String, GooflowNodeModel> entry : set) {
             String key = entry.getKey();
             GooflowNodeModel gooflowNodeModel = entry.getValue();
 
-            List<ChooseModel> chooseModelList = chooseMap.get(key);
             //插入场景
-            if (gooflowNodeModel.getType().equals(GooflowNodeTypeEnum.NODE)) {
+            if (gooflowNodeModel.getType().equals(GooflowNodeTypeEnum.TASK.getStatus())) {
+                NodeDetail nodeDetail = new NodeDetail();
+                nodeDetail.setDescription(gooflowNodeModel.getName());
+                nodeDetailList.add(nodeDetail);
+            }
+            //插入选项
+            List<ChooseModel> chooseModelList = chooseMap.get(key);
+            if (gooflowNodeModel.getType().equals(GooflowNodeTypeEnum.NODE.getStatus())) {
                 ChooseModel chooseModel = new ChooseModel();
                 chooseModel.setDescription(gooflowNodeModel.getName());
                 if (chooseModelList == null) {
@@ -163,45 +170,42 @@ public class DramaBusiness implements IDrama {
             }
         }
 
-        //第三步 获取关系 拼装
+        //第二步 获取关系 拼装
         //此次先把选项 添加 下节点
-        Map<String, GooflowLineModel> gooflowLineModelMap = gooflowModel.getLines();
         for (Map.Entry<String, GooflowLineModel> entry : gooflowLineModelMap.entrySet()) {
             String key = entry.getKey();
             GooflowLineModel gooflowLineModel = entry.getValue();
-
+            //节点名
             String from = gooflowLineModel.getFrom();
             String to = gooflowLineModel.getTo();
-
-
+            //节点对象
             GooflowNodeModel fromNode = gooflowNodeModelMap.get(from);
             GooflowNodeModel toNode = gooflowNodeModelMap.get(to);
+
+//            //如果是选项
+//            if (fromNode.getType().equals(GooflowNodeTypeEnum.NODE.getStatus())) {
+//                //选项->场景
+//                if (toNode.getType().equals(GooflowNodeTypeEnum.TASK.getStatus())) {
 //
-
-            //如果是选项
-            if (fromNode.getType().equals(GooflowNodeTypeEnum.NODE)) {
-                //选项->场景
-                if (toNode.getType().equals(GooflowNodeTypeEnum.TASK)) {
-
-                    Optional<NodeDetail> optional = nodeDetailList.stream().filter(e -> e.getDescription().equals(from)).findFirst();
-                    if (optional.isPresent()) {
-                        NodeDetail nodeDetail = optional.get();
-
-                        List<ChooseModel> chooseModelList = nodeDetail.getChooseModelList();
-                        if (chooseModelList == null) {
-                            chooseModelList = new ArrayList<>();
-                        }
-
-                        List<ChooseModel> chooseModelList1 = chooseMap.get(to);
-
-                        chooseModelList.addAll(chooseModelList1);
-                    }
-                } else if (toNode.getType().equals(GooflowNodeTypeEnum.END)) {
-
-                } else {
-                    throw new BusinessException("节点连接不正确");
-                }
-            }
+//                    Optional<NodeDetail> optional = nodeDetailList.stream().filter(e -> e.getDescription().equals(from)).findFirst();
+//                    if (optional.isPresent()) {
+//                        NodeDetail nodeDetail = optional.get();
+//
+//                        List<ChooseModel> chooseModelList = nodeDetail.getChooseModelList();
+//                        if (chooseModelList == null) {
+//                            chooseModelList = new ArrayList<>();
+//                        }
+//
+//                        List<ChooseModel> chooseModelList1 = chooseMap.get(to);
+//
+//                        chooseModelList.addAll(chooseModelList1);
+//                    }
+//                } else if (toNode.getType().equals(GooflowNodeTypeEnum.END)) {
+//
+//                } else {
+//                    throw new BusinessException("节点连接不正确");
+//                }
+//            }
         }
 
         for (Map.Entry<String, GooflowLineModel> entry : gooflowLineModelMap.entrySet()) {
@@ -217,9 +221,9 @@ public class DramaBusiness implements IDrama {
             //如果是开始节点 无操作
 //            if(fromNode.getType().equals(GooflowNodeTypeEnum.START))
             //如果是场景
-            if (fromNode.getType().equals(GooflowNodeTypeEnum.TASK)) {
+            if (fromNode.getType().equals(GooflowNodeTypeEnum.TASK.getStatus())) {
                 //场景->选项
-                if (toNode.getType().equals(GooflowNodeTypeEnum.NODE)) {
+                if (toNode.getType().equals(GooflowNodeTypeEnum.NODE.getStatus())) {
 
                     Optional<NodeDetail> optional = nodeDetailList.stream().filter(e -> e.getDescription().equals(from)).findFirst();
                     if (optional.isPresent()) {

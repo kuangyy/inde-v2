@@ -28,10 +28,10 @@
             <li class="waves-effect"><a href="javascript:goForm(${pageWeb.pageCount})">${pageWeb.pageCount}</a></li>
         </c:if>
         <c:if test="${status.last && pageWeb.pageIndex < pageWeb.pageCount}">
-            <li class="waves-effect"><a href="javascript:goForm(${pageWeb.pageIndex+1})"><i class="fa fa-arrow-right" aria-hidden="true"></i></a></li>
+            <li class="waves-effect"><a href="javascript:goForm(${pageWeb.pageIndex+1})"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
         </c:if>
         <c:if test="${status.last && pageWeb.pageIndex == pageWeb.pageCount}">
-            <li class="disabled"><a><i class="fa fa-arrow-right" aria-hidden="true"></i></a></li>
+            <li class="disabled"><a><i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
         </c:if>
     </c:forEach>
 </ul>

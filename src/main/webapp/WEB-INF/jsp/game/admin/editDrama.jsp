@@ -40,17 +40,18 @@
 
             <div class="section scrollspy">
 
-                <div id="gf" style="margin:10px"></div>
+                <div id="gf" ></div>
 
+                <br/>
 
                 <a class="waves-effect waves-light btn" onclick="Export()">导出结果</a>
                 <a class="waves-effect waves-light btn" onclick="Import()">导入数据</a>
 
 
-                <a class="waves-effect waves-light btn" onclick="Submit()">button</a>
+                <a class="waves-effect waves-light btn" onclick="Submit()">修改</a>
 
-                <br/>
-                <textarea id="result" rows="50" cols="100"></textarea>
+                <br/><br/>
+                <textarea id="result" rows="50" cols="100">${drama.data}</textarea>
 
 
 
@@ -111,6 +112,8 @@
     $(document).ready(function () {
         gf = $.createGooFlow($("#gf"), property);
         gf.setNodeRemarks(remark);
+
+        Import();
     });
     var out;
     function Export() {
