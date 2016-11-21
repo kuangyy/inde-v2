@@ -55,3 +55,22 @@ p {
 footer.page-footer {
     margin: 0;
 }
+
+footer .AppPromo .badge {
+    margin-bottom: 10px;
+}
+.badge {
+    margin: 30px;
+}
+.badge span, .IssueMeta-newBadge span {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    color: white;
+    letter-spacing: 1px;
+    padding: 3px 6px;
+    background-color: #fc459e;
+    text-transform: uppercase;
+}

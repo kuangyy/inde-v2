@@ -42,14 +42,13 @@
                 <a href="#start" id="download-button" class="btn-large waves-effect waves-light teal lighten-2">开始游戏</a>
             </div>
             <br><br>
-
         </div>
     </div>
     <div class="parallax"><img src="${ctx}/resources/img/game/bg1.jpg" alt="Unsplashed background img 1"></div>
 </div>
+
 <div class="container">
     <div class="section">
-
         <!--   Icon Section   -->
         <div class="row">
             <div class="col s12 m4">
@@ -60,7 +59,6 @@
                     <p class="light center">玩，万千剧本</p>
                 </div>
             </div>
-
             <div class="col s12 m4">
                 <div class="icon-block">
                     <h2 class="center brown-text"><i class="fa fa-share-alt" aria-hidden="true"></i></h2>
@@ -69,7 +67,6 @@
                     <p class="light center">环环相扣，因果相依</p>
                 </div>
             </div>
-
             <div class="col s12 m4">
                 <div class="icon-block">
                     <h2 class="center brown-text"><i class="fa fa-paper-plane" aria-hidden="true"></i></h2>
@@ -79,7 +76,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="row">
         <div class="col s12 m4">
@@ -90,7 +86,6 @@
                 <p class="light center">随机事件</p>
             </div>
         </div>
-
         <div class="col s12 m4">
             <div class="icon-block">
                 <h2 class="center brown-text"><i class="fa fa-puzzle-piece" aria-hidden="true"></i></h2>
@@ -99,7 +94,6 @@
                 <p class="light center">个性化编辑剧本，世界由你而创</p>
             </div>
         </div>
-
         <div class="col s12 m4">
             <div class="icon-block">
                 <h2 class="center brown-text"><i class="fa fa-resistance" aria-hidden="true"></i></h2>
@@ -110,6 +104,7 @@
         </div>
     </div>
 </div>
+
 <div class="parallax-container valign-wrapper">
     <div class="section no-pad-bot">
         <div class="container">
@@ -120,9 +115,9 @@
     </div>
     <div class="parallax"><img src="${ctx}/resources/img/game/bg2.jpg" alt="Unsplashed background img 2"></div>
 </div>
+
 <div class="container">
     <div class="section">
-
         <div class="row">
             <div class="col s12 center">
                 <h3><i class="mdi-content-send brown-text"></i></h3>
@@ -138,13 +133,13 @@
                 </p>
                 <hr>
                 <p class="left-align light">
-                    <b>如何开始游戏？关注微信订阅号 [ kys ] 即刻享受</b>
+                    <b>如何开始游戏？关注微信公众号 [ kys ] 即刻享受</b>
                 </p>
             </div>
         </div>
-
     </div>
 </div>
+
 <div class="parallax-container valign-wrapper">
     <div class="section no-pad-bot">
         <div class="container">
@@ -159,7 +154,7 @@
 <footer class="page-footer teal">
     <div class="container">
         <div class="row">
-            <div class="col l6 s12">
+            <div class="col l3 s12">
                 <h5 class="white-text">关于我</h5>
                 <p class="grey-text text-lighten-4">
                     就我一个人，就是想玩游戏！
@@ -169,7 +164,7 @@
                 <h5 class="white-text">相关</h5>
                 <ul>
                     <li><a class="white-text" href="#!">橙光游戏</a></li>
-                    <li><a class="white-text" href="#!">微信订阅号</a></li>
+                    <li><a class="white-text" href="#!">微信公众号</a></li>
                     <li><a class="white-text" href="#!">游戏</a></li>
                 </ul>
             </div>
@@ -177,8 +172,12 @@
                 <h5 class="white-text">联系我们</h5>
                 <ul>
                     <li><a class="white-text" href="#">QQ:495621336</a></li>
-                    <li><a class="white-text" href="#">Email:ky.kys.cn@hotmail.com</a></li>
+                    <li><a class="white-text" href="mailto:ky.kys.cn@hotmail.com">Email:ky.kys.cn@hotmail.com</a></li>
                 </ul>
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">公众号</h5>
+                    <img alt="QR-CODE" class="AppPromo" height="100" width="100" src="${ctx}/resources/img/game/qrcode.jpg" >
             </div>
         </div>
     </div>
