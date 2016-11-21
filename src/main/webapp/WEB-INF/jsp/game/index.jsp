@@ -22,7 +22,7 @@
         <ul id="nav-mobile" class="side-nav">
             <li><a href="#">·</a></li>
         </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons"><i class="fa fa-navicon" aria-hidden="true"></i></i></a>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="fa fa-navicon" aria-hidden="true"></i></a>
     </div>
 </nav>
 
@@ -133,7 +133,7 @@
                 </p>
                 <hr>
                 <p class="left-align light">
-                    <b>如何开始游戏？关注微信公众号 [ kys ] 即刻享受</b>
+                    <b>如何开始游戏？关注微信公众号 [ kys ] 即刻享受 <a href="#qrcode">扫码</a></b>
                 </p>
             </div>
         </div>
@@ -176,6 +176,7 @@
                 </ul>
             </div>
             <div class="col l3 s12">
+                <a id="qrcode"></a>
                 <h5 class="white-text">公众号</h5>
                     <img alt="QR-CODE" class="AppPromo" height="100" width="100" src="${ctx}/resources/img/game/qrcode.jpg" >
             </div>

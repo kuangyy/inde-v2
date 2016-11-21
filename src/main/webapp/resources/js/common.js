@@ -282,4 +282,36 @@ var TOOLS = {
     }
 }
 
+// convert rgb to hex value string
+function rgb2hex(rgb) {
+    if (/^#[0-9A-F]{6}$/i.test(rgb)) { return rgb; }
 
+    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+
+    if (rgb === null) { return "N/A"; }
+
+    function hex(x) {
+        return ("0" + parseInt(x).toString(16)).slice(-2);
+    }
+
+    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+}
+
+
+
+// Github Latest Commit
+if ($('.github-commit').length) { // Checks if widget div exists (Index only)
+    $.ajax({
+        url: "https://api.github.com/repos/dogfalo/materialize/commits/master",
+        dataType: "json",
+        success: function (data) {
+            var sha = data.sha,
+                date = jQuery.timeago(data.commit.author.date);
+            if (window_width < 1120) {
+                sha = sha.substring(0,7);
+            }
+            $('.github-commit').find('.date').html(date);
+            $('.github-commit').find('.sha').html(sha).attr('href', data.html_url);
+        }
+    });
+}

@@ -26,6 +26,8 @@
 
 <!-- #css -->
 <link rel="stylesheet" href="${ctx}/resources/plugins/materialize/css/materialize.css">
+<!-- 语法高亮 -->
+<link rel="stylesheet" href="${ctx}/resources/plugins/prism/prism.css">
 <!-- custom -->
 <link rel="stylesheet" href="${ctx}/resources/css/style_game.css?v=${resourcesVersion}">
 

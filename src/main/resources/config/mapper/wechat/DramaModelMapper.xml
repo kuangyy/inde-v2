@@ -181,4 +181,19 @@
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
+  <select id="searchByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select * from drama
+    ORDER BY last_update_time DESC ,create_time DESC
+    <if test="offset != null and limit != null">
+      limit #{offset},#{limit}
+    </if>
+  </select>
+  <select id="searchCount" parameterType="java.util.Map" resultType="int">
+      select count(1) from drama
+  </select>
+
+
 </mapper>

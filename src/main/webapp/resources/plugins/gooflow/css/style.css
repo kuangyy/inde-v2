@@ -108,7 +108,7 @@ v\:group, v\:rect, v\:imagedata, v\:oval, v\:line, v\:polyline, v\:stroke, v\:te
     width: 18px;
     cursor: default;
     padding: 2px;
-    margin: 1px;
+    margin: 2px;
     outline: none;
     blr: expression(this.onFocus=this.blur());
 }
@@ -331,6 +331,14 @@ v\:group, v\:rect, v\:imagedata, v\:oval, v\:line, v\:polyline, v\:stroke, v\:te
     height: 18px;
     overflow: hidden
 }
+.GooFlow i {
+    display: block;
+    width: 18px;
+    height: 18px;
+    overflow: hidden;
+    font-size: inherit;
+    color: #000;
+}
 
 .GooFlow .item_round {
     border-radius: 11px;
@@ -530,4 +538,7 @@ v\:group, v\:rect, v\:imagedata, v\:oval, v\:line, v\:polyline, v\:stroke, v\:te
 .GooFlow .ico_save {
     padding-top: 2px;
 
+}
+.GooFlow textarea {
+    background-color: beige;
 }
