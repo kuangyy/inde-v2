@@ -9,7 +9,7 @@ public class ChooseModel {
 
     private String description;
 
-    private Long nextNodeId;
+    private String nextNodeId;
 
     private Date createTime;
 
@@ -24,11 +24,11 @@ public class ChooseModel {
         this.description = description;
     }
 
-    public Long getNextNodeId() {
+    public String getNextNodeId() {
         return nextNodeId;
     }
 
-    public void setNextNodeId(Long nextNodeId) {
+    public void setNextNodeId(String nextNodeId) {
         this.nextNodeId = nextNodeId;
     }
 

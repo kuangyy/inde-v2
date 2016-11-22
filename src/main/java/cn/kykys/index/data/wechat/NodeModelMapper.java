@@ -8,13 +8,13 @@ import java.util.Map;
 
 @WechatDB
 public interface NodeModelMapper {
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(String id);
 
     int insert(NodeModelWithBLOBs record);
 
     int insertSelective(NodeModelWithBLOBs record);
 
-    NodeModelWithBLOBs selectByPrimaryKey(Long id);
+    NodeModelWithBLOBs selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(NodeModelWithBLOBs record);
 
@@ -27,4 +27,6 @@ public interface NodeModelMapper {
 
 
     NodeModelWithBLOBs selectByType(Map map);
+
+    int deleteByDramaId(Integer dramaId);
 }

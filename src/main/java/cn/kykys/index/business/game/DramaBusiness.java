@@ -1,5 +1,6 @@
 package cn.kykys.index.business.game;
 
+import cn.kykys.index.data.TransactionManagerName;
 import cn.kykys.index.data.wechat.DramaModelMapper;
 import cn.kykys.index.data.wechat.DramaPlayModelMapper;
 import cn.kykys.index.data.wechat.NodeModelMapper;
@@ -15,11 +16,15 @@ import cn.kykys.index.model.ext.NodeDetail;
 import cn.kykys.index.model.page.PageWeb;
 import cn.kykys.index.model.wechat.DramaModel;
 import cn.kykys.index.model.wechat.NodeModelWithBLOBs;
+import cn.kykys.index.utils.DateUtils;
+import cn.kykys.index.utils.data.DataUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
@@ -59,9 +64,9 @@ public class DramaBusiness implements IDrama {
         return this.nodeHandler(nodeModelWithBLOBs);
     }
 
-    public NodeDetail getNextNodeByDramaId(Long nodeId) {
+    public NodeDetail getNextNodeByDramaId(String nodeId) {
 
-        if (nodeId != null && nodeId > 0) {
+        if (StringUtils.hasText(nodeId)) {
             NodeModelWithBLOBs nodeModelWithBLOBs = nodeModelMapper.selectByPrimaryKey(nodeId);
 
             return this.nodeHandler(nodeModelWithBLOBs);
@@ -108,6 +113,7 @@ public class DramaBusiness implements IDrama {
     }
 
 
+    @Transactional(value = TransactionManagerName.wechatDbTransactionManager, rollbackFor = Exception.class)
     public boolean updateDrama(Integer dramaId, GooflowModel gooflowModel, String data) {
 
         DramaModel dramaModel = dramaModelMapper.selectByPrimaryKey(dramaId);
@@ -116,19 +122,29 @@ public class DramaBusiness implements IDrama {
 
         dramaModelMapper.updateByPrimaryKeySelective(dramaModel);
 
-        updateDrama2(dramaId, gooflowModel, data);
+        updateDramaNode(dramaId, gooflowModel, data);
 
         return true;
     }
 
+
+    private String gernerateANodeId(Integer dramaId) {
+        return dramaId + "-" + UUID.randomUUID().toString();
+    }
+
     /**
      * 需要先指定id 不然不好创建关系
+     *
      * @param dramaId
      * @param gooflowModel
      * @param data
      * @return
      */
-    public boolean updateDrama2(Integer dramaId, GooflowModel gooflowModel, String data) {
+    @Transactional(value = TransactionManagerName.wechatDbTransactionManager, rollbackFor = Exception.class)
+    private boolean updateDramaNode(Integer dramaId, GooflowModel gooflowModel, String data) {
+
+        //先删除
+        nodeModelMapper.deleteByDramaId(dramaId);
 
         DramaModel dramaModel = dramaModelMapper.selectByPrimaryKey(dramaId);
         //保存流程
@@ -139,12 +155,12 @@ public class DramaBusiness implements IDrama {
         Map<String, GooflowLineModel> gooflowLineModelMap = gooflowModel.getLines();
 
         //节点列表
-        List<NodeDetail> nodeDetailList = new ArrayList<>(0);
+        Map<String, NodeDetail> nodeDetailMap = new HashMap<>(0);
 
         Set<Map.Entry<String, GooflowNodeModel>> set = gooflowNodeModelMap.entrySet();
 
         //所有的选项
-        Map<String, List<ChooseModel>> chooseMap = new HashMap<>();
+        Map<String, ChooseModel> chooseMap = new HashMap<>();
         //第一步 获取所有场景 获取所有选项
         for (Map.Entry<String, GooflowNodeModel> entry : set) {
             String key = entry.getKey();
@@ -153,25 +169,26 @@ public class DramaBusiness implements IDrama {
             //插入场景
             if (gooflowNodeModel.getType().equals(GooflowNodeTypeEnum.TASK.getStatus())) {
                 NodeDetail nodeDetail = new NodeDetail();
+                nodeDetail.setDramaId(dramaId);
                 nodeDetail.setDescription(gooflowNodeModel.getName());
-                nodeDetailList.add(nodeDetail);
+                //获取ID
+                nodeDetail.setId(this.gernerateANodeId(dramaId));
+
+                nodeDetailMap.put(key, nodeDetail);
             }
             //插入选项
-            List<ChooseModel> chooseModelList = chooseMap.get(key);
+            ChooseModel chooseModel = chooseMap.get(key);
             if (gooflowNodeModel.getType().equals(GooflowNodeTypeEnum.NODE.getStatus())) {
-                ChooseModel chooseModel = new ChooseModel();
-                chooseModel.setDescription(gooflowNodeModel.getName());
-                if (chooseModelList == null) {
-                    chooseModelList = new ArrayList<>();
+                if (chooseModel == null) {
+                    chooseModel = new ChooseModel();
                 }
-                chooseModelList.add(chooseModel);
-
-                chooseMap.put(key, chooseModelList);
+                chooseModel.setDescription(gooflowNodeModel.getName());
+                chooseMap.put(key, chooseModel);
             }
         }
 
         //第二步 获取关系 拼装
-        //此次先把选项 添加 下节点
+        //此次先把选项 添加 下一节点
         for (Map.Entry<String, GooflowLineModel> entry : gooflowLineModelMap.entrySet()) {
             String key = entry.getKey();
             GooflowLineModel gooflowLineModel = entry.getValue();
@@ -182,32 +199,28 @@ public class DramaBusiness implements IDrama {
             GooflowNodeModel fromNode = gooflowNodeModelMap.get(from);
             GooflowNodeModel toNode = gooflowNodeModelMap.get(to);
 
-//            //如果是选项
-//            if (fromNode.getType().equals(GooflowNodeTypeEnum.NODE.getStatus())) {
-//                //选项->场景
-//                if (toNode.getType().equals(GooflowNodeTypeEnum.TASK.getStatus())) {
-//
-//                    Optional<NodeDetail> optional = nodeDetailList.stream().filter(e -> e.getDescription().equals(from)).findFirst();
-//                    if (optional.isPresent()) {
-//                        NodeDetail nodeDetail = optional.get();
-//
-//                        List<ChooseModel> chooseModelList = nodeDetail.getChooseModelList();
-//                        if (chooseModelList == null) {
-//                            chooseModelList = new ArrayList<>();
-//                        }
-//
-//                        List<ChooseModel> chooseModelList1 = chooseMap.get(to);
-//
-//                        chooseModelList.addAll(chooseModelList1);
-//                    }
-//                } else if (toNode.getType().equals(GooflowNodeTypeEnum.END)) {
-//
-//                } else {
-//                    throw new BusinessException("节点连接不正确");
-//                }
-//            }
+            //如果是选项
+            if (fromNode.getType().equals(GooflowNodeTypeEnum.NODE.getStatus())) {
+                //选项->场景
+                if (toNode.getType().equals(GooflowNodeTypeEnum.TASK.getStatus())) {
+                    //找到选项
+                    Optional<Map.Entry<String, ChooseModel>> op1 = chooseMap.entrySet().stream().filter(e -> e.getKey().equals(from)).findFirst();
+                    //找到下一节点
+                    Optional<Map.Entry<String, NodeDetail>> op2 = nodeDetailMap.entrySet().stream().filter(e -> e.getKey().equals(to)).findFirst();
+
+                    if (op1.isPresent() && op2.isPresent()) {
+                        ChooseModel chooseModel = op1.get().getValue();
+                        //设置下一节点
+                        chooseModel.setNextNodeId(op2.get().getValue().getId());
+                    }
+                } else {
+                    throw new BusinessException("节点连接不正确");
+                }
+            }
         }
 
+        //第三步 还是关系
+        // 这次获取 节点 选项关系
         for (Map.Entry<String, GooflowLineModel> entry : gooflowLineModelMap.entrySet()) {
             String key = entry.getKey();
             GooflowLineModel gooflowLineModel = entry.getValue();
@@ -218,25 +231,44 @@ public class DramaBusiness implements IDrama {
 
             GooflowNodeModel fromNode = gooflowNodeModelMap.get(from);
             GooflowNodeModel toNode = gooflowNodeModelMap.get(to);
-            //如果是开始节点 无操作
-//            if(fromNode.getType().equals(GooflowNodeTypeEnum.START))
-            //如果是场景
-            if (fromNode.getType().equals(GooflowNodeTypeEnum.TASK.getStatus())) {
+
+            //如果是开始节点
+            if (fromNode.getType().equals(GooflowNodeTypeEnum.START.getStatus())) {
+                //获取场景
+                Optional<Map.Entry<String, NodeDetail>> op1 = nodeDetailMap.entrySet().stream().filter(e -> e.getKey().equals(to)).findFirst();
+                //设置节点为开始节点
+                if (op1.isPresent()) {
+                    op1.get().getValue().setType(NodeTypeEnum.START.getStatus());
+                }
+            } else if (fromNode.getType().equals(GooflowNodeTypeEnum.TASK.getStatus())) {
+                //如果是场景
                 //场景->选项
                 if (toNode.getType().equals(GooflowNodeTypeEnum.NODE.getStatus())) {
+                    //获取场景
+                    Optional<Map.Entry<String, NodeDetail>> op1 = nodeDetailMap.entrySet().stream().filter(e -> e.getKey().equals(from)).findFirst();
+                    //获取选项
+                    Optional<Map.Entry<String, ChooseModel>> op2 = chooseMap.entrySet().stream().filter(e -> e.getKey().equals(to)).findFirst();
 
-                    Optional<NodeDetail> optional = nodeDetailList.stream().filter(e -> e.getDescription().equals(from)).findFirst();
-                    if (optional.isPresent()) {
-                        NodeDetail nodeDetail = optional.get();
+                    if (op1.isPresent() && op2.isPresent()) {
+                        NodeDetail nodeDetail = op1.get().getValue();
+                        //设置为中继节点
+                        nodeDetail.setType(NodeTypeEnum.REPALY.getStatus());
 
                         List<ChooseModel> chooseModelList = nodeDetail.getChooseModelList();
                         if (chooseModelList == null) {
                             chooseModelList = new ArrayList<>();
+                            nodeDetail.setChooseModelList(chooseModelList);
                         }
-
-                        List<ChooseModel> chooseModelList1 = chooseMap.get(to);
-
-                        chooseModelList.addAll(chooseModelList1);
+                        ChooseModel chooseModel = op2.get().getValue();
+                        chooseModelList.add(chooseModel);
+                    }
+                } else if (toNode.getType().equals(GooflowNodeTypeEnum.END.getStatus())) {
+                    //场景->结束
+                    //获取场景
+                    Optional<Map.Entry<String, NodeDetail>> op1 = nodeDetailMap.entrySet().stream().filter(e -> e.getKey().equals(from)).findFirst();
+                    //设置节点为结束节点
+                    if (op1.isPresent()) {
+                        op1.get().getValue().setType(NodeTypeEnum.END.getStatus());
                     }
                 } else {
                     throw new BusinessException("节点连接不正确");
@@ -244,6 +276,19 @@ public class DramaBusiness implements IDrama {
             }
         }
 
+        //拼装结束获取所有节点修改数据库
+
+        if (nodeDetailMap != null && nodeDetailMap.size() > 0) {
+            for (Map.Entry<String, NodeDetail> entry : nodeDetailMap.entrySet()) {
+                NodeDetail nodeDetail = entry.getValue();
+                //选项用JSON存储
+                if (nodeDetail.getChooseModelList() != null && nodeDetail.getChooseModelList().size() > 0) {
+                    String choices = JSON.toJSONString(nodeDetail.getChooseModelList());
+                    nodeDetail.setChoices(choices);
+                }
+                nodeModelMapper.insertSelective(nodeDetail);
+            }
+        }
 
         return true;
     }

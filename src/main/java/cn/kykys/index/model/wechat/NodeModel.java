@@ -3,7 +3,7 @@ package cn.kykys.index.model.wechat;
 import java.util.Date;
 
 public class NodeModel {
-    private Long id;
+    private String id;
 
     private Integer dramaId;
 
@@ -15,11 +15,11 @@ public class NodeModel {
 
     private Date updateTime;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

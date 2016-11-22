@@ -19,7 +19,7 @@ public interface IDrama {
 
     NodeDetail getFirstNodeByDramaId(Integer dramaId);
 
-    NodeDetail getNextNodeByDramaId(Long nodeId);
+    NodeDetail getNextNodeByDramaId(String nodeId);
 
 
 
