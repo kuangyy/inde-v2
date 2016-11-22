@@ -133,10 +133,10 @@ public class WechatBusiness implements IWechat {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         WechatBusiness wechatBusiness = new WechatBusiness();
 
-        System.out.println( wechatBusiness.regexMatch("odCuQtydm6RGBdh0MMDNHevVCESg","改名 kyy"));
+        System.out.println(wechatBusiness.doTextMessage("odCuQtydm6RGBdh0MMDNHevVCESg", "进入 1"));
     }
 
     private String regexMatch(String openId, String text) {
@@ -156,7 +156,7 @@ public class WechatBusiness implements IWechat {
             try {
                 Integer dramaId = Integer.parseInt(matchText);
                 iGame.chooseDrama(openId, dramaId);
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 return "输入错误请检查后重试！";
             }
         }
@@ -168,7 +168,7 @@ public class WechatBusiness implements IWechat {
             try {
                 Integer dramaId = Integer.parseInt(matchText);
                 iGame.exitDrama(openId, dramaId);
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 return "输入错误请检查后重试！";
             }
         }
@@ -184,6 +184,7 @@ public class WechatBusiness implements IWechat {
         if (m.matches()) {
             String name = m.group(1);
             if (StringUtils.hasText(name)) {
+                LogUtil.debug("匹配 ：" + pattern);
                 return name;
             }
         }
