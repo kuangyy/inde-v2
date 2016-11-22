@@ -31,7 +31,9 @@ public final class Settings {
     public static final String EXPLAIN = new StringBuffer()
             .append("游戏指南:").append("\n")
             .append("\n")
-            .append("等待完善").append("\n")
+            .append("[指令][改名 张三] 中间为空格 改名").append("\n")
+            .append("[指令][进入 1] 中间为空格 进入指定剧本").append("\n")
+            .append("[指令][退出 1] 中间为空格 退出某剧本").append("\n")
             .append("等待完善").append("\n")
             .toString();
 
@@ -41,8 +43,10 @@ public final class Settings {
             .append("金币:{1} ").append("\n")
             .append("积分:{2} ").append("\n")
             .append("等级:{3} ").append("\n")
-            .append("正处于故事: XXXX中 / 你还在现充中").append("\n")
-            .append("上次登录时间:{4} ").append("\n").append("\n")
+            .append("上次登录时间:{4} ").append("\n")
+            .append("\n")
+            .append("{5}").append("\n")
+            .append("\n")
             .append("输入 ? 查看更多命令.")
             .toString();
 

@@ -64,6 +64,13 @@ public class DramaBusiness implements IDrama {
         return this.nodeHandler(nodeModelWithBLOBs);
     }
 
+    public NodeDetail getNodeByNodeId(String nodeId) {
+
+        NodeModelWithBLOBs nodeModelWithBLOBs = nodeModelMapper.selectByPrimaryKey(nodeId);
+
+        return this.nodeHandler(nodeModelWithBLOBs);
+    }
+
     public NodeDetail getNextNodeByDramaId(String nodeId) {
 
         if (StringUtils.hasText(nodeId)) {

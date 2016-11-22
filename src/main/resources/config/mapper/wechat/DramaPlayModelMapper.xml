@@ -3,20 +3,20 @@
 <mapper namespace="cn.kykys.index.data.wechat.DramaPlayModelMapper" >
   <resultMap id="BaseResultMap" type="cn.kykys.index.model.wechat.DramaPlayModelKey" >
     <id column="drama_id" property="dramaId" jdbcType="INTEGER" />
-    <id column="node_id" property="nodeId" jdbcType="BIGINT" />
+    <id column="node_id" property="nodeId" jdbcType="VARCHAR" />
     <id column="people_id" property="peopleId" jdbcType="INTEGER" />
     <id column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="cn.kykys.index.model.wechat.DramaPlayModelKey" >
     delete from drama_play
     where drama_id = #{dramaId,jdbcType=INTEGER}
-      and node_id = #{nodeId,jdbcType=BIGINT}
+      and node_id = #{nodeId,jdbcType=VARCHAR}
       and people_id = #{peopleId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.kykys.index.model.wechat.DramaPlayModelKey" >
     insert into drama_play (drama_id, node_id, people_id, status
       )
-    values (#{dramaId,jdbcType=INTEGER}, #{nodeId,jdbcType=BIGINT}, #{peopleId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
+    values (#{dramaId,jdbcType=INTEGER}, #{nodeId,jdbcType=VARCHAR}, #{peopleId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.kykys.index.model.wechat.DramaPlayModelKey" >
@@ -40,7 +40,7 @@
         #{dramaId,jdbcType=INTEGER},
       </if>
       <if test="nodeId != null" >
-        #{nodeId,jdbcType=BIGINT},
+        #{nodeId,jdbcType=VARCHAR},
       </if>
       <if test="peopleId != null" >
         #{peopleId,jdbcType=INTEGER},

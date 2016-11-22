@@ -3,7 +3,7 @@ package cn.kykys.index.model.wechat;
 public class DramaPlayModelKey {
     private Integer dramaId;
 
-    private Long nodeId;
+    private String nodeId;
 
     private Integer peopleId;
 
@@ -17,11 +17,11 @@ public class DramaPlayModelKey {
         this.dramaId = dramaId;
     }
 
-    public Long getNodeId() {
+    public String getNodeId() {
         return nodeId;
     }
 
-    public void setNodeId(Long nodeId) {
+    public void setNodeId(String nodeId) {
         this.nodeId = nodeId;
     }
 

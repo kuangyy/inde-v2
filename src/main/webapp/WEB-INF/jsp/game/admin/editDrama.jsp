@@ -24,7 +24,7 @@
 <header>
     <nav class="top-nav">
         <div class="container">
-            <div class="nav-wrapper"><a class="page-title">Chips</a></div>
+            <div class="nav-wrapper"><a class="page-title">剧本</a></div>
         </div>
     </nav>
 

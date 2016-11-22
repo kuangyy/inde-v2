@@ -60,9 +60,13 @@ public class GameBusiness implements IGame {
             peopleModel.setCreateTime(new Date());
             peopleModel.setLastLoginTime(new Date());
             iPeople.addPeople(peopleModel);
+
+            return MessageFormat.format(Settings.GAME_REAL_TIME_INFO, "未设置", 0, 0, 0, "无", "你还在现充中");
         }
 
-        return MessageFormat.format(Settings.GAME_REAL_TIME_INFO, "未设置", 0, 0, 0, "无");
+        return MessageFormat.format(Settings.GAME_REAL_TIME_INFO,
+                peopleModel.getName() == null ? "未设置" : peopleModel.getName(),
+                peopleModel.getCoins(), peopleModel.getPoints(), peopleModel.getLevel(), "无", "你还在现充中");
     }
 
 
@@ -84,13 +88,34 @@ public class GameBusiness implements IGame {
             peopleModel.setLastIncreaseTime(new Date());
         }
 
-        String info = MessageFormat.format(Settings.GAME_REAL_TIME_INFO, peopleModel.getName() == null ? "未设置" : peopleModel.getName(),
-                peopleModel.getCoins(), peopleModel.getPoints(), peopleModel.getLevel(), peopleModel.getLastLoginTime());
+        int i = 0;
+        DramaModel dramaModel = null;
+        String[] story = new String[]{"你还在现充中", "正处于故事：{0} 中"};
+        List<DramaPlayModelKey> dramaPlayModelKeyList = iPeople.getInPlayDramaByPeopleId(peopleModel.getId());
+        if (dramaPlayModelKeyList != null && dramaPlayModelKeyList.size() > 0) {
+            i = 1;
+            dramaModel = iDrama.getById(dramaPlayModelKeyList.get(0).getDramaId());
+            story[i] = MessageFormat.format(story[i], dramaModel.getName());
+        }
 
+        String info = MessageFormat.format(Settings.GAME_REAL_TIME_INFO, peopleModel.getName() == null ? "未设置" : peopleModel.getName(),
+                peopleModel.getCoins(), peopleModel.getPoints(), peopleModel.getLevel(), peopleModel.getLastLoginTime(),
+                story[i]);
 
         peopleModel.setLastLoginTime(new Date());
 
         iPeople.updatePeople(peopleModel);
+
+        if (i > 0) {
+            //插入当前剧本 当前节点信息
+            DramaPlayModelKey dramaPlayModelKey = dramaPlayModelKeyList.get(0);
+            NodeDetail nodeDetail = iDrama.getNodeByNodeId(dramaPlayModelKey.getNodeId());
+
+            info += ("\n" + MessageFormat.format(Settings.DRAMA_PLAY,
+                    dramaPlayModelKey.getDramaId(), dramaModel.getName(), dramaModel.getDescription(),
+                    Settings.formatChoice(nodeDetail.getChooseModelList())));
+        }
+
 
         return info;
     }
