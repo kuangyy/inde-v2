@@ -133,6 +133,12 @@ public class WechatBusiness implements IWechat {
     }
 
 
+    public static void main(String[] args) {
+        WechatBusiness wechatBusiness = new WechatBusiness();
+
+        System.out.println( wechatBusiness.regexMatch("odCuQtydm6RGBdh0MMDNHevVCESg","改名 kyy"));
+    }
+
     private String regexMatch(String openId, String text) {
 
         String matchText;
@@ -176,7 +182,7 @@ public class WechatBusiness implements IWechat {
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(text);
         if (m.matches()) {
-            String name = m.group(0);
+            String name = m.group(1);
             if (StringUtils.hasText(name)) {
                 return name;
             }
