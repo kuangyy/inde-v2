@@ -184,7 +184,7 @@ public class GameBusiness implements IGame {
         model.setId(peopleModel.getId());
         model.setName(name);
         model.setUpdateTime(new Date());
-        iPeople.updatePeople(peopleModel);
+        iPeople.updatePeople(model);
 
         return "修改成功";
     }

@@ -146,7 +146,9 @@ public class WechatBusiness implements IWechat {
         //rename
         matchText = this.regexHandler(text, Settings.REGEX_RENAME);
         if (StringUtils.hasText(matchText)) {
-            iGame.rename(openId, matchText);
+
+            return iGame.rename(openId, matchText);
+
         }
 
 
@@ -154,8 +156,10 @@ public class WechatBusiness implements IWechat {
         matchText = this.regexHandler(text, Settings.REGEX_DRAMA_CHOOSE);
         if (StringUtils.hasText(matchText)) {
             try {
+
                 Integer dramaId = Integer.parseInt(matchText);
-                iGame.chooseDrama(openId, dramaId);
+                return iGame.chooseDrama(openId, dramaId);
+
             } catch (NumberFormatException e) {
                 return "输入错误请检查后重试！";
             }
@@ -166,8 +170,10 @@ public class WechatBusiness implements IWechat {
         matchText = this.regexHandler(text, Settings.REGEX_DRAMA_EXIT);
         if (StringUtils.hasText(matchText)) {
             try {
+
                 Integer dramaId = Integer.parseInt(matchText);
-                iGame.exitDrama(openId, dramaId);
+                return iGame.exitDrama(openId, dramaId);
+
             } catch (NumberFormatException e) {
                 return "输入错误请检查后重试！";
             }
