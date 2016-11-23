@@ -126,7 +126,7 @@ public class WechatBusiness implements IWechat {
 
                 default:
                     //regex match
-                    this.regexMatch(openID, text);
+                    return this.regexMatch(openID, text);
             }
         }
         return Settings.MAIN_MENU;
