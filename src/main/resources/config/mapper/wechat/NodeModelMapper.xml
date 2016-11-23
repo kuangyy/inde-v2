@@ -24,11 +24,11 @@
     ,
     <include refid="Blob_Column_List" />
     from node
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from node
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="cn.kykys.index.model.wechat.NodeModelWithBLOBs" >
     insert into node (id, drama_id, next_node_id, 

@@ -8,6 +8,7 @@ import cn.kykys.index.utils.game.Settings;
 import cn.kykys.index.utils.weixin.MessageUtil;
 import cn.kykys.index.utils.weixin.message.req.TextMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -138,17 +139,25 @@ public class WechatBusiness implements IWechat {
 
         String matchText;
 
-        //choose
+        //choose one
         if (Pattern.matches(Settings.REGEX_CHOOSE, text)) {
-            Long choice = Long.parseLong(text);
-            return iGame.choose(openId, choice);
+            try {
+                Long choice = Long.parseLong(text);
+                return iGame.choose(openId, choice);
+            }catch (NumberFormatException e){
+                return "选项异常";
+            }
         }
 
         //reset
         matchText = this.regexHandler(text, Settings.REGEX_RESET);
         if (StringUtils.hasText(matchText)) {
-            Integer dramaId = Integer.parseInt(matchText);
-            return iGame.reset(openId, dramaId);
+            try {
+                Integer dramaId = Integer.parseInt(matchText);
+                return iGame.reset(openId, dramaId);
+            }catch (NumberFormatException e){
+                return "剧本ID异常";
+            }
         }
 
         //rename
@@ -160,14 +169,16 @@ public class WechatBusiness implements IWechat {
         }
 
 
-        //choose
+        //enter
         matchText = this.regexHandler(text, Settings.REGEX_DRAMA_CHOOSE);
         if (StringUtils.hasText(matchText)) {
             try {
-
-                Integer dramaId = Integer.parseInt(matchText);
-                return iGame.chooseDrama(openId, dramaId);
-
+                try {
+                    Integer dramaId = Integer.parseInt(matchText);
+                    return iGame.chooseDrama(openId, dramaId);
+                }catch (NumberFormatException e){
+                    return "剧本ID异常";
+                }
             } catch (NumberFormatException e) {
                 return "输入错误请检查后重试！";
             }
@@ -178,10 +189,8 @@ public class WechatBusiness implements IWechat {
         matchText = this.regexHandler(text, Settings.REGEX_DRAMA_EXIT);
         if (StringUtils.hasText(matchText)) {
             try {
-
                 Integer dramaId = Integer.parseInt(matchText);
                 return iGame.exitDrama(openId, dramaId);
-
             } catch (NumberFormatException e) {
                 return "输入错误请检查后重试！";
             }

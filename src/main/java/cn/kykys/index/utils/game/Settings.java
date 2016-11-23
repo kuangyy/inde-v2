@@ -16,13 +16,12 @@ public final class Settings {
 
 
     public static final String MAIN_MENU = new StringBuffer()
-            .append("您好，我是kyy，请回复数字选择服务：").append("\n")
+            .append("您好，我是kyy，请回复文字选择服务：").append("\n")
             .append("\n")
-            .append("1  开始游戏/继续游戏").append("\n")
-            .append("2  个人状态").append("\n")
-            .append("3  游戏规则").append("\n")
+            .append("[说明]  查看游戏说明").append("\n")
+            .append("0  个人状态").append("\n")
             .append("\n")
-            .append("5  kyy的歌（随机一首）").append("\n")
+            .append("（暂未开通） kyy的歌（随机一首）").append("\n")
             .append("\n")
             .append("回复 ? 显示此帮助菜单")
             .toString();
@@ -31,9 +30,11 @@ public final class Settings {
     public static final String EXPLAIN = new StringBuffer()
             .append("游戏指南:").append("\n")
             .append("\n")
+            .append("游戏采用指令的形式进行 （进入剧本后只需回复选项数字即可）")
             .append("[指令][改名 张三] 中间为空格 改名").append("\n")
             .append("[指令][进入 1] 中间为空格 进入指定剧本").append("\n")
             .append("[指令][退出 1] 中间为空格 退出某剧本").append("\n")
+            .append("[指令][重置 1] 中间为空格 重置某剧本进度（重新开始）").append("\n")
             .append("等待完善")
             .toString();
 
@@ -73,10 +74,10 @@ public final class Settings {
 
 
     public static final String
-            REGEX_RENAME = "^改名 (.*?)$",
-            REGEX_DRAMA_CHOOSE = "^进入 (.*?)$",
-            REGEX_DRAMA_EXIT = "^退出 (.*?)$",
-            REGEX_RESET = "^重置 (.*?)$",
+            REGEX_RENAME = "^改名 (\\d+)$",
+            REGEX_DRAMA_CHOOSE = "^进入 (\\d+)$",
+            REGEX_DRAMA_EXIT = "^退出 (\\d+)$",
+            REGEX_RESET = "^重置 (\\d+)$",
             REGEX_CHOOSE = "^\\d+$",
 
     SPACE = "";
