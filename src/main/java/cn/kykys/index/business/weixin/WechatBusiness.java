@@ -139,14 +139,12 @@ public class WechatBusiness implements IWechat {
         String matchText;
 
         //choose
-        matchText = this.regexHandler(text, Settings.REGEX_CHOOSE);
-        if (StringUtils.hasText(matchText)) {
-            Long choice = Long.parseLong(matchText);
+        if (Pattern.matches(Settings.REGEX_CHOOSE, text)) {
+            Long choice = Long.parseLong(text);
             return iGame.choose(openId, choice);
         }
 
         //reset
-
         matchText = this.regexHandler(text, Settings.REGEX_RESET);
         if (StringUtils.hasText(matchText)) {
             Integer dramaId = Integer.parseInt(matchText);
