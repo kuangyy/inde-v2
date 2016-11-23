@@ -302,21 +302,17 @@ public class GameBusiness implements IGame {
             NodeDetail nodeDetail = iDrama.getNodeByNodeId(dramaPlayModelKey.getNodeId());
 
             List<ChooseModel> chooseModelList = nodeDetail.getChooseModelList();
-            Assert.isTrue(chooseModelList != null, "选项不见了");
 
             if (chooseModelList != null && dramaPlayModelKeyList.size() > 0) {
                 if (chooseModelList.size() > choice) {
 
                     ChooseModel chooseModel = chooseModelList.get(choice - 1);
-                    LogUtil.debug(JSON.toJSONString(chooseModel));
 
                     // TODO 必须有
                     String nextNodeId = chooseModel.getNextNodeId();
-                    Assert.hasText(nextNodeId, "节点不见了 ID");
 
                     //有下一节点
                     NodeDetail nextNodeDetail = iDrama.getNodeByNodeId(nextNodeId);
-                    Assert.isTrue(nextNodeDetail != null, "节点不见了 model");
 
                     if (nextNodeDetail.getType().equals(NodeTypeEnum.END.getStatus())) {
                         //完结节点

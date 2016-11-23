@@ -80,19 +80,18 @@ public class DramaBusiness implements IDrama {
 
     private NodeDetail nodeHandler(NodeModelWithBLOBs nodeModelWithBLOBs) {
 
+        NodeDetail nodeDetail = new NodeDetail();
+
         if (StringUtils.hasText(nodeModelWithBLOBs.getChoices())) {
 
             List<ChooseModel> chooseModelList = JSON.parseObject(nodeModelWithBLOBs.getChoices(), new TypeReference<List<ChooseModel>>() {
             });
-
-            NodeDetail nodeDetail = new NodeDetail();
-            BeanUtils.copyProperties(nodeModelWithBLOBs, nodeDetail);
             nodeDetail.setChooseModelList(chooseModelList);
-
-            return nodeDetail;
         }
 
-        return null;
+        BeanUtils.copyProperties(nodeModelWithBLOBs, nodeDetail);
+
+        return nodeDetail;
     }
 
 
