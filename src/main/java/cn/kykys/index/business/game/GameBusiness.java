@@ -304,7 +304,7 @@ public class GameBusiness implements IGame {
             List<ChooseModel> chooseModelList = nodeDetail.getChooseModelList();
 
             if (chooseModelList != null && dramaPlayModelKeyList.size() > 0) {
-                if (chooseModelList.size() > choice) {
+                if (chooseModelList.size() >= choice) {
 
                     ChooseModel chooseModel = chooseModelList.get(choice - 1);
 
