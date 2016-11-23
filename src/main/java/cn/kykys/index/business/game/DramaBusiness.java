@@ -18,6 +18,7 @@ import cn.kykys.index.model.wechat.DramaModel;
 import cn.kykys.index.model.wechat.DramaPlayModelKey;
 import cn.kykys.index.model.wechat.NodeModelWithBLOBs;
 import cn.kykys.index.utils.DateUtils;
+import cn.kykys.index.utils.LogUtil;
 import cn.kykys.index.utils.data.DataUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -26,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
@@ -67,27 +69,26 @@ public class DramaBusiness implements IDrama {
 
     public NodeDetail getNodeByNodeId(String nodeId) {
 
-
         if (StringUtils.hasText(nodeId)) {
-        NodeModelWithBLOBs nodeModelWithBLOBs = nodeModelMapper.selectByPrimaryKey(nodeId);
+            NodeModelWithBLOBs nodeModelWithBLOBs = nodeModelMapper.selectByPrimaryKey(nodeId);
 
-        return this.nodeHandler(nodeModelWithBLOBs);
+            return this.nodeHandler(nodeModelWithBLOBs);
         }
         return null;
     }
 
 
     private NodeDetail nodeHandler(NodeModelWithBLOBs nodeModelWithBLOBs) {
-
+        Assert.hasText(nodeModelWithBLOBs.getChoices(),"没有内容哦");
         if (StringUtils.hasText(nodeModelWithBLOBs.getChoices())) {
 
             List<ChooseModel> chooseModelList = JSON.parseObject(nodeModelWithBLOBs.getChoices(), new TypeReference<List<ChooseModel>>() {
             });
-
+            LogUtil.debug(chooseModelList);
             NodeDetail nodeDetail = new NodeDetail();
             BeanUtils.copyProperties(nodeModelWithBLOBs, nodeDetail);
             nodeDetail.setChooseModelList(chooseModelList);
-
+            LogUtil.debug(JSON.toJSONString(nodeDetail));
             return nodeDetail;
         }
 
@@ -304,7 +305,7 @@ public class DramaBusiness implements IDrama {
     }
 
 
-    public boolean updateDramaPeopleRelation(DramaPlayModelKey dramaPlayModelKey){
+    public boolean updateDramaPeopleRelation(DramaPlayModelKey dramaPlayModelKey) {
         if (dramaPlayModelKey != null) {
             return dramaPlayModelMapper.updateStatus(dramaPlayModelKey) > 0;
         }
