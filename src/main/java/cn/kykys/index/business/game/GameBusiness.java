@@ -113,7 +113,7 @@ public class GameBusiness implements IGame {
 
             info += ("\n" + MessageFormat.format(Settings.DRAMA_PLAY,
                     dramaPlayModelKey.getDramaId(), dramaModel.getName(), dramaModel.getDescription(),
-                    Settings.formatChoice(nodeDetail.getChooseModelList())));
+                    nodeDetail.getDescription(), Settings.formatChoice(nodeDetail.getChooseModelList())));
         }
 
 
@@ -229,7 +229,8 @@ public class GameBusiness implements IGame {
 
             return MessageFormat.format(Settings.DRAMA_PLAY,
                     dramaId, dramaModel.getName(), dramaModel.getDescription(),
-                    Settings.formatChoice(nodeDetail.getChooseModelList()));
+                    nodeDetail.getDescription(), Settings.formatChoice(nodeDetail.getChooseModelList()));
+
 
         }
 

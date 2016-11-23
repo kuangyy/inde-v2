@@ -34,7 +34,7 @@ public final class Settings {
             .append("[指令][改名 张三] 中间为空格 改名").append("\n")
             .append("[指令][进入 1] 中间为空格 进入指定剧本").append("\n")
             .append("[指令][退出 1] 中间为空格 退出某剧本").append("\n")
-            .append("等待完善").append("\n")
+            .append("等待完善")
             .toString();
 
 
@@ -54,9 +54,11 @@ public final class Settings {
     public static final String DRAMA_PLAY = new StringBuffer()
             .append("剧本 No.{0} | {1}").append("\n")
             .append("介绍：{2}").append("\n")
+            .append("\n")
+            .append("介绍：{3}").append("\n")
             .append("选项：").append("\n")
             .append("\n")
-            .append("{3}").append("\n")
+            .append("{4}")
             .toString();
 
 
