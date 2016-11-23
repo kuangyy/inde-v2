@@ -304,7 +304,7 @@ public class GameBusiness implements IGame {
 
                     //有下一节点
                     NodeDetail nextNodeDetail = iDrama.getNodeByNodeId(nextNodeId);
-                    if (nextNodeDetail.getType().equals(NodeTypeEnum.END)) {
+                    if (nextNodeDetail.getType().equals(NodeTypeEnum.END.getStatus())) {
                         //完结节点
 
                         //修改状态
