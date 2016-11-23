@@ -15,6 +15,7 @@ import cn.kykys.index.model.ext.ChooseModel;
 import cn.kykys.index.model.ext.NodeDetail;
 import cn.kykys.index.model.page.PageWeb;
 import cn.kykys.index.model.wechat.DramaModel;
+import cn.kykys.index.model.wechat.DramaPlayModelKey;
 import cn.kykys.index.model.wechat.NodeModelWithBLOBs;
 import cn.kykys.index.utils.DateUtils;
 import cn.kykys.index.utils.data.DataUtils;
@@ -300,4 +301,11 @@ public class DramaBusiness implements IDrama {
         return true;
     }
 
+
+    public boolean addDramaPeopleRelation(DramaPlayModelKey dramaPlayModelKey) {
+        if (dramaPlayModelKey != null) {
+            return dramaPlayModelMapper.insertSelective(dramaPlayModelKey) > 0;
+        }
+        return false;
+    }
 }

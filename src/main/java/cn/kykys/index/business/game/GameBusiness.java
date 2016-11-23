@@ -220,6 +220,13 @@ public class GameBusiness implements IGame {
                 return "结尾 END 撒花~";
             }
 
+            DramaPlayModelKey dramaPlayModelKey = new DramaPlayModelKey();
+            dramaPlayModelKey.setDramaId(dramaId);
+            dramaPlayModelKey.setPeopleId(peopleModel.getId());
+            dramaPlayModelKey.setNodeId(nodeDetail.getId());
+            dramaPlayModelKey.setStatus(DramaPeopleStatusEnum.IN.getStatus());
+            iDrama.addDramaPeopleRelation(dramaPlayModelKey);
+
             return MessageFormat.format(Settings.DRAMA_PLAY,
                     dramaId, dramaModel.getName(), dramaModel.getDescription(),
                     Settings.formatChoice(nodeDetail.getChooseModelList()));

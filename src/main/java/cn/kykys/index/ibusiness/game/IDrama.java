@@ -4,6 +4,7 @@ import cn.kykys.index.model.dto.gooflow.GooflowModel;
 import cn.kykys.index.model.ext.NodeDetail;
 import cn.kykys.index.model.page.PageWeb;
 import cn.kykys.index.model.wechat.DramaModel;
+import cn.kykys.index.model.wechat.DramaPlayModelKey;
 
 import java.util.List;
 import java.util.Map;
@@ -30,4 +31,7 @@ public interface IDrama {
 
 
     boolean updateDrama(Integer dramaId, GooflowModel gooflowModel,String data);
+
+
+    boolean addDramaPeopleRelation(DramaPlayModelKey dramaPlayModelKey);
 }
