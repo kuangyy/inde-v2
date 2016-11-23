@@ -24,5 +24,5 @@ public interface IPeople {
 
     DramaPlayModelKey getPlayDrama(Integer id,Integer dramaId);
 
-    boolean updateInDramaStatus(DramaPlayModelKey dramaPlayModelKey);
+    boolean updatePeopleDramaStatus(DramaPlayModelKey dramaPlayModelKey);
 }

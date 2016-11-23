@@ -80,7 +80,7 @@ public class PeopleBusiness implements IPeople {
     }
 
 
-    public boolean updateInDramaStatus(DramaPlayModelKey dramaPlayModelKey) {
+    public boolean updatePeopleDramaStatus(DramaPlayModelKey dramaPlayModelKey) {
         return dramaPlayModelMapper.updateStatus(dramaPlayModelKey) > 0;
     }
 

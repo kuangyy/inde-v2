@@ -268,7 +268,7 @@ public class GameBusiness implements IGame {
 
                     dramaPlayModelKey.setStatus(DramaPeopleStatusEnum.INTERRUPT.getStatus());
 
-                    iPeople.updateInDramaStatus(dramaPlayModelKey);
+                    iPeople.updatePeopleDramaStatus(dramaPlayModelKey);
 
                     return "已中断该剧本。";
                 }
@@ -350,7 +350,23 @@ public class GameBusiness implements IGame {
 
 
     public String reset(String openId, Integer dramaId) {
-        return "";
+
+        PeopleModel peopleModel = iPeople.selectByOpenId(openId);
+        DramaModel dramaModel = iDrama.getById(dramaId);
+        if (dramaModel != null) {
+
+            NodeDetail nodeDetail = iDrama.getFirstNodeByDramaId(dramaId);
+
+            DramaPlayModelKey dramaPlayModelKey = iPeople.getPlayDrama(peopleModel.getId(), dramaId);
+            dramaPlayModelKey.setStatus(DramaPeopleStatusEnum.IN.getStatus());
+            dramaPlayModelKey.setNodeId(nodeDetail.getId());
+
+            iPeople.updatePeopleDramaStatus(dramaPlayModelKey);
+
+            return "重置成功";
+        }
+
+        return "重置失败";
     }
 
 }
