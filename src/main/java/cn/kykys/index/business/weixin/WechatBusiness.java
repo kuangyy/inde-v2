@@ -142,7 +142,7 @@ public class WechatBusiness implements IWechat {
         //choose one
         if (Pattern.matches(Settings.REGEX_CHOOSE, text)) {
             try {
-                Long choice = Long.parseLong(text);
+                Integer choice = Integer.parseInt(text);
                 return iGame.choose(openId, choice);
             }catch (NumberFormatException e){
                 return "选项异常";

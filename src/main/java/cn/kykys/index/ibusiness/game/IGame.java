@@ -13,7 +13,7 @@ public interface IGame {
 
     String exitDrama(String openId,Integer dramaId);
 
-    String choose(String openId,Long choice);
+    String choose(String openId,Integer choice);
 
     String reset(String openId,Integer dramaId);
 

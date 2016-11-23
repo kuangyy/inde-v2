@@ -12,9 +12,12 @@ import cn.kykys.index.model.wechat.DramaModel;
 import cn.kykys.index.model.wechat.DramaPlayModelKey;
 import cn.kykys.index.model.wechat.PeopleModel;
 import cn.kykys.index.utils.DateUtils;
+import cn.kykys.index.utils.LogUtil;
 import cn.kykys.index.utils.game.Settings;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.text.MessageFormat;
@@ -280,7 +283,11 @@ public class GameBusiness implements IGame {
     }
 
 
-    public String choose(String openId, Long choice) {
+    public String choose(String openId, Integer choice) {
+
+        if (choice <= 0) {
+            return "选项不能小于0";
+        }
 
         PeopleModel peopleModel = iPeople.selectByOpenId(openId);
 
@@ -293,17 +300,26 @@ public class GameBusiness implements IGame {
             DramaModel dramaModel = iDrama.getById(dramaPlayModelKey.getDramaId());
             //获取当前节点
             NodeDetail nodeDetail = iDrama.getNodeByNodeId(dramaPlayModelKey.getNodeId());
+            LogUtil.debug(JSON.toJSONString(nodeDetail));
+
             List<ChooseModel> chooseModelList = nodeDetail.getChooseModelList();
+            Assert.isNull(chooseModelList,"选项不见了");
+
 
             if (chooseModelList != null && dramaPlayModelKeyList.size() > 0) {
                 if (chooseModelList.size() > choice) {
 
-                    ChooseModel chooseModel = chooseModelList.get(choice.intValue() - 1);
+                    ChooseModel chooseModel = chooseModelList.get(choice - 1);
+                    LogUtil.debug(JSON.toJSONString(chooseModel));
+
                     // TODO 必须有
                     String nextNodeId = chooseModel.getNextNodeId();
+                    Assert.isNull(nextNodeId,"节点不见了 ID");
 
                     //有下一节点
                     NodeDetail nextNodeDetail = iDrama.getNodeByNodeId(nextNodeId);
+                    Assert.isNull(nextNodeDetail,"节点不见了 model");
+
                     if (nextNodeDetail.getType().equals(NodeTypeEnum.END.getStatus())) {
                         //完结节点
 
