@@ -66,7 +66,11 @@ public final class Settings {
     public static final String
             REGEX_RENAME = "^改名 (.*?)$",
             REGEX_DRAMA_CHOOSE = "^进入 (.*?)$",
-            REGEX_DRAMA_EXIT = "^退出 (.*?)$";
+            REGEX_DRAMA_EXIT = "^退出 (.*?)$",
+            REGEX_RESET = "^重置 (.*?)$",
+            REGEX_CHOOSE = "^\\d+$",
+
+    SPACE = "";
 
 
     private static String[] LETTER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");

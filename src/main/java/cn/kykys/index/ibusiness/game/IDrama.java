@@ -22,10 +22,6 @@ public interface IDrama {
 
     NodeDetail getNodeByNodeId(String nodeId);
 
-    NodeDetail getNextNodeByDramaId(String nodeId);
-
-
-
     Map<String, ?> searchByPage(String word, PageWeb pageWeb);
 
 

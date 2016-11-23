@@ -5,6 +5,7 @@ import cn.kykys.index.ibusiness.game.IGame;
 import cn.kykys.index.ibusiness.weixin.IPeople;
 import cn.kykys.index.model.enumeration.DramaPeopleStatusEnum;
 import cn.kykys.index.model.enumeration.DramaStatusEnum;
+import cn.kykys.index.model.ext.ChooseModel;
 import cn.kykys.index.model.ext.NodeDetail;
 import cn.kykys.index.model.wechat.DramaModel;
 import cn.kykys.index.model.wechat.DramaPlayModelKey;
@@ -211,7 +212,7 @@ public class GameBusiness implements IGame {
                 } else {
                     //中断或结束
                     return "你已完成或已中断该剧本，是否重新来过？";
-               }
+                }
             }
 
             DramaModel dramaModel = iDrama.getById(dramaId);
@@ -274,6 +275,49 @@ public class GameBusiness implements IGame {
         }
 
         return "系统错误";
+    }
+
+
+    public String choose(String openId, Long choice) {
+
+        PeopleModel peopleModel = iPeople.selectByOpenId(openId);
+
+        //判断当前用户状态
+        List<DramaPlayModelKey> dramaPlayModelKeyList = iPeople.getInPlayDramaByPeopleId(peopleModel.getId());
+        if (dramaPlayModelKeyList != null && dramaPlayModelKeyList.size() > 0) {
+            DramaPlayModelKey dramaPlayModelKey = dramaPlayModelKeyList.get(0);
+
+            //获取剧本
+            DramaModel dramaModel = iDrama.getById(dramaPlayModelKey.getDramaId());
+            //获取当前节点
+            NodeDetail nodeDetail = iDrama.getNodeByNodeId(dramaPlayModelKey.getNodeId());
+            List<ChooseModel> chooseModelList = nodeDetail.getChooseModelList();
+
+            if (chooseModelList != null && dramaPlayModelKeyList.size() > 0) {
+                if (chooseModelList.size() > choice) {
+
+                    String nextNodeId = chooseModelList.get(choice.intValue() - 1).getNextNodeId();
+
+                    NodeDetail nextNodeDetail = iDrama.getNodeByNodeId(nextNodeId);
+
+                    return MessageFormat.format(Settings.DRAMA_PLAY,
+                            dramaPlayModelKey.getDramaId(), dramaModel.getName(), dramaModel.getDescription(),
+                            nextNodeDetail.getDescription(), Settings.formatChoice(nextNodeDetail.getChooseModelList()));
+
+                } else {
+                    //选项出错 请重新选择
+                    return MessageFormat.format(Settings.DRAMA_PLAY,
+                            dramaPlayModelKey.getDramaId(), dramaModel.getName(), dramaModel.getDescription(),
+                            nodeDetail.getDescription(), Settings.formatChoice(nodeDetail.getChooseModelList()));
+
+                }
+            }
+
+            //TODO 不应该有如此节点
+            return "完结，撒花~";
+        } else {
+            return "您并未开始游戏";
+        }
     }
 
 }

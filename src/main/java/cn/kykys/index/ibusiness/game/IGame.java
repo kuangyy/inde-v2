@@ -13,4 +13,6 @@ public interface IGame {
 
     String exitDrama(String openId,Integer dramaId);
 
+    String choose(String openId,Long choice);
+
 }

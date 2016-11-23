@@ -108,14 +108,16 @@ public class WechatBusiness implements IWechat {
 
             // total match
             switch (text) {
+
+
                 //start / continue   [tell people intime state
-                case "1":
-                    return iGame.startOrContinue(openID);
 
-                case "3":
+
+                case "说明":
                     return Settings.EXPLAIN;
-
-
+                case "0":
+                    //当前状态
+                    return iGame.startOrContinue(openID);
 //                case "0":
 //                    WechatUserInfo wechatUserInfo = WeixinUtil.getUserByOpenId(openID);
 //                    return wechatUserInfo == null ? "请先关注本订阅号~" : wechatUserInfo.toString();
@@ -135,6 +137,15 @@ public class WechatBusiness implements IWechat {
     private String regexMatch(String openId, String text) {
 
         String matchText;
+
+        //choose
+        //rename
+        matchText = this.regexHandler(text, Settings.REGEX_CHOOSE);
+        if (StringUtils.hasText(matchText)) {
+            Long choice = Long.parseLong(matchText);
+            return iGame.choose(openId, choice);
+        }
+
 
         //rename
         matchText = this.regexHandler(text, Settings.REGEX_RENAME);
