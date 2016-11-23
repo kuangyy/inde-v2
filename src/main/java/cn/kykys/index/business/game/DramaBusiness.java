@@ -302,4 +302,12 @@ public class DramaBusiness implements IDrama {
         }
         return false;
     }
+
+
+    public boolean updateDramaPeopleRelation(DramaPlayModelKey dramaPlayModelKey){
+        if (dramaPlayModelKey != null) {
+            return dramaPlayModelMapper.updateStatus(dramaPlayModelKey) > 0;
+        }
+        return false;
+    }
 }

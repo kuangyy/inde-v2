@@ -15,4 +15,6 @@ public interface IGame {
 
     String choose(String openId,Long choice);
 
+    String reset(String openId,Integer dramaId);
+
 }

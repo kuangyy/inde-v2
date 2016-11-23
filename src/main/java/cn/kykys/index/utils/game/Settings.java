@@ -62,6 +62,15 @@ public final class Settings {
             .append("{4}")
             .toString();
 
+    public static final String DRAMA_END = new StringBuffer()
+            .append("剧本 No.{0} | {1}").append("\n")
+            .append("介绍：{2}").append("\n")
+            .append("\n")
+            .append("场景：{3}").append("\n")
+            .append("\n")
+            .append("[完结]")
+            .toString();
+
 
     public static final String
             REGEX_RENAME = "^改名 (.*?)$",

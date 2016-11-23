@@ -5,6 +5,7 @@ import cn.kykys.index.ibusiness.game.IGame;
 import cn.kykys.index.ibusiness.weixin.IPeople;
 import cn.kykys.index.model.enumeration.DramaPeopleStatusEnum;
 import cn.kykys.index.model.enumeration.DramaStatusEnum;
+import cn.kykys.index.model.enumeration.NodeTypeEnum;
 import cn.kykys.index.model.ext.ChooseModel;
 import cn.kykys.index.model.ext.NodeDetail;
 import cn.kykys.index.model.wechat.DramaModel;
@@ -14,6 +15,7 @@ import cn.kykys.index.utils.DateUtils;
 import cn.kykys.index.utils.game.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.text.MessageFormat;
 import java.util.Calendar;
@@ -296,14 +298,30 @@ public class GameBusiness implements IGame {
             if (chooseModelList != null && dramaPlayModelKeyList.size() > 0) {
                 if (chooseModelList.size() > choice) {
 
-                    String nextNodeId = chooseModelList.get(choice.intValue() - 1).getNextNodeId();
+                    ChooseModel chooseModel = chooseModelList.get(choice.intValue() - 1);
+                    // TODO 必须有
+                    String nextNodeId = chooseModel.getNextNodeId();
 
+                    //有下一节点
                     NodeDetail nextNodeDetail = iDrama.getNodeByNodeId(nextNodeId);
+                    if (nextNodeDetail.getType().equals(NodeTypeEnum.END)) {
+                        //完结节点
 
-                    return MessageFormat.format(Settings.DRAMA_PLAY,
-                            dramaPlayModelKey.getDramaId(), dramaModel.getName(), dramaModel.getDescription(),
-                            nextNodeDetail.getDescription(), Settings.formatChoice(nextNodeDetail.getChooseModelList()));
+                        //修改状态
+                        dramaPlayModelKey.setStatus(DramaPeopleStatusEnum.FINISH.getStatus());
+                        iDrama.updateDramaPeopleRelation(dramaPlayModelKey);
 
+                        return MessageFormat.format(Settings.DRAMA_END,
+                                dramaPlayModelKey.getDramaId(), dramaModel.getName(), dramaModel.getDescription(),
+                                nextNodeDetail.getDescription());
+
+                    } else {
+                        //下一节点
+                        return MessageFormat.format(Settings.DRAMA_PLAY,
+                                dramaPlayModelKey.getDramaId(), dramaModel.getName(), dramaModel.getDescription(),
+                                nextNodeDetail.getDescription(), Settings.formatChoice(nextNodeDetail.getChooseModelList()));
+
+                    }
                 } else {
                     //选项出错 请重新选择
                     return MessageFormat.format(Settings.DRAMA_PLAY,
@@ -318,6 +336,11 @@ public class GameBusiness implements IGame {
         } else {
             return "您并未开始游戏";
         }
+    }
+
+
+    public String reset(String openId, Integer dramaId) {
+        return "";
     }
 
 }

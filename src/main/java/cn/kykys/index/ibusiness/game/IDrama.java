@@ -30,4 +30,6 @@ public interface IDrama {
 
 
     boolean addDramaPeopleRelation(DramaPlayModelKey dramaPlayModelKey);
+
+    boolean updateDramaPeopleRelation(DramaPlayModelKey dramaPlayModelKey);
 }
