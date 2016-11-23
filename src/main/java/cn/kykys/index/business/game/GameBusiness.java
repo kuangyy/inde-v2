@@ -212,7 +212,6 @@ public class GameBusiness implements IGame {
                     //中断或结束
                     return "你已完成或已中断该剧本，是否重新来过？";
                }
-                //
             }
 
             DramaModel dramaModel = iDrama.getById(dramaId);
