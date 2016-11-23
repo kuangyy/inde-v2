@@ -195,10 +195,24 @@ public class GameBusiness implements IGame {
         PeopleModel peopleModel = iPeople.selectByOpenId(openId);
         if (peopleModel != null) {
 
-            List<DramaPlayModelKey> dramaPlayModelKeyList = iPeople.getInPlayDramaByPeopleId(peopleModel.getId());
+            DramaPlayModelKey dramaPlayModelKey = iPeople.getPlayDrama(peopleModel.getId(), dramaId);
 
-            if (dramaPlayModelKeyList != null && dramaPlayModelKeyList.size() > 0) {
-                return "已有参与的剧本，无法参与多个剧本";
+            if (dramaPlayModelKey != null) {
+                if (dramaPlayModelKey.getStatus().equals(DramaPeopleStatusEnum.IN.getStatus())) {
+                    // "已参与该剧本，正在进行中";
+
+                    DramaModel dramaModel = iDrama.getById(dramaId);
+                    NodeDetail nodeDetail = iDrama.getNodeByNodeId(dramaPlayModelKey.getNodeId());
+
+                    return MessageFormat.format(Settings.DRAMA_PLAY,
+                            dramaId, dramaModel.getName(), dramaModel.getDescription(),
+                            nodeDetail.getDescription(), Settings.formatChoice(nodeDetail.getChooseModelList()));
+
+                } else {
+                    //中断或结束
+                    return "你已完成或已中断该剧本，是否重新来过？";
+               }
+                //
             }
 
             DramaModel dramaModel = iDrama.getById(dramaId);
@@ -220,7 +234,7 @@ public class GameBusiness implements IGame {
                 return "结尾 END 撒花~";
             }
 
-            DramaPlayModelKey dramaPlayModelKey = new DramaPlayModelKey();
+            dramaPlayModelKey = new DramaPlayModelKey();
             dramaPlayModelKey.setDramaId(dramaId);
             dramaPlayModelKey.setPeopleId(peopleModel.getId());
             dramaPlayModelKey.setNodeId(nodeDetail.getId());

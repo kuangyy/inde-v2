@@ -62,7 +62,7 @@ public class PeopleBusiness implements IPeople {
 
         Map<String, Object> map = new HashMap<>();
         map.put("peopleId", id);
-        map.put("status", DramaPeopleStatusEnum.IN);
+        map.put("status", DramaPeopleStatusEnum.IN.getStatus());
         return dramaPlayModelMapper.select(map);
     }
 
