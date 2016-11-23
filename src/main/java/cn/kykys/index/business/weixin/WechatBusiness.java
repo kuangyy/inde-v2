@@ -132,13 +132,6 @@ public class WechatBusiness implements IWechat {
         return Settings.MAIN_MENU;
     }
 
-
-    public static void main(String[] args) throws Exception {
-        WechatBusiness wechatBusiness = new WechatBusiness();
-
-        System.out.println(wechatBusiness.doTextMessage("odCuQtydm6RGBdh0MMDNHevVCESg", "进入 1"));
-    }
-
     private String regexMatch(String openId, String text) {
 
         String matchText;

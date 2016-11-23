@@ -135,7 +135,7 @@
 
 
   <select id="selectByType" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
-    select * from node where drama_id = #{drama_id} and type = #{type}
+    select * from node where drama_id = #{dramaId} and type = #{type}
   </select>
 
 <delete id="deleteByDramaId" parameterType="java.lang.Integer">
