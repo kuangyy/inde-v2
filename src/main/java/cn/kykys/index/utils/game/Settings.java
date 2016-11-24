@@ -23,6 +23,7 @@ public final class Settings {
             .append("[0]  个人状态/签到").append("\n")
             .append("\n")
             .append("（暂未开通） kyy的歌（随机一首）").append("\n")
+            .append("网站<a href=\"https://kykys.cn/game\">https://kykys.cn/game</a>").append("\n")
             .append("\n")
             .append("回复 ? 显示此帮助菜单")
             .toString();

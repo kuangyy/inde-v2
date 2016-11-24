@@ -143,10 +143,10 @@
         });
     }
 
-    //点击文字编辑
-    $(document).on("click",".GooFlow_item.item_round",function(){
-        console.log(this);
-    })
+//    //点击文字编辑
+//    $(document).on("click",".GooFlow_item.item_round",function(){
+//        console.log(this);
+//    })
 </script>
 
 </body>
