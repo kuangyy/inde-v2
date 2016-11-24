@@ -1,5 +1,6 @@
 package cn.kykys.index.business.game;
 
+import cn.kykys.index.data.TransactionManagerName;
 import cn.kykys.index.ibusiness.game.IDrama;
 import cn.kykys.index.ibusiness.game.IGame;
 import cn.kykys.index.ibusiness.weixin.IPeople;
@@ -15,6 +16,7 @@ import cn.kykys.index.utils.DateUtils;
 import cn.kykys.index.utils.game.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
 import java.util.Calendar;
@@ -329,11 +331,29 @@ public class GameBusiness implements IGame {
     }
 
 
-    public String levelUp(String openId){
+    @Transactional(value = TransactionManagerName.wechatDbTransactionManager, rollbackFor = Exception.class)
+    public String levelUp(String openId) {
 
+        PeopleModel peopleModel = iPeople.selectByOpenId(openId);
 
+        Integer level = peopleModel.getLevel();
+        Long point = peopleModel.getPoints();
 
-        return "";
+        //升级需要使用当前等级对应的积分数
+        if (point >= level) {
+            point -= level;
+            level += 1;
+
+            PeopleModel model = new PeopleModel();
+            model.setId(peopleModel.getId());
+            model.setPoints(point);
+            model.setLevel(level);
+            iPeople.updatePeople(model);
+
+            return "升级成功，当前 Lv " + level + ",积分剩余：" + point;
+        }
+
+        return "升级失败，没有足够的积分（" + point + "/" + level + "）";
     }
 
 }

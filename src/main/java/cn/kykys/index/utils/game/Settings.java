@@ -19,6 +19,7 @@ public final class Settings {
             .append("您好，我是kyy，请回复文字选择服务：").append("\n")
             .append("\n")
             .append("[说明]  查看游戏说明").append("\n")
+            .append("[升级]  提升个人等级（需要当前等级对应积分数）").append("\n")
             .append("[0]  个人状态/签到").append("\n")
             .append("\n")
             .append("（暂未开通） kyy的歌（随机一首）").append("\n")
