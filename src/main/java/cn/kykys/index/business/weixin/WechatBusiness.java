@@ -1,14 +1,12 @@
 package cn.kykys.index.business.weixin;
 
 import cn.kykys.index.ibusiness.game.IGame;
-import cn.kykys.index.ibusiness.weixin.IPeople;
 import cn.kykys.index.ibusiness.weixin.IWechat;
 import cn.kykys.index.utils.LogUtil;
 import cn.kykys.index.utils.game.Settings;
 import cn.kykys.index.utils.weixin.MessageUtil;
 import cn.kykys.index.utils.weixin.message.req.TextMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 

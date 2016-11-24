@@ -4,7 +4,6 @@ import cn.kykys.index.data.wechat.DramaPlayModelMapper;
 import cn.kykys.index.data.wechat.PeopleModelMapper;
 import cn.kykys.index.ibusiness.weixin.IPeople;
 import cn.kykys.index.model.enumeration.DramaPeopleStatusEnum;
-import cn.kykys.index.model.wechat.DramaModel;
 import cn.kykys.index.model.wechat.DramaPlayModelKey;
 import cn.kykys.index.model.wechat.PeopleModel;
 import org.springframework.beans.factory.annotation.Autowired;

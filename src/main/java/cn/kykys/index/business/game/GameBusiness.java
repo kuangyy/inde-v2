@@ -12,13 +12,9 @@ import cn.kykys.index.model.wechat.DramaModel;
 import cn.kykys.index.model.wechat.DramaPlayModelKey;
 import cn.kykys.index.model.wechat.PeopleModel;
 import cn.kykys.index.utils.DateUtils;
-import cn.kykys.index.utils.LogUtil;
 import cn.kykys.index.utils.game.Settings;
-import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
 import java.text.MessageFormat;
 import java.util.Calendar;

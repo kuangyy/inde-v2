@@ -9,8 +9,6 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
-import javax.jws.WebService;
-
 /**
  * Created by kuangye on 2016/10/25.
  */

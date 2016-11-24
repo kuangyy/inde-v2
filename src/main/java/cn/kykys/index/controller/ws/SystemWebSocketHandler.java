@@ -1,6 +1,5 @@
 package cn.kykys.index.controller.ws;
 
-import cn.kykys.index.constants.Constants;
 import cn.kykys.index.model.ws.WSMessage;
 import com.alibaba.fastjson.JSON;
 import org.springframework.web.socket.*;

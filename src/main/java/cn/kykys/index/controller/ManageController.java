@@ -2,7 +2,6 @@ package cn.kykys.index.controller;
 
 import cn.kykys.index.annotations.MustLogin;
 import cn.kykys.index.constants.Constants;
-import cn.kykys.index.model.page.PageWeb;
 import cn.kykys.index.utils.security.SecurityHelper;
 import cn.kykys.index.utils.web.WebHelper;
 import org.springframework.stereotype.Controller;

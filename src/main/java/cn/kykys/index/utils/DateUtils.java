@@ -1,8 +1,6 @@
 package cn.kykys.index.utils;
 
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.joda.time.DateTime;
-import org.joda.time.Days;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
 import org.joda.time.format.DateTimeFormat;
