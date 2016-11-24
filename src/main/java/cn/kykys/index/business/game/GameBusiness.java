@@ -139,7 +139,7 @@ public class GameBusiness implements IGame {
 
         PeopleModel peopleModel = iPeople.selectByOpenId(openId);
 
-        if(name.length()>50){
+        if (name.length() > 50) {
             return "字数太长50字以内";
         }
         if (peopleModel.getName() != null && peopleModel.getName().equals(name)) {
@@ -179,7 +179,7 @@ public class GameBusiness implements IGame {
 
                 } else {
                     //中断或结束
-                    return "你已完成或已中断该剧本，是否重新来过？";
+                    return "你已完成或已中断该剧本，是否重新来过？回复 [重置 " + dramaId + "] 重置本剧本";
                 }
             }
 
