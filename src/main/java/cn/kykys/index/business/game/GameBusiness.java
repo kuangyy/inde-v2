@@ -33,47 +33,10 @@ public class GameBusiness implements IGame {
     IDrama iDrama;
 
 
-    public String startOrContinue(String openId) {
+    //intime info
+    public String inTimeInfo(String openId) {
 
         PeopleModel peopleModel = iPeople.selectByOpenId(openId);
-
-        if (peopleModel != null) {
-            //continue
-            if (peopleModel.getLastLoginTime() != null) {
-                return this.continueGame(peopleModel);
-            }
-
-            return this.startGame(peopleModel, false);
-
-        } else {
-            //start
-            peopleModel = new PeopleModel();
-            peopleModel.setOpenid(openId);
-
-            return this.startGame(peopleModel, true);
-        }
-    }
-
-
-    //start
-    private String startGame(PeopleModel peopleModel, boolean isNew) {
-
-        if (isNew) {
-            peopleModel.setCreateTime(new Date());
-            peopleModel.setLastLoginTime(new Date());
-            iPeople.addPeople(peopleModel);
-
-            return MessageFormat.format(Settings.GAME_REAL_TIME_INFO, "未设置", 0, 0, 0, "无", "你还在现充中");
-        }
-
-        return MessageFormat.format(Settings.GAME_REAL_TIME_INFO,
-                peopleModel.getName() == null ? "未设置" : peopleModel.getName(),
-                peopleModel.getCoins(), peopleModel.getPoints(), peopleModel.getLevel(), "无", "你还在现充中");
-    }
-
-
-    //continue
-    private String continueGame(PeopleModel peopleModel) {
 
         //get last add time
         Date lastAddTime = peopleModel.getLastIncreaseTime();
@@ -363,6 +326,14 @@ public class GameBusiness implements IGame {
         }
 
         return "重置失败";
+    }
+
+
+    public String levelUp(String openId){
+
+
+
+        return "";
     }
 
 }

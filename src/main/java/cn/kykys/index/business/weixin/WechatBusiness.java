@@ -77,7 +77,7 @@ public class WechatBusiness implements IWechat {
                 String eventType = requestMap.get("Event");
                 // 订阅
                 if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
-                    respContent = "谢谢您的关注！";
+                    respContent = "谢谢您的关注！回复 ? 查看帮助";
                 }
                 // 取消订阅
                 else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
@@ -108,15 +108,17 @@ public class WechatBusiness implements IWechat {
             // total match
             switch (text) {
 
-
-                //start / continue   [tell people intime state
+                case "升级":
+                    //level up
+                    return iGame.levelUp(openID);
 
 
                 case "说明":
                     return Settings.EXPLAIN;
+
                 case "0":
-                    //当前状态
-                    return iGame.startOrContinue(openID);
+                    //当前状态 签到
+                    return iGame.inTimeInfo(openID);
 //                case "0":
 //                    WechatUserInfo wechatUserInfo = WeixinUtil.getUserByOpenId(openID);
 //                    return wechatUserInfo == null ? "请先关注本订阅号~" : wechatUserInfo.toString();

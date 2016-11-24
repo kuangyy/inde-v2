@@ -37,6 +37,10 @@
 			<mvc:mapping path="/**"/>
 			<bean class="cn.kykys.index.filter.FilterAll"/><!-- 自定义拦截器 -->
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/weixin/**"/>
+			<bean class="cn.kykys.index.filter.WechatInterceptor"/><!-- 自定义拦截器 -->
+		</mvc:interceptor>
 
 	</mvc:interceptors>
 

@@ -46,8 +46,8 @@ public class WeixinController {
     @RequestMapping(method = RequestMethod.POST)
     public String message(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        // xml请求解析
-        Map<String, String> requestMap = MessageUtil.parseXml(request);
+        //改为拦截器处理
+        Map<String, String> requestMap = (Map<String, String>) request.getAttribute("inputMap");
 
         return iWechat.processRequest(requestMap);
     }
