@@ -148,7 +148,7 @@ function GooFlow(bgDiv, property) {
     width = width - toolWidth - 8;
     height = height - headHeight - (property.haveHead ? 5 : 8);
     this.$bgDiv.append("<div class='GooFlow_work' style='width:" + (width) + "px;height:" + (height) + "px;" + (property.haveHead ? "" : "margin-top:3px") + "'></div>");
-    this.$workArea = $("<div class='GooFlow_work_inner' style='width:" + width * 3 + "px;height:" + height * 3 + "px'></div>")
+    this.$workArea = $("<div class='GooFlow_work_inner' style='width:" + width * 10 + "px;height:" + height * 10 + "px'></div>")
         .attr({"unselectable": "on", "onselectstart": 'return false', "onselect": 'document.selection.empty()'});
     this.$bgDiv.children(".GooFlow_work").append(this.$workArea);
     this.$draw = null;//画矢量线条的容器

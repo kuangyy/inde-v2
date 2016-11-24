@@ -111,15 +111,17 @@ public class DramaBusiness implements IDrama {
 
 
     @Transactional(value = TransactionManagerName.wechatDbTransactionManager, rollbackFor = Exception.class)
-    public boolean updateDrama(Integer dramaId, GooflowModel gooflowModel, String data) {
+    public boolean updateDrama(Integer dramaId, GooflowModel gooflowModel, DramaModel model) {
 
         DramaModel dramaModel = dramaModelMapper.selectByPrimaryKey(dramaId);
 
-        dramaModel.setData(data);
+        dramaModel.setName(model.getName());
+        dramaModel.setDescription(model.getDescription());
+        dramaModel.setData(model.getData());
 
         dramaModelMapper.updateByPrimaryKeySelective(dramaModel);
 
-        updateDramaNode(dramaId, gooflowModel, data);
+        updateDramaNode(dramaId, gooflowModel, model.getData());
 
         return true;
     }

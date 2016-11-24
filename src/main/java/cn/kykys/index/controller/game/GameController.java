@@ -3,6 +3,7 @@ package cn.kykys.index.controller.game;
 import cn.kykys.index.ibusiness.game.IDrama;
 import cn.kykys.index.model.dto.gooflow.GooflowModel;
 import cn.kykys.index.model.page.PageWeb;
+import cn.kykys.index.model.wechat.DramaModel;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 /**
  * Created by kuangye on 2016/11/14.
@@ -45,14 +47,16 @@ public class GameController {
 
     @ResponseBody
     @RequestMapping(value = "/setting/editDramaDo/{id}",method = RequestMethod.POST)
-    public JSONObject editDramaDo(HttpServletRequest request, @PathVariable("id") Integer id,String data) {
+    public JSONObject editDramaDo(HttpServletRequest request, @PathVariable("id") Integer id,DramaModel dramaModel) {
         JSONObject result = new JSONObject();
 
-        GooflowModel gooflowModel = JSON.parseObject(data,GooflowModel.class);
+        GooflowModel gooflowModel = JSON.parseObject(dramaModel.getData(),GooflowModel.class);
 
-        iDrama.updateDrama(id,gooflowModel,data);
+        iDrama.updateDrama(id,gooflowModel,dramaModel);
 
         result.put("success",1);
+
+
 
         return result;
     }

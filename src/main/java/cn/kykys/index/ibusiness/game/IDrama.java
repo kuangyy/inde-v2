@@ -25,7 +25,7 @@ public interface IDrama {
 
 
 
-    boolean updateDrama(Integer dramaId, GooflowModel gooflowModel,String data);
+    boolean updateDrama(Integer dramaId, GooflowModel gooflowModel,DramaModel dramaModel);
 
 
     boolean addDramaPeopleRelation(DramaPlayModelKey dramaPlayModelKey);

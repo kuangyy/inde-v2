@@ -139,10 +139,12 @@ public class GameBusiness implements IGame {
 
         PeopleModel peopleModel = iPeople.selectByOpenId(openId);
 
+        if(name.length()>50){
+            return "字数太长50字以内";
+        }
         if (peopleModel.getName() != null && peopleModel.getName().equals(name)) {
             return "昵称未发生改变";
         }
-
         if (iPeople.nameExist(name)) {
             return "昵称已存在，请换一个~";
         }

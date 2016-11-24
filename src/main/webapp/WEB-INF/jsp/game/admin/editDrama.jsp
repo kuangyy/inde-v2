@@ -38,7 +38,16 @@
 
         <div class="col s12 m12">
 
-            <div class="section scrollspy">
+            <div class="input-field col s6">
+                <input id="name" type="text" class="validate" name="name" value="${drama.name}">
+                <label for="name">名称</label>
+            </div>
+            <div class="input-field col s6">
+                <textarea id="description" class="materialize-textarea" name="description" >${drama.description}</textarea>
+                <label for="description">故事简介</label>
+            </div>
+
+            <div class="section scrollspy col s12">
 
                 <div id="gf" ></div>
 
@@ -46,7 +55,7 @@
 
                 <a class="waves-effect waves-light btn" onclick="Export()">导出结果</a>
                 <a class="waves-effect waves-light btn" onclick="Import()">导入数据</a>
-
+                <a class="waves-effect waves-light btn" onclick="Bigger()">扩充区域</a>
 
                 <a class="waves-effect waves-light btn" onclick="Submit()">修改</a>
 
@@ -123,12 +132,23 @@
         gf.clearData()
         gf.loadData(JSON.parse($("#result").val()));
     }
+    function Bigger(){
+        function big(px,n){
+            return parseInt(px)*n+"px";
+        }
+        var inner = $(".GooFlow_work_inner")
+        inner.css({"height":big(inner.css("height"),2),"weight":big(inner.css("weight"),2)});
+    }
     function Submit(){
         $.ajax({
             url : $.baseData.basePath+"/game/setting/editDramaDo/${id}",
             type: "POST",
             cache : false,
-            data :{data:document.getElementById("result").value = JSON.stringify(gf.exportData())},
+            data :{
+                data:document.getElementById("result").value = JSON.stringify(gf.exportData()),
+                name:$("#name").val(),
+                description:$("#description").val()
+            },
             dataType : "json",
             success : function(data) {
                 if(data.status){

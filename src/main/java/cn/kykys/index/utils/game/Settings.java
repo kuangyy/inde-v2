@@ -32,7 +32,7 @@ public final class Settings {
     public static final String EXPLAIN = new StringBuffer()
             .append("游戏指南:").append("\n")
             .append("\n")
-            .append("游戏采用指令的形式进行 （进入剧本后只需回复选项数字即可）")
+            .append("游戏采用指令的形式进行 （进入剧本后只需回复选项数字即可）").append("\n")
             .append("[指令][改名 张三] 中间为空格 改名").append("\n")
             .append("[指令][进入 1] 中间为空格 进入指定剧本").append("\n")
             .append("[指令][退出 1] 中间为空格 退出某剧本").append("\n")
@@ -75,7 +75,7 @@ public final class Settings {
 
 
     public static final String
-            REGEX_RENAME = "^改名 (\\d+)$",
+            REGEX_RENAME = "^改名 (.*?)$",
             REGEX_DRAMA_CHOOSE = "^进入 (\\d+)$",
             REGEX_DRAMA_EXIT = "^退出 (\\d+)$",
             REGEX_RESET = "^重置 (\\d+)$",
