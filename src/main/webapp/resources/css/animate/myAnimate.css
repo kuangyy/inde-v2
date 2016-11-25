@@ -1,0 +1,22 @@
+/*-----------------------------------*\
+  $ANIMATIONS
+\*-----------------------------------*/
+
+/** rainbow change  clockwise **/
+@-webkit-keyframes hue {
+    from {
+        -webkit-filter: hue-rotate(0deg);
+    }
+    to {
+        -webkit-filter: hue-rotate(360deg);
+    }
+}
+/** rainbow change  counter clockwise **/
+@-webkit-keyframes dhue {
+    from {
+        -webkit-filter: hue-rotate(0deg);
+    }
+    to {
+        -webkit-filter: hue-rotate(-360deg);
+    }
+}
