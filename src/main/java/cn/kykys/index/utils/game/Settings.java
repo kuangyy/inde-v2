@@ -1,6 +1,7 @@
 package cn.kykys.index.utils.game;
 
 import cn.kykys.index.model.ext.ChooseModel;
+import cn.kykys.index.model.wechat.PeopleModel;
 
 import java.util.List;
 
@@ -96,6 +97,33 @@ public final class Settings {
                 ChooseModel chooseModel = chooseModelList.get(i);
                 sb.append(i + 1).append(":")
                         .append(chooseModel.getDescription())
+                        .append("\n");
+            }
+        }
+
+        return sb.toString();
+    }
+
+    public static String formatChoiceWithRate(List<ChooseModel> chooseModelList, PeopleModel peopleModel) {
+
+        Double rate = 0.0D;
+        if (peopleModel != null) {
+            rate = peopleModel.getLevel() / 1000.0D;
+        }
+
+        StringBuffer sb = new StringBuffer();
+
+        if (chooseModelList != null && chooseModelList.size() > 0) {
+            for (int i = 0; i < chooseModelList.size(); i++) {
+                ChooseModel chooseModel = chooseModelList.get(i);
+
+                Double weight = chooseModel.getWeight()==null?0.0D:chooseModel.getWeight();
+
+                sb.append(i + 1).append(":")
+                        .append(chooseModel.getDescription())
+                        //add rate to display
+                        .append(Math.random()>rate?"("+weight+")":"")
+
                         .append("\n");
             }
         }

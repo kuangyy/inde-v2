@@ -14,8 +14,24 @@
 				<value>
 					classpath*:config/properties/jdbc.properties
 				</value>
+				<value>
+					classpath*:config/properties/cach.properties
+				</value>
 			</list>
 		</property>
+	</bean>
+
+	<!-- 加载cach配置 -->
+	<bean class="cn.kykys.index.utils.cache.RedisCommon">
+		<property name="cacheType" value="${cacheType}" />
+		<property name="maxIdle" value="${maxIdle}" />
+		<property name="maxTotal" value="${maxTotal}" />
+		<property name="testOnBorrow" value="${testOnBorrow}" />
+		<property name="testOnReturn" value="${testOnReturn}" />
+		<property name="host" value="${host}" />
+		<property name="port" value="${port}" />
+		<property name="userName" value="${userName}" />
+		<property name="password" value="${password}" />
 	</bean>
 
 	<!-- 扫描文件（自动将service层注入） -->

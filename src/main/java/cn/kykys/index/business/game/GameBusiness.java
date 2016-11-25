@@ -292,7 +292,8 @@ public class GameBusiness implements IGame {
                         //下一节点
                         return MessageFormat.format(Settings.DRAMA_PLAY,
                                 dramaPlayModelKey.getDramaId(), dramaModel.getName(), dramaModel.getDescription(),
-                                nextNodeDetail.getDescription(), Settings.formatChoice(nextNodeDetail.getChooseModelList()));
+                                //add rate
+                                nextNodeDetail.getDescription(), Settings.formatChoiceWithRate(nextNodeDetail.getChooseModelList(), peopleModel));
 
                     }
                 } else {
