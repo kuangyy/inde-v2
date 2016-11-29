@@ -30,19 +30,22 @@
         canvas {
             position: fixed !important;
             z-index: 0;
-            width: 100%;
-            height: 100%;
+            width: 50rem;
+            height: 50rem;
         }
         #canvas-container {
-            position: fixed !important;
+            /*position: fixed !important;*/
             z-index: 0;
             width: 100%;
             height: 100%;
-            opacity: 0;
+            /*opacity: 0;*/
+            /*top:0;*/
+            /*left: 0;*/
         }
 
         .site_title {
             text-align: center;
+            margin-top: 50px;
             color: #f35626;
             background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
             -webkit-background-clip: text;
@@ -51,12 +54,12 @@
         }
     </style>
 </head>
-<body data-depth="1">
-<h1 class="site_title layer" data-depth="0.2" >asdasd</h1>
+<body>
+<h1 class="site_title layer" data-depth="0.4" >asdasd</h1>
 
 
-<div id="canvas-container" class="animated fadeInUp">
-    <canvas id="gravity"  ></canvas>
+<div id="canvas-container" class="animated fadeInUp layer"  data-depth="0.1">
+    <canvas id="gravity"></canvas>
 </div>
 
 
