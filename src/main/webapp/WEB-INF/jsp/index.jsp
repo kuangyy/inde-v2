@@ -50,6 +50,17 @@
         max-width: 1000px;
         padding: 0 auto;
     }
+    footer {
+        color: #fff;
+        z-index: 200;
+    }
+    footer a{
+        color: #fff;
+    }
+    footer a:hover, footer a:active{
+        color: #fff;
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -62,6 +73,8 @@
 </div>
 
 
+
+<footer><a href="${ctx}/about">About</a> </footer>
 
 
 

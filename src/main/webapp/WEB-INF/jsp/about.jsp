@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 
-    <title>About:狂or野 - 你喜欢哪一个我</title>
+    <title>About - 狂or野 - 你喜欢哪一个我</title>
     <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"/>
 
     <style>
