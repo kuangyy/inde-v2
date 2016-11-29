@@ -1,50 +1,98 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="/WEB-INF/jsp/commons/taglibs.jsp" %>
-<!DOCTYPE html>
-<html>
+<%@ include file="/WEB-INF/jsp/commons/taglibs.jsp"%>
+<!DOCTYPE HTML>
+<html lang="en">
 <head>
+
+    <title>About:狂or野 - 你喜欢哪一个我</title>
     <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"/>
 
-    <title>About - 狂or野-你喜欢哪一个我</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-weight: 300;
+            font-style: normal;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            overflow: hidden !important;
+            color: #000;
+            background: #222;
+            -webkit-font-smoothing: antialiased;
+        }
+        canvas {
+            /*position: fixed !important;*/
+            z-index: 0;
+            width: auto;
+            height: auto;
+        }
+        #canvas-container {
+            /*position: fixed !important;*/
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            /*opacity: 0;*/
+            /*top:0;*/
+            /*left: 0;*/
+        }
+        .about {
+            text-align: center;
+            margin-top: 100px;
+            color: #fff;
+            z-index: 100;
+        }
+        .about .title {
+            color: #93e0f3;
+            font-size: 70px;
+            background-image: -webkit-linear-gradient(92deg, #3849f3, #70fef7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-animation: dhue 40s infinite linear;
+        }
+        .about p {
+            margin: 10px 0;
+        }
+        .about p:first-of-type {
+          margin-top: 30px;
+        }
 
-    <link rel="stylesheet" type="text/css" href="${ctx}/resources/css/404.css">
-    <script type="text/javascript" src="${ctx}/resources/js/wordsearch-resize.js"></script>
-
+    </style>
 </head>
 <body>
 
-<div id="wrap">
-    <div id="main-content">
-        <h1>KYKYS.CN</h1>
-        <p>
-            Just a personal website for kuangye.
-        </p>
-        <p>
-            All of the site contains his collection.Maybe something not abstract you now.Don't upset.I'll do better soon.
-        </p>
-        <p>
-            books / foods / poems / photos .etc
-        </p>
-        <div id="search">
-            <form action="${ctx}/s">
-                <input type="text" placeholder="Search" name="s">
-                <button type="submit" class="input-search"><i class="fa fa-search"></i>
-                </button>
-            </form>
-        </div>
-        <div id="navigation">
-            <a class="navigation" href="${ctx}">Home</a>
-            <%--<a class="navigation" href="${ctx}/about">About Us</a>--%>
-            <!-- <a class="navigation" href="">Site Map</a>
-            <a class="navigation" href="">Contact</a> -->
-            <!-- <a class="navigation" href="http://twitter.com/SeptimusFossett"> <i class="fa fa-twitter"></i>
-            </a> -->
-            <a class="navigation" href="https://google.com">
-                <i class="fa fa-google-plus"></i>
-            </a>
-        </div>
-    </div>
+<div class="about layer" data-depth="0.4">
+    <h1 class="title"  >关于/About</h1>
+    <p>这是kyy的个人网站。</p>
 </div>
+
+
+<div id="canvas-container" class="animated fadeInUp layer"  data-depth="0.1">
+    <canvas id="gravity"></canvas>
+</div>
+
+
+
+
+
+<script src="//cdn.bootcss.com/parallax/2.1.3/jquery.parallax.min.js"></script>
+<!-- canvas star in background -->
+<script src="../resources/js/effect/star.js"></script>
+<script>
+    //PARALLAX
+    $('body').parallax({
+        scalarX: 25,
+        scalarY: 15,
+        frictionX: 0.1,
+        frictionY: 0.1,
+    });
+
+    //shrotcut
+    shortcut.add("Ctrl+C",function(){alert(1)})
+</script>
 
 </body>
 </html>

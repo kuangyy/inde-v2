@@ -27,6 +27,9 @@
 <!-- #css -->
 <!-- bootstrap -->
 <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
+<!-- animate.css -->
+<link rel="stylesheet" src="${ctx}/resources/css/animate/animate.css">
+<link rel="stylesheet" src="${ctx}/resources/css/animate/myAnimate.css">
 <!-- custom -->
 <link rel="stylesheet" href="${ctx}/resources/css/style.css?v=${resourcesVersion}">
 
@@ -41,6 +44,8 @@
 <script src="https://cdn.bootcss.com/trianglify/1.0.1/trianglify.min.js"></script>
 <!-- jquery.cookie -->
 <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<!-- key -->
+<script src="${ctx}/resources/js/effect/shortcut.js"></script>
 <!-- custom -->
 <script src="${ctx}/resources/js/common.js"></script>
 

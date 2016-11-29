@@ -1,119 +1,84 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="/WEB-INF/jsp/commons/taglibs.jsp" %>
-<!DOCTYPE html>
-<html>
+<%@ include file="/WEB-INF/jsp/commons/taglibs.jsp"%>
+<!DOCTYPE HTML>
+<html lang="en">
 <head>
 
+    <title>狂or野 - 你喜欢哪一个我</title>
     <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"/>
 
-    <title>狂or野-你喜欢哪一个我</title>
-    <meta name="description" content="ky's home page">
-    <meta name="author" content="kuangye">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-weight: 300;
+        font-style: normal;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: hidden !important;
+        color: #000;
+        background: #222;
+        -webkit-font-smoothing: antialiased;
+    }
+    canvas {
+        /*position: fixed !important;*/
+        z-index: 0;
+        width: auto;
+        height: auto;
+    }
+    #canvas-container {
+        /*position: fixed !important;*/
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        /*opacity: 0;*/
+        /*top:0;*/
+        /*left: 0;*/
+    }
+    .site_title {
+        text-align: center;
+        margin-top: 100px;
+        color: #93e0f3;
+        font-size: 70px;
+        background-image: -webkit-linear-gradient(92deg, #3849f3, #70fef7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-animation: dhue 40s infinite linear;
+    }
+</style>
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/jsp/commons/header.jsp"/>
+<h1 class="site_title layer" data-depth="0.4" >狂or野 - 你喜欢哪一个我</h1>
 
 
-<div class="container">
-
-    <div class="jumbotron">
-        <h1 class="display-3">Hello, world!</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
-            featured content or information.</p>
-        <hr class="m-y-2">
-        <p>${motto.name}</p>
-
-        <div class="row">
-            <div class="offset-xs-5 col-xs-5">
-                <form class="form-inline text-sx-center" action="${ctx}/s">
-                    <div class="input-group">
-                        <input style="display: none" type="text" class="form-control" aria-label="Text input with segmented button dropdown" name="wd" value="${wd}"
-                               placeholder="Search">
-                        <div class="input-group-btn">
-                            <button class="btn btn-outline-inverse btn-outline-gold" type="submit">Search</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <script>
-            $(function() {
-                $('form').on('mouseover', function() {
-                    $(this).parent()
-                            .removeClass("offset-xs-5").removeClass("col-xs-5")
-                            .addClass("offset-xs-2").addClass("col-xs-9");
-                    $(this).find("input").show();
-
-                });
-
-            });
-        </script>
-    </div>
-
-
-    <c:forEach var="tags" items="${hotTagList}" varStatus="varStatus">
-
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">${tags.name} </li><span class="pull-right"><a href="${ctx}/tag/${tags.id}"> more... </a></span>
-        </ol>
-        <div class="card-deck-wrapper">
-            <div class="card-deck">
-
-                <c:forEach var="posts" items="${tags.postsModelList}" varStatus="varStatus">
-
-                    <div class="card">
-                        <c:set var="defaultImg" value="${ctx}/resources/images/a.png"/>
-                        <c:set var="img" value="${posts.pic==null?defaultImg:posts.pic}"/>
-                        <img class="card-img-top" src="${img}" alt="${posts.title}">
-                        <div class="card-block">
-                            <a href="${ctx}/p/${posts.id}" target="_blank">
-                                <h4 class="card-title" title="${posts.title}">
-                                    <c:choose>
-                                        <c:when test="${fn:length(posts.title) > 12}">
-                                            ${fn:substring(posts.title,0,12)}...
-                                        </c:when>
-                                        <c:otherwise>
-                                            ${posts.title}
-                                        </c:otherwise>
-                                    </c:choose>
-                                </h4>
-                            </a>
-                            <p class="card-text" title="${posts.summary}">
-                                <c:choose>
-                                    <c:when test="${fn:length(posts.summary) > 50}">
-                                        ${fn:substring(posts.summary,0,50)}...
-                                    </c:when>
-                                    <c:otherwise>
-                                        ${posts.summary}
-                                    </c:otherwise>
-                                </c:choose>
-                            </p>
-                            <p class="card-text">
-                                <small class="text-inverse pull-right">
-                                    <i class="fa fa-clock-o" aria-hidden="true"></i> <fmt:formatDate value="${posts.publishTime}" pattern="yy-MM-dd HH:mm"/>
-                                    <i class="fa fa-heart" aria-hidden="true"></i> ${posts.likeCount}
-                                    <i class="fa fa-eye" aria-hidden="true"></i> ${posts.viewCount}
-                                </small>
-                            </p>
-                        </div>
-                    </div>
-
-                </c:forEach>
-
-            </div>
-        </div>
-
-    </c:forEach>
-
-
-
-
-
+<div id="canvas-container" class="animated fadeInUp layer"  data-depth="0.1">
+    <canvas id="gravity"></canvas>
 </div>
 
 
-<jsp:include page="/WEB-INF/jsp/commons/footer.jsp"/>
+
+
+
+<script src="//cdn.bootcss.com/parallax/2.1.3/jquery.parallax.min.js"></script>
+<!-- canvas star in background -->
+<script src="../resources/js/effect/star.js"></script>
+<script>
+    //PARALLAX
+    $('body').parallax({
+        scalarX: 25,
+        scalarY: 15,
+        frictionX: 0.1,
+        frictionY: 0.1,
+    });
+
+    //shrotcut
+    shortcut.add("Ctrl+C",function(){alert(1)})
+</script>
 
 </body>
 </html>
