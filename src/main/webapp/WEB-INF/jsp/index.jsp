@@ -31,29 +31,30 @@
         height: auto;
     }
     #canvas-container {
-        /*position: fixed !important;*/
+        position: fixed !important;
         z-index: 0;
         width: 100%;
         height: 100%;
-        /*opacity: 0;*/
-        /*top:0;*/
-        /*left: 0;*/
+        margin-top: -100px;
     }
     .site_title {
-        text-align: center;
-        margin-top: 100px;
+        margin: 100px 0 0 20px;
         color: #93e0f3;
         font-size: 70px;
         background-image: -webkit-linear-gradient(92deg, #3849f3, #70fef7);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         -webkit-animation: dhue 40s infinite linear;
+        z-index: 200;
+
+        max-width: 1000px;
+        padding: 0 auto;
     }
 </style>
 </head>
 <body>
 
-<h1 class="site_title layer" data-depth="0.4" >狂or野 - 你喜欢哪一个我</h1>
+<h1 class="site_title" >狂or野 - 你喜欢哪一个我</h1>
 
 
 <div id="canvas-container" class="animated fadeInUp layer"  data-depth="0.1">
@@ -70,14 +71,19 @@
 <script>
     //PARALLAX
     $('body').parallax({
-        scalarX: 25,
-        scalarY: 15,
-        frictionX: 0.1,
-        frictionY: 0.1,
+//        scalarX: 25,
+//        scalarY: 15,
+        frictionX: 0.2,
+        frictionY: 0.2,
     });
 
     //shrotcut
     shortcut.add("Ctrl+C",function(){alert(1)})
+
+    //clock
+    setInterval(function(){
+        $(".site_title").text(new Date());
+    },1000)
 </script>
 
 </body>

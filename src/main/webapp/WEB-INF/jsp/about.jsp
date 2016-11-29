@@ -31,13 +31,11 @@
             height: auto;
         }
         #canvas-container {
-            /*position: fixed !important;*/
+            position: fixed !important;
             z-index: 0;
             width: 100%;
             height: 100%;
-            /*opacity: 0;*/
-            /*top:0;*/
-            /*left: 0;*/
+            margin-top: -100px;
         }
         .about {
             text-align: center;
@@ -46,9 +44,9 @@
             z-index: 100;
         }
         .about .title {
-            color: #93e0f3;
             font-size: 70px;
-            background-image: -webkit-linear-gradient(92deg, #3849f3, #70fef7);
+            color: #f35626;
+            background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             -webkit-animation: dhue 40s infinite linear;
@@ -64,7 +62,7 @@
 </head>
 <body>
 
-<div class="about layer" data-depth="0.4">
+<div class="about">
     <h1 class="title"  >关于/About</h1>
     <p>这是kyy的个人网站。</p>
 </div>
@@ -84,8 +82,8 @@
 <script>
     //PARALLAX
     $('body').parallax({
-        scalarX: 25,
-        scalarY: 15,
+//        scalarX: 25,
+//        scalarY: 15,
         frictionX: 0.1,
         frictionY: 0.1,
     });
