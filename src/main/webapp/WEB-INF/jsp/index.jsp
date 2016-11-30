@@ -39,7 +39,7 @@
     }
     .site_title {
         margin: 100px 0 0 20px;
-        color: #93e0f3;
+        color: #3849f3;
         font-size: 70px;
         background-image: -webkit-linear-gradient(92deg, #3849f3, #70fef7);
         -webkit-background-clip: text;

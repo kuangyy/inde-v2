@@ -28,8 +28,8 @@
 <!-- bootstrap -->
 <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
 <!-- animate.css -->
-<link rel="stylesheet" src="${ctx}/resources/css/animate/animate.css">
-<link rel="stylesheet" src="${ctx}/resources/css/animate/myAnimate.css">
+<link rel="stylesheet" href="${ctx}/resources/css/animate/animate.css">
+<link rel="stylesheet" href="${ctx}/resources/css/animate/myAnimate.css">
 <!-- custom -->
 <link rel="stylesheet" href="${ctx}/resources/css/style.css?v=${resourcesVersion}">
 
