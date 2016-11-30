@@ -18,17 +18,34 @@
 <h1 class="site_title" >狂or野 - 你喜欢哪一个我</h1>
 
 
-<div class="list">
+<div class="list container col-sm-12">
     <ul>
-        <li><a href=""><img src="${ctx}/resources/img/test/red.png"></a></li>
-        <li><a href=""><img src="${ctx}/resources/img/test/green.png"></a></li>
-        <li><a href=""><img src="${ctx}/resources/img/test/red.png"></a></li>
-        <li><a href=""><img src="${ctx}/resources/img/test/green.png"></a></li>
+        <%--<li><a href=""><img src="${ctx}/resources/img/test/red.png"></a></li>--%>
+        <%--<li><a href=""><img src="${ctx}/resources/img/test/green.png"></a></li>--%>
+        <%--<li><a href=""><img src="${ctx}/resources/img/test/red.png"></a></li>--%>
+        <%--<li><a href=""><img src="${ctx}/resources/img/test/green.png"></a></li>--%>
+        <li>
+            <div>博客</div>
+        </li>
+        <li>
+            <div>游戏</div>
+        </li>
+        <li>
+            <div>新奇</div>
+        </li>
+        <li>
+            <div>其他</div>
+        </li>
     </ul>
 </div>
 
 
 <div class="motto">${motto.name}</div>
+
+<div class="shadow-list"></div>
+
+
+
 
 <footer><a href="${ctx}/about">About</a> </footer>
 
@@ -56,7 +73,7 @@
 
     //clock
     setInterval(function(){
-//        $(".site_title").text(new Date());
+        $(".site_title").text(new Date());
     },1000)
 </script>
 
