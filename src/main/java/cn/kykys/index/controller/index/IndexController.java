@@ -7,16 +7,12 @@ import cn.kykys.index.ibusiness.blog.ITags;
 import cn.kykys.index.model.blog.MottoModel;
 import cn.kykys.index.model.blog.TagsModel;
 import cn.kykys.index.model.page.PageWeb;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by kuangye on 2016/9/18.
@@ -52,6 +48,7 @@ public class IndexController extends BaseController {
         //motto
         MottoModel mottoModel = mottoModelMapper.selectByRandom();
         mav.addObject("motto", mottoModel);
+
 
         return mav;
     }
