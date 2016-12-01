@@ -25,16 +25,16 @@
         <%--<li><a href=""><img src="${ctx}/resources/img/test/red.png"></a></li>--%>
         <%--<li><a href=""><img src="${ctx}/resources/img/test/green.png"></a></li>--%>
         <li>
-            <div>博客</div>
+            <a href=""><div>博客</div></a>
         </li>
         <li>
-            <div>游戏</div>
+            <a href=""><div>游戏</div></a>
         </li>
         <li>
-            <div>新奇</div>
+            <a href=""><div>新奇</div></a>
         </li>
         <li>
-            <div>其他</div>
+            <a href=""><div>其他</div></a>
         </li>
     </ul>
 </div>

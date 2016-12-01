@@ -93,6 +93,13 @@ canvas {
     height: 30em;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
+.list ul li a {
+  color: inherit;
+}
+.list ul li a:hover, .list ul li a:visited {
+    color: inherit;
+    text-decoration:none;
+}
 .list ul li:nth-child(1) div{
     background-color: #00b0ff;
     opacity: 0.3;
