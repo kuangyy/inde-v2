@@ -108,7 +108,7 @@ canvas {
 .info-list ul li a {
   color: inherit;
 }
-.info-list ul li a:hover, .list ul li a:visited, .list ul li a:active, .list ul li a:focus {
+.info-list ul li a:hover, .info-list ul li a:visited, .info-list ul li a:active, .info-list ul li a:focus {
     color: inherit;
     text-decoration:none;
 }
