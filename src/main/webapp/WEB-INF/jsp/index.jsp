@@ -63,8 +63,8 @@
     });
 
     //animate
-    $.each($(".list ul li"),function(index,item){
-        index%2==0?$(item).addClass("bounceInDown animated"):$(item).addClass("bounceInUp animated");
+    $.each($(".info-list ul li"),function(index,item){
+        index%4==0?$(item).addClass("slideInLeft animated"):index%4==1?$(item).addClass("slideInDown animated"):index%4==2?$(item).addClass("slideInUp animated"):$(item).addClass("slideInRight animated");
     });
 
     //shrotcut
