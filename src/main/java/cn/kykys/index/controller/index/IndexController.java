@@ -34,16 +34,16 @@ public class IndexController extends BaseController {
 
         ModelAndView mav = new ModelAndView("index");
 
-        PageWeb pageWeb = new PageWeb();
-        pageWeb.setPageSize(3);
+//        PageWeb pageWeb = new PageWeb();
+//        pageWeb.setPageSize(3);
 
-        //hot tags
-        List<TagsModel> hotTagList = iTags.selectHotTagByPage(pageWeb, 3, true);
-        mav.addObject("hotTagList", hotTagList);
-
-        //all tags
-        List<TagsModel> allTagList = iTags.selectHotTagByPage(null);
-        mav.addObject("allTagList", allTagList);
+//        //hot tags
+//        List<TagsModel> hotTagList = iTags.selectHotTagByPage(pageWeb, 3, true);
+//        mav.addObject("hotTagList", hotTagList);
+//
+//        //all tags
+//        List<TagsModel> allTagList = iTags.selectHotTagByPage(null);
+//        mav.addObject("allTagList", allTagList);
 
         //motto
         MottoModel mottoModel = mottoModelMapper.selectByRandom();

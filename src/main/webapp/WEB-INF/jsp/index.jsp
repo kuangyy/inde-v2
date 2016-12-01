@@ -8,6 +8,7 @@
     <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"/>
 
     <link rel="stylesheet" href="${ctx}/resources/css/index.css">
+
 </head>
 <body>
 
@@ -15,52 +16,50 @@
     <canvas id="gravity"></canvas>
 </div>
 
-<h1 class="site_title" >狂or野 - 你喜欢哪一个我</h1>
+<div class="site_title" >狂or野 - 你喜欢哪一个我</div>
 
 
-<div class="list container col-sm-12">
+
+<div class="info-list container col-sm-12">
     <ul>
-        <%--<li><a href=""><img src="${ctx}/resources/img/test/red.png"></a></li>--%>
-        <%--<li><a href=""><img src="${ctx}/resources/img/test/green.png"></a></li>--%>
-        <%--<li><a href=""><img src="${ctx}/resources/img/test/red.png"></a></li>--%>
-        <%--<li><a href=""><img src="${ctx}/resources/img/test/green.png"></a></li>--%>
         <li>
-            <a href=""><div>博客</div></a>
+            <a href="${ctx}/blog" target="_blank"><div>壹</div></a>
         </li>
         <li>
-            <a href=""><div>游戏</div></a>
+            <a href="${ctx}/game" target="_blank"><div>贰</div></a>
         </li>
         <li>
-            <a href=""><div>新奇</div></a>
+            <a href="" target="_blank"><div>叁</div></a>
         </li>
         <li>
-            <a href=""><div>其他</div></a>
+            <a href="" target="_blank"><div>肆</div></a>
         </li>
     </ul>
 </div>
 
 
-<div class="motto">${motto.name}</div>
-
-<div class="shadow-list"></div>
+<div class="shadow-box"></div>
 
 
 
-
-<footer><a href="${ctx}/about">About</a> </footer>
+<footer>
+    <span style="color: #999">[ky]</span> /
+    <a href="${ctx}/about"> About</a>
+    <div class="motto pull-right">${motto.name}</div>
+</footer>
 
 
 
 <script src="//cdn.bootcss.com/parallax/2.1.3/jquery.parallax.min.js"></script>
 <!-- canvas star in background -->
-<script src="../resources/js/effect/star.js"></script>
+<script src="${ctx}/resources/js/effect/star.js"></script>
 <script>
     //PARALLAX
     $('body').parallax({
 //        scalarX: 25,
 //        scalarY: 15,
-        frictionX: 0.2,
-        frictionY: 0.2,
+//        frictionX: 0.2,
+//        frictionY: 0.2,
     });
 
     //animate

@@ -2,6 +2,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 body {
     font-weight: 300;
@@ -23,6 +24,7 @@ canvas {
     z-index: 0;
     width: auto;
     height: auto;
+    z-index: 0;
 }
 #canvas-container {
     position: fixed !important;
@@ -34,19 +36,28 @@ canvas {
 
 
 .site_title {
-    margin: 100px 0 0 20px;
+    padding-top: 2em;
+    padding-bottom: 10em;
     color: #3849f3;
     background-image: -webkit-linear-gradient(92deg, #3849f3, #70fef7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-animation: dhue 40s infinite linear;
     z-index: 200;
-
+    text-align: center;
     max-width: 1000px;
-    padding: 0 auto;
 }
 
-.list {
+.shadow-box {
+    height: 6em;
+    top: 280px;
+    z-index: 10;
+    font-size: 2em;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    z-index: 300;
+}
+
+.info-list {
     position: fixed;
     margin-left:auto;
     margin-right:auto;
@@ -56,22 +67,22 @@ canvas {
     text-align: center;
     z-index: 200;
 }
-.list ul {
+.info-list ul {
     position: relative;
     left: -50%;
     margin: 0;
 }
-.list ul li {
-    padding: 2px 0;
+.info-list ul li {
+    /*padding: 2px 0px;*/
     float:left;
     list-style-type:none;
     color: #fff;
 
-    margin: 0 2px;
+    margin: 2px;
     width: 13em;
-    height: 30em;
+    height: 12em;
 }
-.list ul li div {
+.info-list ul li div {
     width: 100%;
     height: 100%;
     transform: skew(-20deg);
@@ -87,71 +98,63 @@ canvas {
     word-break: break-all;
     line-height: 2em;
 }
-.list ul li img {
+.info-list ul li img {
     margin: 10px 0;
     width: 13em;
     height: 30em;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
-.list ul li a {
+
+.info-list ul li a {
   color: inherit;
 }
-.list ul li a:hover, .list ul li a:visited {
+.info-list ul li a:hover, .list ul li a:visited, .list ul li a:active, .list ul li a:focus {
     color: inherit;
     text-decoration:none;
 }
-.list ul li:nth-child(1) div{
+
+.info-list ul li:nth-child(1) div{
     background-color: #00b0ff;
     opacity: 0.3;
 }
-.list ul li:nth-child(1) div:hover {
+.info-list ul li:nth-child(1) div:hover {
     opacity: 0.7;
     cursor: pointer;
 }
-.list ul li:nth-child(2) div{
+.info-list ul li:nth-child(2) div{
     background-color: #3dffaa;
     opacity: 0.3;
 }
-.list ul li:nth-child(2) div:hover {
+.info-list ul li:nth-child(2) div:hover {
     opacity: 0.7;
     cursor: pointer;
 }
-.list ul li:nth-child(3) div {
+.info-list ul li:nth-child(3) div {
     background-color: #b4ff4f;
     opacity: 0.3;
 }
-.list ul li:nth-child(3) div:hover {
+.info-list ul li:nth-child(3) div:hover {
     opacity: 0.7;
     cursor: pointer;
 }
-.list ul li:nth-child(4) div {
+.info-list ul li:nth-child(4) div {
     background-color: #ff8776;
     opacity: 0.3;
 }
-.list ul li:nth-child(4) div:hover {
+.info-list ul li:nth-child(4) div:hover {
     opacity: 0.7;
     cursor: pointer;
 }
-/*.list ul li:first-child {*/
-    /*background-color: #00b0ff;*/
-    /*opacity: 0.3;*/
-/*}*/
-/*.list ul li:last-child {*/
-    /*background-color: #ff8776;*/
-    /*opacity: 0.3;*/
-/*}*/
 
 .motto {
-    color: #00b0ff;
+    /*color: #00b0ff;*/
+    font-size: small;
 }
 
-.shadow-list {
-    height: 15em;
-    top: 280px;
+.readme {
     z-index: 300;
-    font-size: 2em;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
 }
+
 
 
 footer {

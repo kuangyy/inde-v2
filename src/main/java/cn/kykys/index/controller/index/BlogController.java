@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by kuangye on 2016/9/18.
  */
 @Controller
-@RequestMapping("blog")
+@RequestMapping("/blog")
 public class BlogController extends BaseController {
 
     @Autowired
@@ -34,7 +34,7 @@ public class BlogController extends BaseController {
 
 
     //home page
-    @RequestMapping("/")
+    @RequestMapping
     public ModelAndView index() {
 
         ModelAndView mav = new ModelAndView("blog/index");
