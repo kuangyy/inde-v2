@@ -135,9 +135,4 @@ public class BlogController extends BaseController {
         return new ModelAndView("blog/about");
     }
 
-    //404
-    @RequestMapping("/404")
-    public ModelAndView err404() {
-        return new ModelAndView("404");
-    }
 }

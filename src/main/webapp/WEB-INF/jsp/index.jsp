@@ -21,16 +21,16 @@
 <div class="info-list container col-sm-12">
     <ul>
         <li>
-            <a href="${ctx}/blog" target="_blank"><div>壹</div></a>
+            <a href="${ctx}/blog" target="_blank" title="文字"><div>壹</div></a>
         </li>
         <li>
-            <a href="${ctx}/game" target="_blank"><div>贰</div></a>
+            <a href="${ctx}/game" target="_blank" title="游戏"><div>贰</div></a>
         </li>
         <li>
-            <a href="${ctx}/research" target="_blank"><div>叁</div></a>
+            <a href="${ctx}/research" target="_blank" title="研究"><div>叁</div></a>
         </li>
         <li>
-            <a href="" target="_blank"><div>肆</div></a>
+            <a href="${ctx}/fun" target="_blank" title="趣"><div>肆</div></a>
         </li>
     </ul>
 </div>
