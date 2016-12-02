@@ -1,11 +1,6 @@
 package cn.kykys.index.controller.research;
 
 import cn.kykys.index.controller.BaseController;
-import cn.kykys.index.data.kykys.MottoModelMapper;
-import cn.kykys.index.ibusiness.blog.IPosts;
-import cn.kykys.index.ibusiness.blog.ITags;
-import cn.kykys.index.model.blog.MottoModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,13 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/research")
 public class ResearchController extends BaseController {
-
-    @Autowired
-    IPosts iPosts;
-    @Autowired
-    ITags iTags;
-    @Autowired
-    MottoModelMapper mottoModelMapper;
 
 
     //research page
@@ -45,9 +33,4 @@ public class ResearchController extends BaseController {
         return new ModelAndView("/research/about");
     }
 
-    //404
-    @RequestMapping("/404")
-    public ModelAndView err404() {
-        return new ModelAndView("404");
-    }
 }
