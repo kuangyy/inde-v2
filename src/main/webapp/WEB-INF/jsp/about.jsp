@@ -69,7 +69,9 @@
         }
 
 
-
+        .dot:hover {
+            cursor: pointer;
+        }
         .wrapper {
             position: absolute;
             top: 0;
@@ -137,8 +139,8 @@
 <body>
 
 <div class="about">
-    <%--<h1 class="title"  >关于/About</h1>--%>
-    <%--<p>这是kyy的个人网站。</p>--%>
+    <h1 class="title"  >关于/About</h1>
+    <p>这是kyy的个人网站。</p>
 </div>
 
 

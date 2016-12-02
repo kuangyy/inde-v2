@@ -18,7 +18,7 @@
 
 <div class="site_title" >狂or野 - 你喜欢哪一个我</div>
 
-<div class="info-list col-sm-12">
+<div class="info-list container col-sm-12">
     <ul>
         <li>
             <a href="${ctx}/blog" target="_blank"><div>壹</div></a>
