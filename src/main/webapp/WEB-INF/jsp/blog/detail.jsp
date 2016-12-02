@@ -48,9 +48,24 @@
             </div>
         </div>
 
-        <div class="reading-progress"><progress></progress></div>
-        <script>
 
+
+        <div class="reading-progress" style="position: fixed;bottom: 0;width: 100%;height: 5px;">
+            <progress class="progress progress-striped" value="0" max="100" ></progress>
+        </div>
+        <script>
+            !function(){
+               $(function(){
+                   var $progress = $('.reading-progress progress');
+                   function updateProgress(){
+                       $progress.val(100*(document.body.clientHeight+$(window).scrollTop())/document.body.scrollHeight);
+                   }
+                   updateProgress();
+                   $(window).scroll(function() {
+                       updateProgress();
+                   });
+               })
+            }()
         </script>
 
     </div>
