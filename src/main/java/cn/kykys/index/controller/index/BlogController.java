@@ -61,7 +61,7 @@ public class BlogController extends BaseController {
     @RequestMapping("/s")
     public ModelAndView search(String wd, PageWeb pageWeb) {
 
-        ModelAndView mav = new ModelAndView("list");
+        ModelAndView mav = new ModelAndView("/blog/list");
 
         if (StringUtils.hasText(wd)) {
             String word = StringEscapeUtils.unescapeHtml(wd);
@@ -82,7 +82,7 @@ public class BlogController extends BaseController {
     @RequestMapping("/list")
     public ModelAndView list(PageWeb pageWeb) {
 
-        ModelAndView mav = new ModelAndView("list");
+        ModelAndView mav = new ModelAndView("/blog/list");
 
         Map<String, ?> result = iPosts.selectByPage(null, pageWeb);
         mav.addAllObjects(result);
@@ -93,7 +93,7 @@ public class BlogController extends BaseController {
     @RequestMapping("/p/{id}")
     public ModelAndView detail(@PathVariable("id") Long id) {
 
-        ModelAndView mav = new ModelAndView("detail");
+        ModelAndView mav = new ModelAndView("/blog/detail");
 
         mav.addObject("posts", iPosts.getByIdAddViewCount(id));
         return mav;
@@ -103,7 +103,7 @@ public class BlogController extends BaseController {
     @RequestMapping("/tag/{w}")
     public ModelAndView tag(@PathVariable("w") String w, PageWeb pageWeb) {
 
-        ModelAndView mav = new ModelAndView("list");
+        ModelAndView mav = new ModelAndView("/blog/list");
 
         TagsModel tagsModel = iTags.getByName(w);
 
@@ -119,7 +119,7 @@ public class BlogController extends BaseController {
     @RequestMapping("/tags")
     public ModelAndView tag() {
 
-        ModelAndView mav = new ModelAndView("tags");
+        ModelAndView mav = new ModelAndView("blog/tags");
 
        List<TagsModel> tagsModelList = iTags.selectHotTagByPage(null);
 

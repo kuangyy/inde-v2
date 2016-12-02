@@ -67,7 +67,7 @@
                         <c:set var="img" value="${posts.pic==null?defaultImg:posts.pic}"/>
                         <img class="card-img-top" src="${img}" alt="${posts.title}">
                         <div class="card-block">
-                            <a href="${ctx}/p/${posts.id}" target="_blank">
+                            <a href="${ctx}/blog/p/${posts.id}" target="_blank">
                                 <h4 class="card-title" title="${posts.title}">
                                     <c:choose>
                                         <c:when test="${fn:length(posts.title) > 12}">
