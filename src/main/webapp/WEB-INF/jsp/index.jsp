@@ -5,6 +5,8 @@
 <head>
 
     <title>狂or野 - 你喜欢哪一个我</title>
+    <meta name="author" content="ky"/>
+
     <jsp:include page="/WEB-INF/jsp/commons/resources.jsp"/>
 
     <link rel="stylesheet" href="${ctx}/resources/css/index.css">
@@ -66,7 +68,7 @@
     });
 
     //shrotcut
-    shortcut.add("Ctrl+C",function(){alert(1)})
+    shortcut.add("Ctrl+C",function(){alert("你干嘛要复制我")})
 
     //clock
     setInterval(function(){
