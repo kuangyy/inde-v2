@@ -26,7 +26,7 @@
 
         <div class="row">
             <div class="offset-xs-5 col-xs-5">
-                <form class="form-inline text-sx-center" action="${ctx}/s">
+                <form class="form-inline text-sx-center" action="${ctx}/blog/s">
                     <div class="input-group">
                         <input style="display: none" type="text" class="form-control" aria-label="Text input with segmented button dropdown" name="wd" value="${wd}"
                                placeholder="Search">

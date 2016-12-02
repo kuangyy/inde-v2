@@ -48,6 +48,10 @@
             </div>
         </div>
 
+        <div class="reading-progress"><progress></progress></div>
+        <script>
+
+        </script>
 
     </div>
 
