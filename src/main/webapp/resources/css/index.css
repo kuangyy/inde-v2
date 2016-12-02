@@ -36,16 +36,14 @@ canvas {
 
 
 .site_title {
-    padding-top: 2em;
-    padding-bottom: 10em;
-    color: #3849f3;
-    background-image: -webkit-linear-gradient(92deg, #3849f3, #70fef7);
+    padding-top: 10em;
+    color: #d0f382;
+    background-image: -webkit-linear-gradient(92deg, #f3624f, #70fef7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-animation: dhue 40s infinite linear;
     z-index: 200;
-    text-align: center;
-    max-width: 1000px;
+    text-align: right;
 }
 
 .shadow-box {
