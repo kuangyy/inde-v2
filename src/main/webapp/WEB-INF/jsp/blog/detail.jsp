@@ -58,7 +58,7 @@
                $(function(){
                    var $progress = $('.reading-progress progress');
                    function updateProgress(){
-                       $progress.val(100*(document.body.clientHeight+$(window).scrollTop())/document.body.scrollHeight);
+                       $progress.val(100*($(window).scrollTop())/document.body.scrollHeight-document.body.clientHeight);
                    }
                    updateProgress();
                    $(window).scroll(function() {
