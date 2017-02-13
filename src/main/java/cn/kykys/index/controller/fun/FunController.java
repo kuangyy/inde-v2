@@ -23,13 +23,6 @@ public class FunController {
     IDrama iDrama;
 
 
-    @RequestMapping
-    public ModelAndView setting(HttpServletRequest request, PageWeb pageWeb) {
-        ModelAndView mav = new ModelAndView("/fun/index");
-
-        return mav;
-    }
-
 
 
 
