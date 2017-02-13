@@ -1,11 +1,22 @@
 
 
 
+2017.2.13
+in the past few days, i have an idea that show a jpg/gif picture wall classified by emotion
+or show one of then in the sourth-east of the cornor,
+click it to show something about the picture like the Today In History or come to the picture wall 
+try it as soon as possible
+
+--------------------------------
 
 
+2017.2.11
+happy new year
+in the past 2016, something written something must be done(but i didn't do that :D )
+but i'll do it in the next year
+many ideas come to me
 
-
-
+--------------------------------
 
 
 2016.11.25

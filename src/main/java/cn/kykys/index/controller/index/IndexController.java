@@ -34,21 +34,9 @@ public class IndexController extends BaseController {
 
         ModelAndView mav = new ModelAndView("index");
 
-//        PageWeb pageWeb = new PageWeb();
-//        pageWeb.setPageSize(3);
-
-//        //hot tags
-//        List<TagsModel> hotTagList = iTags.selectHotTagByPage(pageWeb, 3, true);
-//        mav.addObject("hotTagList", hotTagList);
-//
-//        //all tags
-//        List<TagsModel> allTagList = iTags.selectHotTagByPage(null);
-//        mav.addObject("allTagList", allTagList);
-
         //motto
         MottoModel mottoModel = mottoModelMapper.selectByRandom();
         mav.addObject("motto", mottoModel);
-
 
         return mav;
     }
@@ -58,6 +46,16 @@ public class IndexController extends BaseController {
     public ModelAndView game() {
 
         ModelAndView mav = new ModelAndView("/game/index");
+
+        return mav;
+    }
+
+
+    //jpfun page
+    @RequestMapping("/fun")
+    public ModelAndView fun() {
+
+        ModelAndView mav = new ModelAndView("/fun/index");
 
         return mav;
     }
