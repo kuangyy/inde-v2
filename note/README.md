@@ -1,5 +1,11 @@
 
 
+2017.2.14
+today is Valentine's Day.
+even though i am a single dog.
+i'm thinking about to do a surprising page for someone or for some feels.
+
+--------------------------------
 
 2017.2.13
 in the past few days, i have an idea that show a jpg/gif picture wall classified by emotion
