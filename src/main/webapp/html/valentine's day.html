@@ -105,6 +105,7 @@
                 width: 300px; height: 300px;
                 top: calc(50% - 150px); left: calc(25% - 150px);
                 text-align: center;
+
                 -webkit-transform: scale(0.95);
                 transform: scale(0.95);
             }
@@ -119,9 +120,17 @@
                 width: 150px; height: 240px;
                 background: #c66c75;
                 border-radius: 150px 150px 0 0;
+
                 -webkit-transform: rotate(-45deg);
+                -moz-transform: rotate(-45deg);
+                -o-transform: rotate(-45deg);
+                -ms-transform: rotate(-45deg);
                 transform: rotate(-45deg);
+
                 -webkit-transform-origin: 0 100%;
+                -moz-transform-origin: 0 100%;
+                -o-transform-origin: 0 100%;
+                -ms-transform-origin: 0 100%;
                 transform-origin: 0 100%;
             }
 
@@ -132,8 +141,15 @@
             #heart::after, #echo::after {
                 left: 0;
                 -webkit-transform: rotate(45deg);
+                -moz-transform: rotate(45deg);
+                -o-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
                 transform: rotate(45deg);
+
                 -webkit-transform-origin: 100% 100%;
+                -moz-transform-origin: 100% 100%;
+                -o-transform-origin: 100% 100%;
+                -ms-transform-origin: 100% 100%;
                 transform-origin: 100% 100%;
             }
 
@@ -182,12 +198,84 @@
             }
             }
 
+            @-moz-keyframes heartbeat {
+                0%, 100% {
+                -moz-transform: scale(0.95);
+                transform: scale(0.95);
+            }
+                50% {
+                -moz-transform: scale(1.00);
+                transform: scale(1.00);
+            }
+            }
+
+            @-o-keyframes heartbeat {
+                0%, 100% {
+                -o-transform: scale(0.95);
+                transform: scale(0.95);
+            }
+                50% {
+                -o-transform: scale(1.00);
+                transform: scale(1.00);
+            }
+            }
+
+            @-ms-keyframes heartbeat {
+                0%, 100% {
+                -ms-transform: scale(0.95);
+                transform: scale(0.95);
+            }
+                50% {
+                -ms-transform: scale(1.00);
+                transform: scale(1.00);
+            }
+            }
+
             @keyframes heartbeat {
                 0%, 100% { transform: scale(0.95); }
                 50%      { transform: scale(1.00); }
             }
 
             @-webkit-keyframes echo {
+                0%   {
+                    opacity: 0.1;
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+                100% {
+                    opacity: 0;
+                -webkit-transform: scale(1.4);
+                transform: scale(1.4);
+            }
+            }
+
+             @-moz-keyframes echo {
+                0%   {
+                    opacity: 0.1;
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+                100% {
+                    opacity: 0;
+                -webkit-transform: scale(1.4);
+                transform: scale(1.4);
+            }
+            }
+
+             @-o-keyframes echo {
+                0%   {
+                    opacity: 0.1;
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+                100% {
+                    opacity: 0;
+                -webkit-transform: scale(1.4);
+                transform: scale(1.4);
+            }
+            }
+
+             @-ms-keyframes echo {
                 0%   {
                     opacity: 0.1;
                 -webkit-transform: scale(1);
@@ -218,25 +306,53 @@
 
             #heart, #echo {
                 -webkit-animation-duration: 2000ms;
+                -moz-animation-duration: 2000ms;
+                -o-animation-duration: 2000ms;
+                -ms-animation-duration: 2000ms;
                 animation-duration: 2000ms;
+
                 -webkit-animation-timing-function:
+                cubic-bezier(0, 0, 0, 1.74);
+                -moz-animation-timing-function:
+                cubic-bezier(0, 0, 0, 1.74);
+                -o-animation-timing-function:
+                cubic-bezier(0, 0, 0, 1.74);
+                -ms-animation-timing-function:
                 cubic-bezier(0, 0, 0, 1.74);
                 animation-timing-function:
                 cubic-bezier(0, 0, 0, 1.74);
+
                 -webkit-animation-delay: 500ms;
+                -moz-animation-delay: 500ms;
+                -o-animation-delay: 500ms;
+                -ms-animation-delay: 500ms;
                 animation-delay: 500ms;
+
                 -webkit-animation-iteration-count: infinite;
+                -moz-animation-iteration-count: infinite;
+                -o-animation-iteration-count: infinite;
+                -ms-animation-iteration-count: infinite;
                 animation-iteration-count: infinite;
+
                 -webkit-animation-play-state: paused;
+                -moz-animation-play-state: paused;
+                -o-animation-play-state: paused;
+                -ms-animation-play-state: paused;
                 animation-play-state: paused;
             }
 
             #heart {
                 -webkit-animation-name: heartbeat;
+                -moz-animation-name: heartbeat;
+                -o-animation-name: heartbeat;
+                -ms-animation-name: heartbeat;
                 animation-name: heartbeat;
             }
             #echo {
                 -webkit-animation-name: echo;
+                -moz-animation-name: echo;
+                -o-animation-name: echo;
+                -ms-animation-name: echo;
                 animation-name: echo;
             }
 
@@ -252,6 +368,9 @@
                  */
 
                 -webkit-animation-play-state: running;
+                -moz-animation-play-state: running;
+                -o-animation-play-state: running;
+                -ms-animation-play-state: running;
                 animation-play-state: running;
 
                 /*
