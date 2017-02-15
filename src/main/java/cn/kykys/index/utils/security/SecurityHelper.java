@@ -1,28 +1,34 @@
 package cn.kykys.index.utils.security;
 
+import org.apache.commons.lang.StringUtils;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
 import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
+import java.security.SecureRandom;
 
 /**
  * SecurityHelper
  *
  * @author liwei
  * @date 16/8/10
- * @description
- *
- * 加解密相关方法帮助类
+ * @description 加解密相关方法帮助类
  */
 public class SecurityHelper {
     /**
      * DES解密方法
-     * @param message   密文
-     * @param key       密钥
+     *
+     * @param message 密文
+     * @param key     密钥
      * @return
      */
     public static String desDecrypt(String message, String key) {
@@ -48,8 +54,9 @@ public class SecurityHelper {
 
     /**
      * DES加密方法
-     * @param message   明文
-     * @param key       加密密钥
+     *
+     * @param message 明文
+     * @param key     加密密钥
      * @return
      * @throws Exception
      */
@@ -93,65 +100,69 @@ public class SecurityHelper {
 
     /**
      * MD5加密
+     *
      * @param md5Str 要进行md5加密的字符串
      * @return 返回加密后的md5串  如果异常则返回null
      */
-    public static String MD5(String md5Str){
+    public static String MD5(String md5Str) {
         return Digest(md5Str, DigestEnum.MD5);
     }
 
     /**
      * SHA1加密 默认全部转换成小写 如需大写请使用重载传参数
+     *
      * @param sha1Str
      * @return
      */
-    public static String SHA1(String sha1Str){
-        return SHA1(sha1Str,true);
+    public static String SHA1(String sha1Str) {
+        return SHA1(sha1Str, true);
     }
 
     /**
      * SHA1加密 根据指定是否将结果转换为小写
+     *
      * @param sha1Str
      * @param isToLower 是否转换小写
      * @return
      */
-    public static String SHA1(String sha1Str,boolean isToLower) {
-        String digeStr= Digest(sha1Str, DigestEnum.SHA1);
-        if(digeStr != null && isToLower){
-            digeStr =digeStr.toLowerCase();
+    public static String SHA1(String sha1Str, boolean isToLower) {
+        String digeStr = Digest(sha1Str, DigestEnum.SHA1);
+        if (digeStr != null && isToLower) {
+            digeStr = digeStr.toLowerCase();
         }
         return digeStr;
     }
 
-    enum DigestEnum{
+    enum DigestEnum {
         MD5,
         SHA1
     }
+
     /**
      * 生成数据摘要
+     *
      * @param digStr
      * @param type
      * @return
      */
-    private static String Digest(String digStr,DigestEnum type){
-        final char hexDigits[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+    private static String Digest(String digStr, DigestEnum type) {
+        final char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
         try {
-            byte[] btInput =digStr.getBytes();
+            byte[] btInput = digStr.getBytes();
             //获取md5摘要获取对象
-            MessageDigest md5Dig =null;//MessageDigest.getInstance("MD5");
+            MessageDigest md5Dig = null;//MessageDigest.getInstance("MD5");
             //DigestEnum de=//DigestEnum.SHA1;
-            if(type == DigestEnum.MD5){
-                md5Dig =MessageDigest.getInstance("MD5");
+            if (type == DigestEnum.MD5) {
+                md5Dig = MessageDigest.getInstance("MD5");
+            } else if (type == DigestEnum.SHA1) {
+                md5Dig = MessageDigest.getInstance("SHA-1");
             }
-            else if(type== DigestEnum.SHA1){
-                md5Dig =MessageDigest.getInstance("SHA-1");
-            }
-            byte[] md5Bytes =md5Dig.digest(btInput);
-            StringBuilder sb =new StringBuilder();
+            byte[] md5Bytes = md5Dig.digest(btInput);
+            StringBuilder sb = new StringBuilder();
             for (byte b : md5Bytes) {
-                char c= hexDigits[(b>>>4) & 0xf];
+                char c = hexDigits[(b >>> 4) & 0xf];
                 sb.append(c);
-                c= hexDigits[b&0xf];
+                c = hexDigits[b & 0xf];
                 sb.append(c);
 
             }
@@ -163,4 +174,108 @@ public class SecurityHelper {
         }
         return null;
     }
+
+
+    //==================================================================================================================
+
+    /**
+     * 获取byte[]的md5值
+     *
+     * @param bytes byte[]
+     * @return md5
+     * @throws Exception
+     */
+    public static byte[] md5(byte[] bytes) throws Exception {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(bytes);
+
+        return md.digest();
+    }
+
+
+    /**
+     * base 64 encode
+     *
+     * @param bytes 待编码的byte[]
+     * @return 编码后的base 64 code
+     */
+    public static String base64Encode(byte[] bytes) {
+        return new BASE64Encoder().encode(bytes);
+    }
+
+    /**
+     * base 64 decode
+     *
+     * @param base64Code 待解码的base 64 code
+     * @return 解码后的byte[]
+     * @throws Exception
+     */
+    public static byte[] base64Decode(String base64Code) throws Exception {
+        return StringUtils.isEmpty(base64Code) ? null : new BASE64Decoder().decodeBuffer(base64Code);
+    }
+
+
+    /**
+     * AES加密
+     *
+     * @param content    待加密的内容
+     * @param encryptKey 加密密钥
+     * @return 加密后的byte[]
+     * @throws Exception
+     */
+    public static byte[] aesEncryptToBytes(String content, String encryptKey) throws Exception {
+        KeyGenerator kgen = KeyGenerator.getInstance("AES");
+        kgen.init(128, new SecureRandom(encryptKey.getBytes()));
+
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(kgen.generateKey().getEncoded(), "AES"));
+
+        return cipher.doFinal(content.getBytes("utf-8"));
+    }
+
+    /**
+     * AES加密为base 64 code
+     *
+     * @param content    待加密的内容
+     * @param encryptKey 加密密钥
+     * @return 加密后的base 64 code
+     * @throws Exception
+     */
+    public static String aesEncrypt(String content, String encryptKey) throws Exception {
+        return base64Encode(aesEncryptToBytes(content, encryptKey));
+    }
+
+    /**
+     * AES解密
+     *
+     * @param encryptBytes 待解密的byte[]
+     * @param decryptKey   解密密钥
+     * @return 解密后的String
+     * @throws Exception
+     */
+    public static String aesDecryptByBytes(byte[] encryptBytes, String decryptKey) throws Exception {
+        KeyGenerator kgen = KeyGenerator.getInstance("AES");
+        kgen.init(128, new SecureRandom(decryptKey.getBytes()));
+
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(kgen.generateKey().getEncoded(), "AES"));
+        byte[] decryptBytes = cipher.doFinal(encryptBytes);
+
+        return new String(decryptBytes);
+    }
+
+
+    /**
+     * 将base 64 code AES解密
+     *
+     * @param encryptStr 待解密的base 64 code
+     * @param decryptKey 解密密钥
+     * @return 解密后的string
+     * @throws Exception
+     */
+    public static String aesDecrypt(String encryptStr, String decryptKey) throws Exception {
+        return StringUtils.isEmpty(encryptStr) ? null : aesDecryptByBytes(base64Decode(encryptStr), decryptKey);
+    }
+
+
 }

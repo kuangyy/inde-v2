@@ -79,7 +79,7 @@
         </tbody>
     </table>
 </div>
-<audio id="audio" style=" " src="http://oooc.lol/mp3/a.mp3" crossorigin="anonymous" autobuffered >
+<audio id="audio" style=" " crossorigin="anonymous" autobuffered >
     <source src="http://oooc.lol/mp3/a.mp3" type="audio/mpeg">
     Your browser does not support the audio tag.
 </audio>
