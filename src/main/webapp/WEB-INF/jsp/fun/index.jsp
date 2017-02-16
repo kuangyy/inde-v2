@@ -80,7 +80,7 @@
     </table>
 </div>
 <audio id="audio" style=" " crossorigin="anonymous" autobuffered >
-    <source src="http://oooc.lol/mp3/a.mp3" type="audio/mpeg">
+    <source src="https://static.kykys.cn/mp3/a.mp3" type="audio/mpeg">
     Your browser does not support the audio tag.
 </audio>
 <script>
@@ -88,7 +88,7 @@
     window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
 
     var msc = ['a', 'b'];
-    var mscsrc = ['http://oooc.lol/mp3/a.mp3', 'http://oooc.lol/mp3/a.mp3'];
+    var mscsrc = ['https://static.kykys.cn/mp3/a.mp3', 'https://static.kykys.cn/mp3/a.mp3'];
     var mscid = 0;
     function playa(id) {
         mscid = id;
