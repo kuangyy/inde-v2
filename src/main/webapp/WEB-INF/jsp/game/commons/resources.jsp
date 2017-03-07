@@ -5,9 +5,9 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
 
-	if (_port == 80) {
+//	if (_port == 80) {
 		basePath =  request.getScheme() + "://" + request.getServerName();
-	}
+//	}
 	request.setAttribute("ctx", basePath);
 %>
 <c:set var="resourcesVersion" value="1.0.1" />

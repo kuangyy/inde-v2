@@ -171,3 +171,48 @@ footer a:hover, footer a:active{
     color: #fff;
     cursor: pointer;
 }
+
+
+
+.audiolist {
+    position: fixed;
+    top: 0;
+    right: 0;
+    border: none;
+}
+.audioplay{
+    width:350px;
+    height:70px;
+    border: groove;
+    border-color:#000000;
+    background-color: #3EAAF8;
+    z-index:1;
+    position: relative;
+    margin:5px 0 0 10px;
+    cursor:pointer;
+}
+.audioplay1{
+    font-family:Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
+    font-size:22px;
+    line-height:30px;
+    margin:0 0 0 10px;
+    z-index:10;
+    position: absolute;
+}
+.audioplay1 span{
+    font-family:"Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+    font-size:27px;
+}
+.audioplay2{
+    width:0;
+    height:70px;
+    background-color: #584C26;
+    opacity:0.35;
+    position: absolute;
+}
+.audioplay3{
+    font-size:30px;
+    margin:20px 0 0 180px;
+    z-index:10;
+    position: absolute;
+}

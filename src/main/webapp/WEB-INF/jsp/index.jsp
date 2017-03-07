@@ -41,14 +41,20 @@
 <div class="shadow-box"></div>
 
 
+<div class="audiolist">
+    <div class="audioplay">
+        <audio class="audio1" style="width:200px; height:20px;" src="http://m2.music.126.net/DRohYj-4xOW8kOO7ERkSdg==/18824738580876363.mp3" loop autobuffer ></audio>
+        <div class="audioplay1"><span>关于我爱你</span><br>-张悬</div>
+        <div class="audioplay2"></div>
+        <div class="audioplay3"><span id="audiospan">00:00/00:00</span></div>
+    </div>
+</div>
 
 <footer>
     <span style="color: #999">[ky]</span> /
     <a href="${ctx}/about"> About</a>
     <div class="motto pull-right">${motto.name}</div>
 </footer>
-
-
 
 <script src="//cdn.bootcss.com/parallax/2.1.3/jquery.parallax.min.js"></script>
 <!-- canvas star in background -->
@@ -74,6 +80,55 @@
     setInterval(function(){
         $(".site_title").text(new Date());
     },1000)
+
+
+    {
+        //music
+        var time = [];
+        var audiostart = [];
+
+        $(function () {
+            $(".audioplay").click(function () {
+                var i = $(this).index()
+                var au = $(".audio1")[i];
+
+                if (audiostart[i]) {
+                    au.pause();
+                    au.currentTime = time[i];
+                    audiostart[i] = false;
+                } else {
+                    for (var j = 0; j < $(".audioplay").length; j++) {
+                        audiostart[j] ? $(".audioplay")[j].click() : "";
+                    }
+                    au.play();
+                    audiostart[i] = true;
+                }
+            });
+            window.setInterval(function () {
+                var audios = $(".audioplay audio");
+                var audiopro = $(".audioplay2");
+
+                for (var i = 0; i < audios.length; i++) {
+                    var total = audios[i].duration;
+                    var now = audios[i].currentTime;
+                    time[i] = now;
+
+                    var minuteTotal = Math.floor(total / 60) > 9 ? Math.floor(total / 60) : "0" + Math.floor(total / 60);
+                    var secondTotal = Math.floor(total % 60) > 9 ? Math.floor(total % 60) : "0" + Math.floor(total % 60);
+
+                    var minuteNow = Math.floor(now / 60) > 9 ? Math.floor(now / 60) : "0" + Math.floor(now / 60);
+                    var secondNow = Math.floor(now % 60) > 9 ? Math.floor(now % 60) : "0" + Math.floor(now % 60);
+
+                    var widthpx = $($(".audioplay")[i]).css("width");
+                    var w = parseInt(widthpx);
+
+                    $(audiopro[i]).animate({width: now / total * w});
+                    $($(".audioplay3")[i]).html(minuteNow + ":" + secondNow + "/" + minuteTotal + ":" + secondTotal);
+                }
+            }, 1000)
+        });
+    }
+
 </script>
 
 </body>
