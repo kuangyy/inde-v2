@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,7 +35,7 @@ import java.util.Set;
  * @date 16/6/27
  * @description 所有Controller的基类
  */
-
+//@ControllerAdvice
 public abstract class BaseController {
     private static Logger logger = LogManager.getLogger(BaseController.class);
 
