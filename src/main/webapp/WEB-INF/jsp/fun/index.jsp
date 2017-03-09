@@ -79,7 +79,7 @@
         </tbody>
     </table>
 </div>
-<audio id="audio" style=" " crossorigin="anonymous" autobuffered >
+<audio id="audio" style=" " crossorigin="anonymous" autobuffered controls autoplay >
     <source src="https://static.kykys.cn/mp3/a.mp3" type="audio/mpeg">
     Your browser does not support the audio tag.
 </audio>
