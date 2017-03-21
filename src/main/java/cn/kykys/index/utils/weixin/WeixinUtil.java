@@ -73,7 +73,7 @@ public class WeixinUtil {
 
     /**
      * 缓存获取accesstoken
-     * TODO 负载均衡时必须使用redis缓存全局共享
+     * TODO 负载均衡时必须使用redis缓存全局共享 | redis 应用间独立需要考虑
      *
      * @return ACCESS_TOKEN
      */
