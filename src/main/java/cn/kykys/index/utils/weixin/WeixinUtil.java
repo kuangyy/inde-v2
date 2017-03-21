@@ -1,6 +1,8 @@
 package cn.kykys.index.utils.weixin;
 
 import cn.kykys.index.utils.LogUtil;
+import cn.kykys.index.utils.cache.CacheFactory;
+import cn.kykys.index.utils.cache.ICache;
 import cn.kykys.index.utils.web.HttpRequestHelper;
 import cn.kykys.index.utils.web.HttpResponseModel;
 import cn.kykys.index.utils.weixin.exception.ErrorCode;
@@ -10,6 +12,7 @@ import cn.kykys.index.utils.weixin.properties.AccessToken;
 import cn.kykys.index.utils.weixin.properties.WeixinProperties;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
 import java.text.MessageFormat;
@@ -21,9 +24,9 @@ import java.util.regex.Pattern;
  */
 public class WeixinUtil {
 
-    private static String TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={0}&secret={1}";
+    private static final String TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={0}&secret={1}";
 
-    private static String USERINFO_URL = "https://api.weixin.qq.com/cgi-bin/user/info?access_token={0}&openid={1}&lang=zh_CN";
+    private static final String USERINFO_URL = "https://api.weixin.qq.com/cgi-bin/user/info?access_token={0}&openid={1}&lang=zh_CN";
 
 
     private static JSONObject send(String url, String... args) throws WeiXinException {
@@ -64,8 +67,30 @@ public class WeixinUtil {
     }
 
 
+    private static final String ACCESS_TOKEN_KEY = "weixin_access_token_key";
+
+    private static ICache iCache = CacheFactory.getLocalCache();
+
+    /**
+     * 缓存获取accesstoken
+     *
+     * @return ACCESS_TOKEN
+     */
+    public static AccessToken getAccessToken() throws WeiXinException {
+        AccessToken accessToken = iCache.get(AccessToken.class, ACCESS_TOKEN_KEY);
+        if (accessToken == null) {
+            accessToken = getNewAccessToken();
+            if (accessToken != null) {
+                accessToken = WeixinUtil.getNewAccessToken();
+                iCache.set(ACCESS_TOKEN_KEY, accessToken, 6000);
+            }
+        }
+        return accessToken;
+    }
+
+
     @Test
-    public static AccessToken getNewAccessToken() throws WeiXinException  {
+    public static AccessToken getNewAccessToken() throws WeiXinException {
 //        https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
 
         JSONObject jsonObject = WeixinUtil.weixinAPIRequest(TOKEN_URL, WeixinProperties.getAppID(), WeixinProperties.getAppSecret());
@@ -103,7 +128,7 @@ public class WeixinUtil {
 //    tagid_list	用户被打上的标签ID列表
 
 
-        JSONObject jsonObject = WeixinUtil.weixinAPIRequest(USERINFO_URL, AccessTokenThread.getAccessToken().getToken(), openId);
+        JSONObject jsonObject = WeixinUtil.weixinAPIRequest(USERINFO_URL, WeixinUtil.getAccessToken().getToken(), openId);
 
         String subscribe = jsonObject.getString("subscribe");
         if (subscribe.equals("0")) {
@@ -111,21 +136,7 @@ public class WeixinUtil {
             return null;
         }
 
-        WechatUserInfo wechatUserInfo = new WechatUserInfo();
-        wechatUserInfo.setSubscribe(subscribe);
-        wechatUserInfo.setOpenid(jsonObject.getString("openid"));
-        wechatUserInfo.setNickname(jsonObject.getString("nickname"));
-        wechatUserInfo.setSex(jsonObject.getString("sex"));
-        wechatUserInfo.setCity(jsonObject.getString("city"));
-        wechatUserInfo.setCountry(jsonObject.getString("country"));
-        wechatUserInfo.setProvince(jsonObject.getString("province"));
-        wechatUserInfo.setLanguage(jsonObject.getString("language"));
-        wechatUserInfo.setHeadimgurl(jsonObject.getString("headimgurl"));
-        wechatUserInfo.setSubscribe_time(jsonObject.getString("subscribe_time"));
-        wechatUserInfo.setUnionid(jsonObject.getString("unionid"));
-        wechatUserInfo.setRemark(jsonObject.getString("remark"));
-        wechatUserInfo.setGroupid(jsonObject.getString("groupid"));
-        wechatUserInfo.setTagid_list(jsonObject.getString("tagid_list"));
+        WechatUserInfo wechatUserInfo = JSON.toJavaObject(jsonObject, WechatUserInfo.class);
 
         return wechatUserInfo;
     }
