@@ -1734,4 +1734,4 @@
   expose.toHTMLTree = Markdown.toHTMLTree;
   expose.renderJsonML = Markdown.renderJsonML;
 
-})(exports);
+})(window);
