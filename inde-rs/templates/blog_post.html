@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} - {{ ctx.site_title }}{% endblock %}
+{% block content %}
+<article class="article">
+    <p class="crumb"><a href="/blog">← 博客</a></p>
+    <h1>{{ post.title }}</h1>
+    <p class="meta">{{ post.date }} · 阅读 {{ post.views }}</p>
+    {% if post.tags.len() > 0 %}
+    <p class="tags">{% for t in post.tags %}<a class="chip small" href="/blog?tag={{ t }}">{{ t }}</a>{% endfor %}</p>
+    {% endif %}
+    {% if post.cover != "" %}
+    <img class="article-cover" src="{{ post.cover }}" alt="{{ post.title }}">
+    {% endif %}
+    <div class="markdown-body">{{ post.body_html|safe }}</div>
+</article>
+{% endblock %}

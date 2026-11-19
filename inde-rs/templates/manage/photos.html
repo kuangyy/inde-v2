@@ -1,0 +1,31 @@
+{% extends "manage/base.html" %}
+{% block title %}图片墙{% endblock %}
+{% block content %}
+<div class="admin-head">
+    <h1>图片墙</h1>
+    <a class="btn primary" href="/manage/photos/new">添加图片</a>
+</div>
+{% if notice != "" %}<p class="alert notice">{{ notice }}</p>{% endif %}
+{% if photos.len() == 0 %}
+<p class="empty">还没有图片。</p>
+{% else %}
+<div class="admin-photo-grid">
+    {% for photo in photos %}
+    <div class="admin-photo">
+        <img src="{{ photo.url }}" alt="{{ photo.original_name }}" loading="lazy">
+        <div class="admin-photo-meta">
+            <span>{{ photo.original_name }}</span>
+            <span class="muted">{{ photo.size }}</span>
+        </div>
+        <div class="row-actions">
+            <a class="btn small" href="/manage/photos/{{ photo.id }}/edit">编辑</a>
+            <form method="post" action="/manage/photos/{{ photo.id }}/delete" onsubmit="return confirm('确定从图片墙移除？');">
+                <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+                <button class="btn danger small" type="submit">删除</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

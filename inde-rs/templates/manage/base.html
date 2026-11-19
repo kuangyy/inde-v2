@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf" content="{{ ctx.csrf }}">
+    <title>{% block title %}管理后台{% endblock %} - {{ ctx.site_title }}</title>
+    <link rel="icon" href="/assets/img/angry.png">
+    <link rel="stylesheet" href="/assets/css/admin.css">
+</head>
+<body>
+<div class="admin-shell">
+    <aside class="admin-side">
+        <a class="admin-brand" href="/manage">{{ ctx.site_title }}<small>管理后台</small></a>
+        <nav class="admin-nav">
+            <a href="/manage">仪表盘</a>
+            <a href="/manage/posts">文章</a>
+            <a href="/manage/books">书籍</a>
+            <a href="/manage/photos">图片墙</a>
+            <a href="/manage/dramas">游戏剧本</a>
+            <a href="/manage/uploads">上传文件</a>
+            <a href="/manage/players">玩家</a>
+            <a href="/manage/settings">站点设置</a>
+            <a href="/" target="_blank" rel="noopener">查看前台 ↗</a>
+        </nav>
+        <form method="post" action="/manage/logout" class="admin-logout">
+            <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+            <button type="submit">退出登录</button>
+        </form>
+    </aside>
+    <main class="admin-main">
+        {% block content %}{% endblock %}
+    </main>
+</div>
+<script src="/assets/js/admin.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,19 @@
+services:
+  inde:
+    image: ${INDE_IMAGE:-inde-rs:local}
+    build: .
+    container_name: inde-rs
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8080}:${PORT:-8080}"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true

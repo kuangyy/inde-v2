@@ -1,0 +1,33 @@
+{% extends "manage/base.html" %}
+{% block title %}游戏剧本{% endblock %}
+{% block content %}
+<div class="admin-head">
+    <h1>游戏剧本</h1>
+    <a class="btn primary" href="/manage/dramas/new">新建剧本</a>
+</div>
+{% if notice != "" %}<p class="alert notice">{{ notice }}</p>{% endif %}
+{% if dramas.len() == 0 %}
+<p class="empty">还没有剧本。</p>
+{% else %}
+<table class="admin-table">
+    <thead><tr><th>名称</th><th>简介</th><th>状态</th><th>更新时间</th><th>操作</th></tr></thead>
+    <tbody>
+    {% for drama in dramas %}
+    <tr>
+        <td>{{ drama.name }}</td>
+        <td>{{ drama.description }}</td>
+        <td>{{ drama.status }}</td>
+        <td>{{ drama.updated }}</td>
+        <td class="row-actions">
+            <a class="btn small" href="/manage/dramas/{{ drama.id }}/edit">编辑</a>
+            <form method="post" action="/manage/dramas/{{ drama.id }}/delete" onsubmit="return confirm('确定删除这个剧本？玩家进度也会被删除。');">
+                <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+                <button class="btn danger small" type="submit">删除</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

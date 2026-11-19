@@ -1,0 +1,54 @@
+{% extends "manage/base.html" %}
+{% block title %}上传文件{% endblock %}
+{% block content %}
+<div class="admin-head">
+    <h1>上传文件</h1>
+</div>
+{% if notice != "" %}<p class="alert notice">{{ notice }}</p>{% endif %}
+
+<form method="post" action="/manage/uploads/upload" enctype="multipart/form-data" class="admin-form upload-form">
+    <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+    <label>选择图片（PNG / JPG / WEBP / GIF，≤10MB）
+        <input type="file" name="file" accept="image/png,image/jpeg,image/webp,image/gif" required>
+    </label>
+    <div class="form-actions"><button class="btn primary" type="submit">上传</button></div>
+</form>
+
+{% if uploads.len() == 0 %}
+<p class="empty">还没有上传过图片。</p>
+{% else %}
+<div class="admin-photo-grid">
+    {% for item in uploads %}
+    <div class="admin-photo">
+        <img src="{{ item.url }}" alt="{{ item.original_name }}" loading="lazy">
+        <div class="admin-photo-meta">
+            <span>{{ item.original_name }}</span>
+            <span class="muted">{{ item.size }} · {{ item.created }}</span>
+        </div>
+        <div class="row-actions">
+            <button type="button" class="btn small" data-copy="{{ item.url }}">复制地址</button>
+            <form method="post" action="/manage/photos">
+                <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+                <input type="hidden" name="name" value="{{ item.original_name }}">
+                <input type="hidden" name="url" value="{{ item.url }}">
+                <input type="hidden" name="sort_order" value="0">
+                <button class="btn small" type="submit">加入图片墙</button>
+            </form>
+            <form method="post" action="/manage/uploads/{{ item.id }}/delete" onsubmit="return confirm('删除这个文件？引用它的页面会显示裂图。');">
+                <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+                <button class="btn danger small" type="submit">删除</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if pag.total_pages > 1 %}
+<nav class="pager">
+    {% if pag.has_prev %}<a href="/manage/uploads?page={{ pag.prev_page }}">← 上一页</a>{% endif %}
+    <span>{{ pag.page }} / {{ pag.total_pages }}</span>
+    {% if pag.has_next %}<a href="/manage/uploads?page={{ pag.next_page }}">下一页 →</a>{% endif %}
+</nav>
+{% endif %}
+{% endblock %}

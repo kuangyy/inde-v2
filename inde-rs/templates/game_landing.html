@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>逃离剧本 - {{ ctx.site_title }}</title>
+    <link rel="icon" href="/assets/img/angry.png">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <link rel="stylesheet" href="/assets/css/game.css">
+</head>
+<body class="game-landing">
+<div class="hero">
+    <div class="hero-bg" style="background-image:url('/assets/img/game/bg1.jpg')"></div>
+    <div class="hero-content">
+        <p class="hero-kicker">文字冒险 · 多结局</p>
+        <h1>逃离剧本</h1>
+        <p class="hero-sub">每一个选择，都把你推向不同的结局。</p>
+        <p class="hero-actions">
+            {% if ctx.player_id > 0 %}
+            <a class="btn primary big" href="/game/play">继续游戏</a>
+            {% else %}
+            <a class="btn primary big" href="/game/play">开始游戏</a>
+            {% endif %}
+            <a class="btn ghost big" href="/">返回首页</a>
+        </p>
+    </div>
+</div>
+
+<section class="game-features wrap">
+    <div class="feature">
+        <div class="feature-num">壹</div>
+        <h3>每日签到</h3>
+        <p>每天签到获得金币与积分，积分足够时消耗积分升级。</p>
+    </div>
+    <div class="feature">
+        <div class="feature-num">贰</div>
+        <h3>存档进度</h3>
+        <p>进行中的剧本会保存进度，随时回来继续；已完成的剧本可以重来。</p>
+    </div>
+    <div class="feature">
+        <div class="feature-num">叁</div>
+        <h3>多线结局</h3>
+        <p>不同选择通往不同节点，体验剧本里的每一种可能。</p>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="wrap">
+        <span>[ky]</span> · <a href="/about">About</a>
+        <span class="footer-right">© {{ ctx.year }} {{ ctx.site_title }}</span>
+    </div>
+</footer>
+</body>
+</html>

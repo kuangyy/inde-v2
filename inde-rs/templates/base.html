@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ ctx.site_title }}{% endblock %}</title>
+    <link rel="icon" href="/assets/img/angry.png">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    {% block head %}{% endblock %}
+</head>
+<body>
+<header class="site-header">
+    <div class="wrap header-inner">
+        <a class="brand" href="/">{{ ctx.site_title }}</a>
+        <nav class="site-nav">
+            <a href="/blog">博客</a>
+            <a href="/books">书籍</a>
+            <a href="/photos">照片</a>
+            <a href="/game">逃离剧本</a>
+            <a href="/about">关于</a>
+            {% if ctx.player_id > 0 %}
+                <span class="nav-user">{{ ctx.player_name }}</span>
+                <a href="/game/play">我的游戏</a>
+            {% else %}
+                <a href="/game/login">玩家登录</a>
+            {% endif %}
+            {% if ctx.is_admin %}<a class="nav-admin" href="/manage">管理后台</a>{% endif %}
+        </nav>
+    </div>
+</header>
+
+<main class="wrap page">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+    <div class="wrap">
+        <span>[ky]</span> · <a href="/about">About</a>
+        <span class="footer-right">© {{ ctx.year }} {{ ctx.site_title }}</span>
+    </div>
+</footer>
+{% block scripts %}{% endblock %}
+</body>
+</html>

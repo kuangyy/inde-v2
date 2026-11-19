@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ ctx.site_title }}</title>
+    <meta name="author" content="ky">
+    <link rel="icon" href="/assets/img/angry.png">
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+</head>
+<body>
+<div id="canvas-container" class="animated fadeInUp layer" data-depth="0.1">
+    <canvas id="gravity"></canvas>
+</div>
+
+<div class="site_title">{{ ctx.site_title }}</div>
+
+<div class="info-list container col-sm-12">
+    <ul>
+        <li><a href="/blog" title="文字"><div>壹</div></a></li>
+        <li><a href="/game" title="游戏"><div>贰</div></a></li>
+        <li><a href="/books" title="书籍"><div>叁</div></a></li>
+        <li><a href="/photos" title="照片"><div>肆</div></a></li>
+    </ul>
+</div>
+
+<div class="shadow-box"></div>
+
+<div class="audiolist">
+    <div class="audioplay" id="audio-card">
+        <audio class="audio1" style="width:200px; height:20px;" src="{{ audio_url }}" loop preload="none"></audio>
+        <div class="audioplay1"><span>关于我爱你</span><br>-张悬</div>
+        <div class="audioplay2" id="audio-progress"></div>
+        <div class="audioplay3"><span id="audiospan">点击播放</span></div>
+    </div>
+</div>
+
+<footer>
+    <span style="color: #999">[ky]</span> /
+    <a href="/about"> About</a>
+    <div class="motto pull-right">{{ motto }}{% if motto_translate != "" %} · {{ motto_translate }}{% endif %}</div>
+</footer>
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/star.js"></script>
+<script>
+    // 时钟替换标题
+    setInterval(function () {
+        $(".site_title").text(new Date().toLocaleString());
+    }, 1000);
+
+    // 音乐播放/暂停
+    (function () {
+        var au = document.querySelector(".audio1");
+        var card = document.getElementById("audio-card");
+        var bar = document.getElementById("audio-progress");
+        var label = document.getElementById("audiospan");
+        card.addEventListener("click", function () {
+            if (au.paused) {
+                au.play().catch(function () { label.textContent = "点击播放"; });
+            } else {
+                au.pause();
+            }
+        });
+        function pad(n) { return n > 9 ? n : "0" + n; }
+        window.setInterval(function () {
+            if (!au.duration || !isFinite(au.duration)) { return; }
+            var now = au.currentTime, total = au.duration;
+            bar.style.width = (now / total * 100) + "%";
+            label.textContent = pad(Math.floor(now / 60)) + ":" + pad(Math.floor(now % 60)) +
+                "/" + pad(Math.floor(total / 60)) + ":" + pad(Math.floor(total % 60));
+        }, 1000);
+    })();
+</script>
+</body>
+</html>

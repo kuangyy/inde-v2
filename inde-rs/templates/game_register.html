@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}注册玩家 - {{ ctx.site_title }}{% endblock %}
+{% block content %}
+<div class="auth-card">
+    <h1>注册玩家</h1>
+    {% if allow_registration %}
+    <p class="muted">用户名 3–32 位，只能用字母、数字和下划线；密码至少 8 位。</p>
+    {% else %}
+    <p class="alert error">当前已关闭注册。</p>
+    {% endif %}
+    {% if error != "" %}<p class="alert error">{{ error }}</p>{% endif %}
+    {% if allow_registration %}
+    <form method="post" action="/game/register" class="form">
+        <label>用户名
+            <input type="text" name="username" value="{{ username }}" autocomplete="username" required>
+        </label>
+        <label>密码
+            <input type="password" name="password" autocomplete="new-password" required>
+        </label>
+        <label>确认密码
+            <input type="password" name="password2" autocomplete="new-password" required>
+        </label>
+        <button class="btn primary" type="submit">注册并登录</button>
+    </form>
+    {% endif %}
+    <p class="muted">已经有账号？<a href="/game/login">登录</a></p>
+</div>
+{% endblock %}

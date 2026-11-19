@@ -1,0 +1,12 @@
+/target
+/data
+/.env
+*.db
+*.db-shm
+*.db-wal
+/.env.local
+*.log
+/.idea/.gitignore
+/.idea/inde-rs.iml
+/.idea/modules.xml
+/.idea/vcs.xml

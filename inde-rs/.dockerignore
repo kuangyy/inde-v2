@@ -1,0 +1,11 @@
+target/
+data/
+.env
+.env.local
+.idea/
+.git/
+.gitignore
+README.md
+docker-compose.yml
+inde-rs.out.log
+inde-rs.err.log

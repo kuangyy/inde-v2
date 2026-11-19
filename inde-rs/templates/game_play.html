@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}我的游戏 - {{ ctx.site_title }}{% endblock %}
+{% block content %}
+{% if notice != "" %}<p class="alert notice">{{ notice }}</p>{% endif %}
+
+<section class="player-panel">
+    <div class="player-head">
+        <div>
+            <h1>{{ player.display_name }}</h1>
+            <p class="muted">@{{ player.username }} · {{ player.created }} 加入</p>
+        </div>
+        <form method="post" action="/game/logout">
+            <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+            <button class="btn ghost small" type="submit">退出登录</button>
+        </form>
+    </div>
+    <div class="stats">
+        <div class="stat"><span class="stat-value">{{ player.coins }}</span><span class="stat-label">金币</span></div>
+        <div class="stat"><span class="stat-value">{{ player.points }}</span><span class="stat-label">积分</span></div>
+        <div class="stat"><span class="stat-value">Lv {{ player.level }}</span><span class="stat-label">等级</span></div>
+        <div class="stat"><span class="stat-value">{{ pending_days }}</span><span class="stat-label">可签到天数</span></div>
+    </div>
+    <div class="player-actions">
+        <form method="post" action="/game/signin">
+            <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+            <button class="btn primary" type="submit"{% if !can_signin %} disabled{% endif %}>
+                {% if can_signin %}每日签到{% else %}今日已签到{% endif %}
+            </button>
+        </form>
+        <form method="post" action="/game/levelup">
+            <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+            <button class="btn" type="submit">升级（消耗 {{ player.level }} 积分）</button>
+        </form>
+        <form method="post" action="/game/rename" class="inline-form">
+            <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+            <input type="text" name="name" value="{{ player.display_name }}" maxlength="50" placeholder="新昵称">
+            <button class="btn ghost" type="submit">改名</button>
+        </form>
+    </div>
+    <p class="muted">上次签到：{{ player.last_signin }}</p>
+</section>
+
+{% if current.has %}
+<section class="current-game">
+    <p class="eyebrow">{% if current.finished %}已完结{% else %}进行中{% endif %}</p>
+    <h2>{{ current.drama_name }}</h2>
+    {% if current.drama_desc != "" %}<p class="muted">{{ current.drama_desc }}</p>{% endif %}
+    <div class="scene">
+        <p>{{ current.node_desc }}</p>
+    </div>
+    {% if current.finished %}
+    <p class="alert notice">该剧本已完结。</p>
+    {% endif %}
+    {% if current.choices.len() > 0 %}
+    <div class="choices">
+        {% for choice in current.choices %}
+        <form method="post" action="/game/dramas/{{ current.drama_id }}/choose/{{ choice.index }}">
+            <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+            <button class="btn choice" type="submit">{{ choice.index }}. {{ choice.description }}</button>
+        </form>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="player-actions">
+        {% if !current.finished %}
+        <form method="post" action="/game/dramas/{{ current.drama_id }}/exit">
+            <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+            <button class="btn ghost" type="submit">中断 / 退出剧本</button>
+        </form>
+        {% endif %}
+        <form method="post" action="/game/dramas/{{ current.drama_id }}/reset">
+            <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+            <button class="btn ghost" type="submit">从头开始</button>
+        </form>
+    </div>
+</section>
+{% endif %}
+
+<section class="drama-list">
+    <h2>可玩的剧本</h2>
+    {% if dramas.len() == 0 %}
+    <p class="empty">暂无已启用的剧本。</p>
+    {% else %}
+    <div class="drama-grid">
+        {% for drama in dramas %}
+        <div class="drama-card">
+            <h3>{{ drama.name }}</h3>
+            <p class="muted">{{ drama.description }}</p>
+            <p class="meta">状态：{{ drama.status_note }}</p>
+            <form method="post" action="/game/dramas/{{ drama.id }}/enter">
+                <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+                <button class="btn primary" type="submit">进入剧本</button>
+            </form>
+            <form method="post" action="/game/dramas/{{ drama.id }}/reset">
+                <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+                <button class="btn ghost small" type="submit">重新开始</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

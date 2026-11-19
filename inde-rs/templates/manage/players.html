@@ -1,0 +1,32 @@
+{% extends "manage/base.html" %}
+{% block title %}玩家{% endblock %}
+{% block content %}
+<div class="admin-head">
+    <h1>玩家</h1>
+</div>
+{% if notice != "" %}<p class="alert notice">{{ notice }}</p>{% endif %}
+{% if players.len() == 0 %}
+<p class="empty">还没有玩家注册。</p>
+{% else %}
+<table class="admin-table">
+    <thead><tr><th>ID</th><th>昵称</th><th>用户名</th><th>金币</th><th>积分</th><th>等级</th><th>进度数</th><th>注册时间</th><th>操作</th></tr></thead>
+    <tbody>
+    {% for player in players %}
+    <tr>
+        <td>{{ player.id }}</td>
+        <td>{{ player.display_name }}</td>
+        <td>{{ player.username }}</td>
+        <td>{{ player.coins }}</td>
+        <td>{{ player.points }}</td>
+        <td>Lv {{ player.level }}</td>
+        <td>{{ player.progress }}</td>
+        <td>{{ player.created }}</td>
+        <td class="row-actions">
+            <a class="btn small" href="/manage/players/{{ player.id }}">详情</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

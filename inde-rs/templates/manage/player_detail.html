@@ -1,0 +1,47 @@
+{% extends "manage/base.html" %}
+{% block title %}玩家详情{% endblock %}
+{% block content %}
+<div class="admin-head">
+    <h1>{{ player.display_name }}</h1>
+    <a class="btn" href="/manage/players">返回列表</a>
+</div>
+{% if notice != "" %}<p class="alert notice">{{ notice }}</p>{% endif %}
+
+<div class="admin-stats">
+    <div class="admin-stat"><span>{{ player.coins }}</span>金币</div>
+    <div class="admin-stat"><span>{{ player.points }}</span>积分</div>
+    <div class="admin-stat"><span>Lv {{ player.level }}</span>等级</div>
+</div>
+<p class="muted">用户名 {{ player.username }} · 注册于 {{ player.created }} · 上次签到 {{ player.last_signin }}</p>
+
+<h2>游戏进度</h2>
+{% if progress.len() == 0 %}
+<p class="empty">该玩家还没有游戏进度。</p>
+{% else %}
+<table class="admin-table">
+    <thead><tr><th>剧本</th><th>当前节点</th><th>状态</th><th>更新时间</th></tr></thead>
+    <tbody>
+    {% for item in progress %}
+    <tr>
+        <td>{{ item.drama_name }}</td>
+        <td>{{ item.node_desc }}</td>
+        <td>{{ item.status }}</td>
+        <td>{{ item.updated }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+<div class="danger-zone">
+    <h2>危险操作</h2>
+    <form method="post" action="/manage/players/{{ player.id }}/reset" onsubmit="return confirm('确定清空该玩家的所有游戏进度？');">
+        <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+        <button class="btn" type="submit">重置游戏进度</button>
+    </form>
+    <form method="post" action="/manage/players/{{ player.id }}/delete" onsubmit="return confirm('确定删除该玩家？此操作不可恢复。');">
+        <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+        <button class="btn danger" type="submit">删除玩家</button>
+    </form>
+</div>
+{% endblock %}

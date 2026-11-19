@@ -1,0 +1,33 @@
+{% extends "manage/base.html" %}
+{% block title %}书籍{% endblock %}
+{% block content %}
+<div class="admin-head">
+    <h1>书籍</h1>
+    <a class="btn primary" href="/manage/books/new">添加书籍</a>
+</div>
+{% if notice != "" %}<p class="alert notice">{{ notice }}</p>{% endif %}
+{% if books.len() == 0 %}
+<p class="empty">书架是空的。</p>
+{% else %}
+<table class="admin-table">
+    <thead><tr><th>书名</th><th>作者</th><th>评分</th><th>更新时间</th><th>操作</th></tr></thead>
+    <tbody>
+    {% for book in books %}
+    <tr>
+        <td>{{ book.name }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.score }}</td>
+        <td>{{ book.updated }}</td>
+        <td class="row-actions">
+            <a class="btn small" href="/manage/books/{{ book.id }}/edit">编辑</a>
+            <form method="post" action="/manage/books/{{ book.id }}/delete" onsubmit="return confirm('确定删除这本书？');">
+                <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+                <button class="btn danger small" type="submit">删除</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

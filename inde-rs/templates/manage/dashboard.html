@@ -1,0 +1,25 @@
+{% extends "manage/base.html" %}
+{% block title %}仪表盘{% endblock %}
+{% block content %}
+<div class="admin-head">
+    <h1>仪表盘</h1>
+</div>
+<div class="admin-stats">
+    <a class="admin-stat" href="/manage/posts"><span>{{ counts.posts }}</span>文章<small>{{ counts.published }} 篇已发布</small></a>
+    <a class="admin-stat" href="/manage/books"><span>{{ counts.books }}</span>书籍</a>
+    <a class="admin-stat" href="/manage/photos"><span>{{ counts.photos }}</span>图片墙</a>
+    <a class="admin-stat" href="/manage/dramas"><span>{{ counts.dramas }}</span>剧本</a>
+    <a class="admin-stat" href="/manage/players"><span>{{ counts.players }}</span>玩家</a>
+    <a class="admin-stat" href="/manage/uploads"><span>{{ counts.uploads }}</span>上传文件</a>
+</div>
+<div class="admin-quick">
+    <h2>快捷操作</h2>
+    <p>
+        <a class="btn primary" href="/manage/posts/new">写文章</a>
+        <a class="btn" href="/manage/books/new">添加书籍</a>
+        <a class="btn" href="/manage/photos/new">添加图片</a>
+        <a class="btn" href="/manage/dramas/new">新建剧本</a>
+        <a class="btn" href="/manage/uploads">上传图片</a>
+    </p>
+</div>
+{% endblock %}

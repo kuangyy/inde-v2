@@ -1,0 +1,27 @@
+{% extends "manage/base.html" %}
+{% block title %}{% if is_new %}新建剧本{% else %}编辑剧本{% endif %}{% endblock %}
+{% block content %}
+<div class="admin-head">
+    <h1>{% if is_new %}新建剧本{% else %}编辑剧本{% endif %}</h1>
+    <a class="btn" href="/manage/dramas">返回列表</a>
+</div>
+{% if error != "" %}<p class="alert error">{{ error }}</p>{% endif %}
+<form method="post" action="{% if is_new %}/manage/dramas{% else %}/manage/dramas/{{ id }}{% endif %}" class="admin-form">
+    <input type="hidden" name="csrf" value="{{ ctx.csrf }}">
+    <label>剧本名称<input type="text" name="name" value="{{ name }}" required></label>
+    <label>简介<textarea name="description" rows="2">{{ description }}</textarea></label>
+    <label class="checkbox"><input type="checkbox" name="enabled" value="1"{% if enabled %} checked{% endif %}> 启用（玩家可见）</label>
+    <label>剧本 JSON
+        <textarea name="script_json" rows="22" class="editor-area code-area">{{ script_json }}</textarea>
+    </label>
+    <p class="muted">
+        结构：<code>{"start": "节点id", "nodes": [...]}</code>。
+        场景节点 <code>kind: "scene"</code> 需要 <code>choices</code>，每项含 <code>description</code> 与 <code>next</code>；
+        结局节点 <code>kind: "end"</code>，不填 choices。所有节点必须从 start 可达，且至少有一个结局。
+    </p>
+    <div class="form-actions">
+        <button class="btn primary" type="submit">保存</button>
+        <a class="btn" href="/manage/dramas">取消</a>
+    </div>
+</form>
+{% endblock %}

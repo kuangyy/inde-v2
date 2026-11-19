@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}书籍 - {{ ctx.site_title }}{% endblock %}
+{% block content %}
+<div class="page-head">
+    <h1>书籍</h1>
+    <form class="search-form" action="/books" method="get">
+        <input type="search" name="q" value="{{ q }}" placeholder="搜索书名 / 作者…">
+        <button type="submit">搜索</button>
+    </form>
+</div>
+
+{% if books.len() == 0 %}
+<p class="empty">书架是空的。{% if ctx.is_admin %}去 <a href="/manage/books/new">添加一本</a>。{% endif %}</p>
+{% else %}
+<div class="book-grid">
+    {% for book in books %}
+    <a class="book-card" href="/b/{{ book.id }}">
+        {% if book.cover != "" %}
+        <img class="book-cover" src="{{ book.cover }}" alt="{{ book.name }}" loading="lazy">
+        {% else %}
+        <div class="book-cover placeholder">{{ book.name }}</div>
+        {% endif %}
+        <div class="book-info">
+            <h3>{{ book.name }}</h3>
+            <p class="muted">{{ book.author }}</p>
+            <p class="score">★ {{ book.score }}</p>
+            <p class="summary">{{ book.summary }}</p>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if pag.total_pages > 1 %}
+<nav class="pager">
+    {% if pag.has_prev %}<a href="/books?{% if has_qs %}{{ qs }}&{% endif %}page={{ pag.prev_page }}">← 上一页</a>{% endif %}
+    <span>{{ pag.page }} / {{ pag.total_pages }}</span>
+    {% if pag.has_next %}<a href="/books?{% if has_qs %}{{ qs }}&{% endif %}page={{ pag.next_page }}">下一页 →</a>{% endif %}
+</nav>
+{% endif %}
+{% endblock %}

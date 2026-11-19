@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}博客 - {{ ctx.site_title }}{% endblock %}
+{% block content %}
+<div class="page-head">
+    <h1>博客</h1>
+    <form class="search-form" action="/blog" method="get">
+        <input type="search" name="q" value="{{ q }}" placeholder="搜索文章…">
+        {% if tag != "" %}<input type="hidden" name="tag" value="{{ tag }}">{% endif %}
+        <button type="submit">搜索</button>
+    </form>
+</div>
+
+{% if tags.len() > 0 %}
+<div class="tag-cloud">
+    <a class="chip{% if tag == "" %} active{% endif %}" href="/blog">全部</a>
+    {% for t in tags %}
+    <a class="chip{% if tag == t.name %} active{% endif %}" href="{{ t.url }}">{{ t.name }} <span>{{ t.count }}</span></a>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if q != "" %}
+<p class="muted">搜索 “{{ q }}” 的结果：{{ pag.total }} 篇</p>
+{% endif %}
+
+{% if posts.len() == 0 %}
+<p class="empty">还没有文章。{% if ctx.is_admin %}去 <a href="/manage/posts/new">写一篇</a> 吧。{% endif %}</p>
+{% else %}
+<div class="post-list">
+    {% for post in posts %}
+    <article class="post-card">
+        {% if post.cover != "" %}
+        <a class="post-cover" href="/blog/p/{{ post.id }}"><img src="{{ post.cover }}" alt="{{ post.title }}" loading="lazy"></a>
+        {% endif %}
+        <div class="post-body">
+            <h2><a href="/blog/p/{{ post.id }}">{{ post.title }}</a></h2>
+            <p class="meta">{{ post.date }}</p>
+            <p class="summary">{{ post.summary }}</p>
+            {% if post.tags.len() > 0 %}
+            <p class="tags">{% for t in post.tags %}<span class="chip small">{{ t }}</span>{% endfor %}</p>
+            {% endif %}
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if pag.total_pages > 1 %}
+<nav class="pager">
+    {% if pag.has_prev %}<a href="/blog?{% if has_qs %}{{ qs }}&{% endif %}page={{ pag.prev_page }}">← 上一页</a>{% endif %}
+    <span>{{ pag.page }} / {{ pag.total_pages }}</span>
+    {% if pag.has_next %}<a href="/blog?{% if has_qs %}{{ qs }}&{% endif %}page={{ pag.next_page }}">下一页 →</a>{% endif %}
+</nav>
+{% endif %}
+{% endblock %}

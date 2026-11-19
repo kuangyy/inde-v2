@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}玩家登录 - {{ ctx.site_title }}{% endblock %}
+{% block content %}
+<div class="auth-card">
+    <h1>玩家登录</h1>
+    <p class="muted">登录后继续你的逃离剧本。</p>
+    {% if error != "" %}<p class="alert error">{{ error }}</p>{% endif %}
+    <form method="post" action="/game/login" class="form">
+        <label>用户名
+            <input type="text" name="username" value="{{ username }}" autocomplete="username" required>
+        </label>
+        <label>密码
+            <input type="password" name="password" autocomplete="current-password" required>
+        </label>
+        <button class="btn primary" type="submit">登录</button>
+    </form>
+    <p class="muted">还没有账号？<a href="/game/register">注册一个</a></p>
+</div>
+{% endblock %}

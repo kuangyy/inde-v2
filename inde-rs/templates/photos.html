@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}照片 - {{ ctx.site_title }}{% endblock %}
+{% block content %}
+<div class="page-head">
+    <h1>照片</h1>
+</div>
+
+{% if photos.len() == 0 %}
+<p class="empty">还没有照片。{% if ctx.is_admin %}去 <a href="/manage/photos/new">添加图片</a>。{% endif %}</p>
+{% else %}
+<div class="photo-grid">
+    {% for photo in photos %}
+    <figure class="photo-item">
+        <a href="{{ photo.url }}" target="_blank" rel="noopener">
+            <img src="{{ photo.url }}" alt="{{ photo.name }}" loading="lazy">
+        </a>
+        {% if photo.name != "" %}<figcaption>{{ photo.name }}</figcaption>{% endif %}
+    </figure>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if pag.total_pages > 1 %}
+<nav class="pager">
+    {% if pag.has_prev %}<a href="/photos?page={{ pag.prev_page }}">← 上一页</a>{% endif %}
+    <span>{{ pag.page }} / {{ pag.total_pages }}</span>
+    {% if pag.has_next %}<a href="/photos?page={{ pag.next_page }}">下一页 →</a>{% endif %}
+</nav>
+{% endif %}
+{% endblock %}
